@@ -123,7 +123,7 @@ ultralearning/
 
 - **Por sessão (1h)**: ~0.02€
 - **Por mês (30 dias)**: ~0.60€
-- **Orçamento**: 15€/mês ✅ (muito dentro!)
+- **Orçamento**: 15€/mês
 
 ---
 
