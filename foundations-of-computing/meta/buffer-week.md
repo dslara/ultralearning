@@ -22,6 +22,13 @@ Use para aprofundar:
 | 4 | Resolver 2-3 LeetCode extras |
 | 5 | Preparar mente para próxima fase |
 
+> **📖 Leitura Recomendada (Buffer 2 - Semana 16):**
+> Se estiver em dia, leia **"The Pattern on the Stone"** por W. Daniel Hillis.
+> - **Tempo**: 2-3h (leitura leve)
+> - **Por quê**: Dá contexto geral antes de entrar em Data Structures
+> - **Foco**: Intuição, não detalhes técnicos
+> - **Link**: https://www.amazon.es/dp/B06XC774TQ (€9.99)
+
 ### Cenário B: Você está atrasado ⚠️
 Use para recuperar:
 

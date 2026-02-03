@@ -56,11 +56,20 @@ Ao final destas duas semanas, você será capaz de:
 
 ## 📚 Recursos
 
-### Leitura
+### Leitura Obrigatória
 | Recurso | Seção | Propósito |
 |---------|-------|-----------|
 | "What Every Programmer Should Know About Memory" | Ulrich Drepper | Deep dive |
 | CSAPP | Chapter 6 - Memory Hierarchy | Fundamentos |
+
+### 📖 Leitura Complementar (Recomendado)
+**"Code: The Hidden Language of Computer Hardware and Software"** - Charles Petzold (2022 Edition)
+- **Quando ler**: Antes ou durante esta semana
+- **Foco**: Capítulos sobre portas lógicas, relés, construção de CPU
+- **Por quê**: Dá intuição bottom-up de como CPUs funcionam desde o hardware
+- **Timing**: ~5-10h de leitura (pode dividir em 2 semanas)
+- **Link**: https://www.amazon.es/dp/B0B123P5GV (€20.49)
+- **Nota**: Não é obrigatório, mas complementa MUITO bem esta fase
 
 ### Ferramentas
 | Recurso | Propósito |

@@ -53,12 +53,28 @@ Ao final destas duas semanas, você será capaz de:
 
 ## 📚 Recursos
 
-### Leitura
+### Leitura Obrigatória
 | Recurso | Seção | Propósito |
 |---------|-------|-----------|
 | Crafting Interpreters | Chapters 4-6 | Guia completo |
 | | https://craftinginterpreters.com/ | Gratuito! |
 | Writing an Interpreter in Go | Chapters 1-2 | Alternativa em Go |
+
+### 📖 Leitura Complementar (Avançado)
+**"Structure and Interpretation of Computer Programs" (SICP)** - JavaScript Edition
+- **Quando ler**: Durante Semana 71-72 (Interpreter) se precisar de mais exemplos
+- **Foco**: APENAS Capítulos 4-5 (Meta-circular Evaluator & Compilers)
+- **Por quê**: SICP tem exemplos excelentes de interpreters em Scheme/JS
+- **ATENÇÃO**: NÃO leia o livro inteiro (1235 páginas = 6 meses)
+- **Link**: https://www.amazon.es/dp/B094X8316F (€40.22)
+- **Alternativa gratuita**: https://sourceacademy.org/sicpjs (online)
+- **Nota**: Só consulte se "Crafting Interpreters" não for suficiente
+
+### ❌ Livro NÃO Recomendado
+**"Abre Tu Mente a Los Números"** - Barbara Oakley
+- **Por quê**: Foca em técnicas de estudo, não em CS fundamentals
+- **Overlap**: Você já tem um sistema ultralearning
+- **Veredicto**: Tempo melhor investido em implementar código
 
 ---
 
