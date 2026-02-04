@@ -86,3 +86,4 @@ draft-*.py
 # Uncomment if you want to track learning maps in Git
 # !01-meta/active/**/learning-map.md
 # !01-meta/active/**/resources.md
+.obsidian
