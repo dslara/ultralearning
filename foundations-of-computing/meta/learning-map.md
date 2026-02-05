@@ -1,5 +1,18 @@
 # 🗺️ Learning Map: CS Fundamentals (~22 meses)
 
+> **O que é este documento?** Este é o plano de estudo detalhado para dominar fundamentos profundos de Ciência da Computação em ~22 meses. Inclui timeline, fases de aprendizado, projetos, metas e métricas de progresso.
+
+### 📌 Índice Rápido
+- [Meta](#meta) - Objetivo e prazo
+- [Timeline Visual](#-timeline-visual) - Visão geral de 88 semanas
+- [Sistema de Sustentabilidade](#-sistema-de-sustentabilidade) - Buffers e mini-projetos
+- [Visão Geral das Fases](#-visão-geral-das-fases) - 6 fases + benchmarks
+- [Critérios de Sucesso](#-critérios-de-sucesso) - O que você será capaz de fazer
+- [Tracking](#-tracking) - Progresso, checkpoints e métricas
+- [Estrutura de Arquivos](#-estrutura-de-arquivos) - Onde encontrar cada semana
+
+---
+
 ## Meta
 - **Objetivo**: Dominar fundamentos profundos de CS
 - **Prazo**: ~22 meses (88 semanas)
@@ -11,37 +24,27 @@
 
 ## 📅 Timeline Visual
 
-```
-Mês:  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22
-      |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-      F0  B |  FASE 1  |B|    FASE 2     |B|    FASE 3     |B| F4  B|   FASE 5A+5B    |B| FASE 6 |B
-     Math   |   Rust   |P|  DataStruct   |P|  Algorithms   |P| DP   |  Go + Systems   |P| Comp+Cap
-
-Legenda: B = Buffer Week | P = Mini-Projeto
-
-Semanas detalhadas:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Fase 0: Math Foundations         [Sem 01-05]    5w    25h
-Buffer 1                         [Sem 06]       1w     5h
-Fase 1: Rust Foundations         [Sem 07-14]    8w    40h
-Mini-Projeto 1: Memory Allocator [Sem 15]       1w     5h
-Buffer 2                         [Sem 16]       1w     5h
-Fase 2: Data Structures          [Sem 17-28]   12w    60h
-Mini-Projeto 2: CLI com DS       [Sem 29]       1w     5h
-Buffer 3                         [Sem 30]       1w     5h
-Fase 3: Algorithms               [Sem 31-42]   12w    60h
-Mini-Projeto 3: Sorting Viz      [Sem 43]       1w     5h
-Buffer 4                         [Sem 44]       1w     5h
-Fase 4: Advanced Rust + DP       [Sem 45-48]    4w    20h
-Buffer 5                         [Sem 49]       1w     5h
-Fase 5A: Go Foundations          [Sem 50-53]    4w    20h  ← ESTENDIDO
-Fase 5B: Systems                 [Sem 54-67]   14w    70h
-Buffer 6                         [Sem 68]       1w     5h
-Fase 6: Compilers + Capstone     [Sem 69-86]   18w    90h
-Buffer 7-8 (Reserva Final)       [Sem 87-88]    2w    10h
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL:                                         88w   440h (~22 meses)
-```
+| Fase | Semanas | Duração | Horas | Descrição |
+|------|---------|---------|-------|-----------|
+| **F0: Math Foundations** | 1-5 | 5w | 25h | Notação, Conjuntos, Log/Exp, Indução, Combinatória |
+| **Buffer 1** | 6 | 1w | 5h | Recuperação e revisão |
+| **F1: Rust Foundations** | 7-14 | 8w | 40h | Ownership, Lifetimes, Memory, Smart Pointers |
+| **Mini-Projeto 1** | 15 | 1w | 5h | Memory Allocator |
+| **Buffer 2** | 16 | 1w | 5h | Recuperação e revisão |
+| **F2: Data Structures** | 17-28 | 12w | 60h | Arrays, Linked Lists, Stacks, Queues, Hash Tables, Trees, Heaps |
+| **Mini-Projeto 2** | 29 | 1w | 5h | CLI tool com Data Structures |
+| **Buffer 3** | 30 | 1w | 5h | Recuperação e revisão |
+| **F3: Algorithms** | 31-42 | 12w | 60h | Sorting, Binary Search, Recursão, Grafos, Análise |
+| **Mini-Projeto 3** | 43 | 1w | 5h | Sorting Visualizer |
+| **Buffer 4** | 44 | 1w | 5h | Recuperação e revisão |
+| **F4: Advanced Rust + DP** | 45-48 | 4w | 20h | Traits, Generics, Dynamic Programming |
+| **Buffer 5** | 49 | 1w | 5h | Recuperação e revisão |
+| **F5A: Go Foundations** | 50-53 | 4w | 20h | Go Basics, Concurrency (Goroutines, Channels) |
+| **F5B: Systems** | 54-67 | 14w | 70h | CPU, Cache, OS, Concorrência, TCP/IP, HTTP, DB |
+| **Buffer 6** | 68 | 1w | 5h | Recuperação e revisão |
+| **F6: Compilers + Capstone** | 69-86 | 18w | 90h | Lexer, Parser, Interpreter, Projeto Final |
+| **Buffer 7-8** | 87-88 | 2w | 10h | Reserva final |
+| **TOTAL** | 1-88 | 88w | 440h | ~22 meses |
 
 ---
 
@@ -54,11 +57,12 @@ Use para:
 - ✅ Descanso mental
 - ✅ Imprevistos da vida
 
-### Mini-Projetos (3 semanas)
-Projetos de integração entre fases:
-1. **Memory Allocator** (após Fase 1) - Aplica ownership
-2. **CLI Tool** (após Fase 2) - Usa todas as DS aprendidas
-3. **Sorting Visualizer** (após Fase 3) - Demonstra algoritmos
+### Mini-Projetos (4 total)
+Projetos de integração entre fases para aplicar conhecimento:
+1. **Memory Allocator** (Semana 15, após Fase 1) - Aplica ownership e memory management
+2. **CLI Tool** (Semana 29, após Fase 2) - Usa todas as estruturas de dados aprendidas
+3. **Sorting Visualizer** (Semana 43, após Fase 3) - Demonstra algoritmos em ação
+4. **Capstone Project** (Semanas 69-86, Fase 6) - Integração completa: Database, KV Store, Language ou HTTP Framework
 
 ### 🔄 Ritual de Retomada (após pausas)
 ```
@@ -77,11 +81,11 @@ Dia 4: Retomar normalmente
 
 | Semana | Tema | Pergunta Guia |
 |--------|------|---------------|
-| 0.1 | Notação & Lógica | Como ler e escrever afirmações matemáticas? |
-| 0.2 | Conjuntos & Funções | O que define uma função? |
-| 0.3 | Logaritmos & Exponenciais | Por que log aparece em complexidade? |
-| 0.4 | Somatórios & Indução | Como provar que algo funciona para N? |
-| 0.5 | Combinatória, Probabilidade & Grafos | Como contar possibilidades? Como analisar caso médio? |
+| 1 | Notação & Lógica | Como ler e escrever afirmações matemáticas? |
+| 2 | Conjuntos & Funções | O que define uma função? |
+| 3 | Logaritmos & Exponenciais | Por que log aparece em complexidade? |
+| 4 | Somatórios & Indução | Como provar que algo funciona para N? |
+| 5 | Combinatória & Probabilidade | Como contar possibilidades? Como analisar caso médio? |
 
 **Benchmark**: Ler análise de algoritmo e entender cada termo
 
@@ -240,36 +244,46 @@ Ao final, você será capaz de:
 - [ ] Criar sistemas concorrentes seguros
 - [ ] Explicar como código fonte vira execução
 
-### 📌 Tópicos para Estudo Futuro (não incluídos)
-> Estes tópicos são importantes mas ficam para após o curso:
-- **Async Rust** (tokio, async/await) - útil para web servers
-- **Rust macros** - metaprogramming
-- **Kubernetes/Docker** - orquestração
-- **Cloud providers** - AWS/GCP/Azure
-- **Frontend** - se necessário para projetos
+### 📌 Tópicos para Estudo Futuro (Fora do escopo)
+Estes tópicos são importantes mas ficam para após o curso de 22 meses:
+
+| Tópico | Por quê esperar | Quando estudar |
+|--------|-----------------|-----------------|
+| **Async Rust** (tokio, async/await) | Requer sólido em concorrência básica | Após Fase 5B |
+| **Rust macros** | Metaprogramming avançado | Projeto web avançado |
+| **Kubernetes/Docker** | Orquestração de containers | Carreira em DevOps |
+| **Cloud providers** (AWS/GCP/Azure) | Requer infra foundations | Trabalhos enterprise |
+| **Frontend** (React, Vue, etc) | Opcional, se necessário para projetos | Conforme demanda |
 
 ---
 
 ## 📈 Tracking
 
 ### Progresso por Fase
-- [ ] FASE 0 completa (Sem 5)
+**Parte 1: Fundamentos (Sem 1-16)**
+- [ ] FASE 0 - Math Foundations (Sem 1-5)
 - [ ] Buffer 1 (Sem 6)
-- [ ] FASE 1 completa (Sem 14)
-- [ ] Mini-Projeto 1 (Sem 15)
+- [ ] FASE 1 - Rust Foundations (Sem 7-14)
+- [ ] Mini-Projeto 1 - Memory Allocator (Sem 15)
 - [ ] Buffer 2 (Sem 16)
-- [ ] FASE 2 completa (Sem 28)
-- [ ] Mini-Projeto 2 (Sem 29)
+
+**Parte 2: Estruturas e Algoritmos (Sem 17-44)**
+- [ ] FASE 2 - Data Structures (Sem 17-28)
+- [ ] Mini-Projeto 2 - CLI Tool (Sem 29)
 - [ ] Buffer 3 (Sem 30)
-- [ ] FASE 3 completa (Sem 42)
-- [ ] Mini-Projeto 3 (Sem 43)
+- [ ] FASE 3 - Algorithms (Sem 31-42)
+- [ ] Mini-Projeto 3 - Sorting Visualizer (Sem 43)
 - [ ] Buffer 4 (Sem 44)
-- [ ] FASE 4 completa (Sem 48)
+
+**Parte 3: Rust Avançado + Linguagens (Sem 45-68)**
+- [ ] FASE 4 - Advanced Rust + DP (Sem 45-48)
 - [ ] Buffer 5 (Sem 49)
-- [ ] FASE 5A completa (Sem 53)
-- [ ] FASE 5B completa (Sem 67)
+- [ ] FASE 5A - Go Foundations (Sem 50-53)
+- [ ] FASE 5B - Systems (Sem 54-67)
 - [ ] Buffer 6 (Sem 68)
-- [ ] FASE 6 completa (Sem 86)
+
+**Parte 4: Capstone (Sem 69-88)**
+- [ ] FASE 6 - Compilers + Capstone (Sem 69-86)
 - [ ] Buffers finais (Sem 87-88)
 
 ### Benchmarks Trimestrais
@@ -279,24 +293,31 @@ Ao final, você será capaz de:
 - [ ] Q4: Capstone (Sem 86)
 
 ### Checkpoints Mensais
-- [ ] Mês 1: Math completo?
-- [ ] Mês 2-3: Rust ownership sólido?
-- [ ] Mês 4-5: Primeiras DS implementadas?
-- [ ] Mês 6-7: Todas DS + Mini-projeto?
-- [ ] Mês 8-9: Sorting + Big O dominados?
-- [ ] Mês 10-11: Grafos + DP + Mini-projeto?
-- [ ] Mês 12: Go basics + concurrency?
-- [ ] Mês 13-15: Systems fundamentals?
-- [ ] Mês 16-17: HTTP server funcional?
-- [ ] Mês 18-19: Interpreter funcional?
-- [ ] Mês 20-22: Capstone finalizado?
 
-### Métricas
-- Horas estudadas: 0/440
-- Semanas completadas: 0/88
-- Projetos completados: 0/4 (3 mini + 1 capstone)
-- LeetCode resolvidos: 0/100
-- Streak atual: 0 dias
+| Mês | Checkpoint | Status |
+|-----|-----------|--------|
+| 1 | Math foundations completo | [ ] |
+| 2-3 | Rust ownership e borrowing sólidos | [ ] |
+| 4-5 | Primeiras DS (Vec, LinkedList) implementadas | [ ] |
+| 6-7 | Todas DS + Mini-projeto 1 completado | [ ] |
+| 8-9 | Sorting e análise de complexidade dominados | [ ] |
+| 10-11 | Grafos, DP e Mini-projeto 2 completado | [ ] |
+| 12 | Go basics e goroutines funcionando | [ ] |
+| 13-15 | Systems fundamentals (CPU, OS, Concorrência) | [ ] |
+| 16-17 | HTTP server do zero funcional | [ ] |
+| 18-19 | Lexer + Parser + Interpreter básico | [ ] |
+| 20-22 | Capstone finalizado e documentado | [ ] |
+
+### Métricas Principais
+
+| Métrica | Meta | Atual | % Completado |
+|---------|------|-------|--------------|
+| Horas estudadas | 440h | 0h | 0% |
+| Semanas completadas | 88 | 0 | 0% |
+| Mini-projetos (1-3) | 3 | 0 | 0% |
+| Capstone (projeto 4) | 1 | 0 | 0% |
+| Problemas LeetCode | 100 | 0 | 0% |
+| Dias de streak (meta) | 440 dias | 0 | 0% |
 
 ### 📊 Métricas de Saúde do Projeto
 
@@ -314,17 +335,16 @@ Ao final, você será capaz de:
 
 ---
 
-## 🗂️ Arquivos por Fase
+## 🗂️ Estrutura de Arquivos
 
-> ✅ Os nomes dos arquivos agora refletem as **semanas reais** do timeline.
-> Ex: `week-17-18-arrays-vec.md` = Semanas 17-18 do curso.
+**Convenção**: `week-XX-YY-topic.md` = Semanas XX-YY do timeline
 
 ### Fase 0: Math Foundations (Semanas 1-5)
 - `week-01-notation-logic.md`
 - `week-02-sets-functions.md`
 - `week-03-log-exp.md`
 - `week-04-summation-induction.md`
-- `week-05-combinatorics-graphs.md` ← Inclui Probabilidade
+- `week-05-combinatorics-graphs.md`
 
 ### Buffer 1 (Semana 6)
 - `buffer-week.md`
@@ -332,7 +352,7 @@ Ao final, você será capaz de:
 ### Fase 1: Rust Foundations (Semanas 7-14)
 - `week-07-08-ownership.md`
 - `week-09-10-lifetimes.md`
-- `week-11-12-memory.md` ← Inclui Error Handling (Result/Option)
+- `week-11-12-memory.md`
 - `week-13-14-smart-pointers.md`
 
 ### Mini-Projeto 1 (Semana 15)
@@ -347,7 +367,7 @@ Ao final, você será capaz de:
 - `week-21-22-stacks-queues.md`
 - `week-23-24-hash-tables.md`
 - `week-25-26-trees-bst.md`
-- `week-27-28-heaps.md` ← Inclui Union-Find
+- `week-27-28-heaps.md`
 
 ### Mini-Projeto 2 (Semana 29)
 - `mini-project-2-cli.md`
@@ -358,7 +378,7 @@ Ao final, você será capaz de:
 ### Fase 3: Algorithms (Semanas 31-42)
 - `week-31-32-sorting-basic.md`
 - `week-33-34-sorting-advanced.md`
-- `week-35-36-binary-search-greedy.md` ← Binary Search + Greedy (substitui Big O)
+- `week-35-36-binary-search-greedy.md`
 - `week-37-38-recursion.md`
 - `week-39-40-graphs-repr.md`
 - `week-41-42-graphs-algo.md`
@@ -402,25 +422,27 @@ Ao final, você será capaz de:
 
 ### Arquivos de Suporte
 - `learning-map.md` - Este arquivo (mapa principal)
-- `resources.md` - Todos os recursos organizados por fase
-- `_template-week.md` - Template para criar novas semanas
-- `buffer-week.md` - Template para semanas de buffer
-- `phase-X-overview.md` - Visão geral de cada fase (7 arquivos)
+- `resources.md` - Recursos organizados por fase
+- `_template-week.md` - Template para criar semanas
 
 ---
 
-## 🔁 Dia de Revisão Quinzenal
+## 🔁 Ritual Semanal de Revisão
 
-A cada 2ª sexta-feira (dia 5 da semana par), dedique a sessão inteira para:
+**Toda 2ª sexta-feira** (semanas pares): dedique a sessão inteira para revisão profunda.
 
-1. **Revisar todos os SRS cards pendentes** (20 min)
-2. **Reler resumos das últimas 2 semanas** (15 min)
-3. **Tentar explicar conceitos sem consulta** (15 min)
-4. **Atualizar métricas de saúde** (10 min)
+### Rotina de Revisão (60 min total)
+1. **SRS Review** (20 min) - Revisar todos os cards pendentes
+2. **Conceitos** (15 min) - Reler resumos das últimas 2 semanas
+3. **Explicação** (15 min) - Explicar conceitos SEM consulta (verbalmente ou escrito)
+4. **Métricas** (10 min) - Atualizar saúde do projeto e identificar sinais de alerta
 
-> Não avance conteúdo novo neste dia!
+⚠️ **Regra importante**: Não avance conteúdo novo neste dia!
 
 ---
 
-*Última atualização: 2025-02-03*
-*Versão: 2.5 - Revisão geral, ajustes de consistência e meta LeetCode*
+## 📝 Última Atualização
+
+- **Data**: 2026-02-05
+- **Versão**: 2.7
+- **Mudanças**: Revisão final - correção de cronograma Fase 0, alinhamento de semanas, clareza em métricas, introdução adicionada
