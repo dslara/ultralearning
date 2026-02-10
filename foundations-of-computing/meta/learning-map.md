@@ -1,12 +1,12 @@
 # 🗺️ Learning Map: CS Fundamentals (~22 meses)
 
-> **O que é este documento?** Este é o plano de estudo detalhado para dominar fundamentos profundos de Ciência da Computação em ~22 meses. Inclui timeline, fases de aprendizado, projetos, metas e métricas de progresso.
+> **O que é este documento?** Este é o plano de estudo detalhado para dominar fundamentos profundos de Ciência da Computação em ~22 meses. Inclui timeline, phases de aprendizado, projetos, metas e métricas de progresso.
 
 ### 📌 Índice Rápido
 - [Meta](#meta) - Objetivo e prazo
 - [Timeline Visual](#-timeline-visual) - Visão geral de 88 semanas
 - [Sistema de Sustentabilidade](#-sistema-de-sustentabilidade) - Buffers e mini-projetos
-- [Visão Geral das Fases](#-visão-geral-das-fases) - 6 fases + benchmarks
+- [Visão Geral das Phases](#-visão-geral-das-phases) - 6 phases + benchmarks
 - [Critérios de Sucesso](#-critérios-de-sucesso) - O que você será capaz de fazer
 - [Tracking](#-tracking) - Progresso, checkpoints e métricas
 - [Estrutura de Arquivos](#-estrutura-de-arquivos) - Onde encontrar cada semana
@@ -24,7 +24,7 @@
 
 ## 📅 Timeline Visual
 
-| Fase | Semanas | Duração | Horas | Descrição |
+| Phase | Semanas | Duração | Horas | Descrição |
 |------|---------|---------|-------|-----------|
 | **F0: Math Foundations** | 1-5 | 5w | 25h | Notação, Conjuntos, Log/Exp, Indução, Combinatória |
 | **Buffer 1** | 6 | 1w | 5h | Recuperação e revisão |
@@ -58,11 +58,11 @@ Use para:
 - ✅ Imprevistos da vida
 
 ### Mini-Projetos (4 total)
-Projetos de integração entre fases para aplicar conhecimento:
-1. **Memory Allocator** (Semana 15, após Fase 1) - Aplica ownership e memory management
-2. **CLI Tool** (Semana 29, após Fase 2) - Usa todas as estruturas de dados aprendidas
-3. **Sorting Visualizer** (Semana 43, após Fase 3) - Demonstra algoritmos em ação
-4. **Capstone Project** (Semanas 69-86, Fase 6) - Integração completa: Database, KV Store, Language ou HTTP Framework
+Projetos de integração entre phases para aplicar conhecimento:
+1. **Memory Allocator** (Semana 15, após Phase 1) - Aplica ownership e memory management
+2. **CLI Tool** (Semana 29, após Phase 2) - Usa todas as estruturas de dados aprendidas
+3. **Sorting Visualizer** (Semana 43, após Phase 3) - Demonstra algoritmos em ação
+4. **Capstone Project** (Semanas 69-86, Phase 6) - Integração completa: Database, KV Store, Language ou HTTP Framework
 
 ### 🔄 Ritual de Retomada (após pausas)
 ```
@@ -74,9 +74,9 @@ Dia 4: Retomar normalmente
 
 ---
 
-## 🎯 Visão Geral das Fases
+## 🎯 Visão Geral das Phases
 
-### FASE 0: Math Foundations (Semanas 1-5)
+### PHASE 0: Math Foundations (Semanas 1-5)
 **Pergunta central**: Que matemática preciso para entender algoritmos?
 
 | Semana | Tema | Pergunta Guia |
@@ -91,7 +91,7 @@ Dia 4: Retomar normalmente
 
 ---
 
-### FASE 1: Rust Foundations (Semanas 7-14)
+### PHASE 1: Rust Foundations (Semanas 7-14)
 **Pergunta central**: Como Rust gerencia memória sem garbage collector?
 
 | Semana | Tema | Pergunta Guia |
@@ -107,7 +107,7 @@ Dia 4: Retomar normalmente
 
 ---
 
-### FASE 2: Data Structures (Semanas 17-28)
+### PHASE 2: Data Structures (Semanas 17-28)
 **Pergunta central**: Como escolher a estrutura certa para cada problema?
 
 | Semana | Tema | Pergunta Guia |
@@ -125,7 +125,7 @@ Dia 4: Retomar normalmente
 
 ---
 
-### FASE 3: Algorithms (Semanas 31-42)
+### PHASE 3: Algorithms (Semanas 31-42)
 **Pergunta central**: Como analisar e comparar algoritmos?
 
 | Semana | Tema | Pergunta Guia | LeetCode Meta |
@@ -137,7 +137,7 @@ Dia 4: Retomar normalmente
 | 39-40 | Grafos: Representação | Matriz vs Lista: quando usar cada? | 4 Medium |
 | 41-42 | Grafos: Algoritmos | Como Dijkstra garante caminho mínimo? | 5 Med/Hard |
 
-**Meta de Prática**: ~25 problemas durante a fase (3-4/semana)
+**Meta de Prática**: ~25 problemas durante a phase (3-4/semana)
 
 **Benchmark Q2**: Resolver 10 problemas (7/10 para passar)
 
@@ -145,7 +145,7 @@ Dia 4: Retomar normalmente
 
 ---
 
-### FASE 4: Advanced Rust + DP (Semanas 45-48)
+### PHASE 4: Advanced Rust + DP (Semanas 45-48)
 **Pergunta central**: Como abstrair e reutilizar código em Rust?
 
 | Semana | Tema | Pergunta Guia | LeetCode Meta |
@@ -155,7 +155,7 @@ Dia 4: Retomar normalmente
 
 ---
 
-### FASE 5A: Go Foundations (Semanas 50-53) ← ESTENDIDO
+### PHASE 5A: Go Foundations (Semanas 50-53) ← ESTENDIDO
 **Pergunta central**: Como Go difere de Rust em modelo de memória?
 
 | Semana | Tema | Pergunta Guia |
@@ -167,7 +167,7 @@ Dia 4: Retomar normalmente
 
 ---
 
-### FASE 5B: Systems (Semanas 54-67)
+### PHASE 5B: Systems (Semanas 54-67)
 **Pergunta central**: Como computadores realmente executam código?
 
 | Semana | Tema | Pergunta Guia | LeetCode Meta |
@@ -184,7 +184,7 @@ Dia 4: Retomar normalmente
 
 ---
 
-### FASE 6: Compilers + Capstone (Semanas 69-86)
+### PHASE 6: Compilers + Capstone (Semanas 69-86)
 **Pergunta central**: Como linguagens de programação funcionam?
 
 | Semana | Tema | Pergunta Guia |
@@ -232,7 +232,7 @@ Ao final, você será capaz de:
 - [ ] Explicar funcionamento de algoritmos clássicos
 - [ ] Implementar binary search e variações sem bugs
 - [ ] Identificar quando usar greedy vs DP
-- [ ] **~100 problemas LeetCode resolvidos** (foco em Fases 3-4)
+- [ ] **~100 problemas LeetCode resolvidos** (foco em Phases 3-4)
 
 ### Sistemas
 - [ ] Explicar como CPU executa código
@@ -249,7 +249,7 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 
 | Tópico | Por quê esperar | Quando estudar |
 |--------|-----------------|-----------------|
-| **Async Rust** (tokio, async/await) | Requer sólido em concorrência básica | Após Fase 5B |
+| **Async Rust** (tokio, async/await) | Requer sólido em concorrência básica | Após Phase 5B |
 | **Rust macros** | Metaprogramming avançado | Projeto web avançado |
 | **Kubernetes/Docker** | Orquestração de containers | Carreira em DevOps |
 | **Cloud providers** (AWS/GCP/Azure) | Requer infra foundations | Trabalhos enterprise |
@@ -259,31 +259,31 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 
 ## 📈 Tracking
 
-### Progresso por Fase
+### Progresso por Phase
 **Parte 1: Fundamentos (Sem 1-16)**
-- [ ] FASE 0 - Math Foundations (Sem 1-5)
+- [ ] PHASE 0 - Math Foundations (Sem 1-5)
 - [ ] Buffer 1 (Sem 6)
-- [ ] FASE 1 - Rust Foundations (Sem 7-14)
+- [ ] PHASE 1 - Rust Foundations (Sem 7-14)
 - [ ] Mini-Projeto 1 - Memory Allocator (Sem 15)
 - [ ] Buffer 2 (Sem 16)
 
 **Parte 2: Estruturas e Algoritmos (Sem 17-44)**
-- [ ] FASE 2 - Data Structures (Sem 17-28)
+- [ ] PHASE 2 - Data Structures (Sem 17-28)
 - [ ] Mini-Projeto 2 - CLI Tool (Sem 29)
 - [ ] Buffer 3 (Sem 30)
-- [ ] FASE 3 - Algorithms (Sem 31-42)
+- [ ] PHASE 3 - Algorithms (Sem 31-42)
 - [ ] Mini-Projeto 3 - Sorting Visualizer (Sem 43)
 - [ ] Buffer 4 (Sem 44)
 
 **Parte 3: Rust Avançado + Linguagens (Sem 45-68)**
-- [ ] FASE 4 - Advanced Rust + DP (Sem 45-48)
+- [ ] PHASE 4 - Advanced Rust + DP (Sem 45-48)
 - [ ] Buffer 5 (Sem 49)
-- [ ] FASE 5A - Go Foundations (Sem 50-53)
-- [ ] FASE 5B - Systems (Sem 54-67)
+- [ ] PHASE 5A - Go Foundations (Sem 50-53)
+- [ ] PHASE 5B - Systems (Sem 54-67)
 - [ ] Buffer 6 (Sem 68)
 
 **Parte 4: Capstone (Sem 69-88)**
-- [ ] FASE 6 - Compilers + Capstone (Sem 69-86)
+- [ ] PHASE 6 - Compilers + Capstone (Sem 69-86)
 - [ ] Buffers finais (Sem 87-88)
 
 ### Benchmarks Trimestrais
@@ -339,7 +339,7 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 
 **Convenção**: `week-XX-YY-topic.md` = Semanas XX-YY do timeline
 
-### Fase 0: Math Foundations (Semanas 1-5)
+### Phase 0: Math Foundations (Semanas 1-5)
 - `week-01-notation-logic.md`
 - `week-02-sets-functions.md`
 - `week-03-log-exp.md`
@@ -349,7 +349,7 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 ### Buffer 1 (Semana 6)
 - `buffer-week.md`
 
-### Fase 1: Rust Foundations (Semanas 7-14)
+### Phase 1: Rust Foundations (Semanas 7-14)
 - `week-07-08-ownership.md`
 - `week-09-10-lifetimes.md`
 - `week-11-12-memory.md`
@@ -361,7 +361,7 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 ### Buffer 2 (Semana 16)
 - `buffer-week.md`
 
-### Fase 2: Data Structures (Semanas 17-28)
+### Phase 2: Data Structures (Semanas 17-28)
 - `week-17-18-arrays-vec.md`
 - `week-19-20-linked-lists.md`
 - `week-21-22-stacks-queues.md`
@@ -375,7 +375,7 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 ### Buffer 3 (Semana 30)
 - `buffer-week.md`
 
-### Fase 3: Algorithms (Semanas 31-42)
+### Phase 3: Algorithms (Semanas 31-42)
 - `week-31-32-sorting-basic.md`
 - `week-33-34-sorting-advanced.md`
 - `week-35-36-binary-search-greedy.md`
@@ -389,18 +389,18 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 ### Buffer 4 (Semana 44)
 - `buffer-week.md`
 
-### Fase 4: Advanced Rust + DP (Semanas 45-48)
+### Phase 4: Advanced Rust + DP (Semanas 45-48)
 - `week-45-46-traits-generics.md`
 - `week-47-48-dynamic-programming.md`
 
 ### Buffer 5 (Semana 49)
 - `buffer-week.md`
 
-### Fase 5A: Go Foundations (Semanas 50-53)
+### Phase 5A: Go Foundations (Semanas 50-53)
 - `week-50-51-go-basics.md`
 - `week-52-53-go-concurrency.md`
 
-### Fase 5B: Systems (Semanas 54-67)
+### Phase 5B: Systems (Semanas 54-67)
 - `week-54-55-cpu-cache.md`
 - `week-56-57-os-processes.md`
 - `week-58-59-concurrency-adv.md`
@@ -412,7 +412,7 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 ### Buffer 6 (Semana 68)
 - `buffer-week.md`
 
-### Fase 6: Compilers + Capstone (Semanas 69-86)
+### Phase 6: Compilers + Capstone (Semanas 69-86)
 - `week-69-70-lexer-parser.md`
 - `week-71-72-interpreter.md`
 - `week-73-86-capstone.md`
@@ -422,7 +422,7 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 
 ### Arquivos de Suporte
 - `learning-map.md` - Este arquivo (mapa principal)
-- `resources.md` - Recursos organizados por fase
+- `resources.md` - Recursos organizados por phase
 - `_template-week.md` - Template para criar semanas
 
 ---
@@ -445,4 +445,4 @@ Estes tópicos são importantes mas ficam para após o curso de 22 meses:
 
 - **Data**: 2026-02-05
 - **Versão**: 2.7
-- **Mudanças**: Revisão final - correção de cronograma Fase 0, alinhamento de semanas, clareza em métricas, introdução adicionada
+- **Mudanças**: Revisão final - correção de cronograma Phase 0, alinhamento de semanas, clareza em métricas, introdução adicionada
