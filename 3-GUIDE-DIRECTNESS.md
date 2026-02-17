@@ -2,7 +2,6 @@
 
 > **Última atualização**: 2026-02-08  
 > **Versão**: 1.0  
-> **"I hear and I forget. I see and I remember. I do and I understand."** - Confúcio
 
 ---
 
@@ -877,9 +876,9 @@ cargo run -- "pattern" file.txt
 
 ## 🔗 Links Relacionados
 
-- [FEYNMAN-GUIDE.md](FEYNMAN-GUIDE.md) - Entender conceitos antes
-- [DRILL-GUIDE.md](DRILL-GUIDE.md) - Automatizar skills antes
-- [FLASHCARDS-GUIDE.md](FLASHCARDS-GUIDE.md) - Memorizar fatos
+- [FEYNMAN-GUIDE.md](8-GUIDE-FEYNMAN.md) - Entender conceitos antes
+- [DRILL-GUIDE.md](4-GUIDE-DRILL.md) - Automatizar skills antes
+- [FLASHCARDS-GUIDE.md](7-GUIDE-FLASHCARDS.md) - Memorizar fatos
 - [Master Learning Map](shared/master-learning-map.md) - Visão global
 
 ---
