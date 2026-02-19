@@ -6,12 +6,12 @@
 
 ## 📋 Índice Rápido
 - [Meta](#meta) - Objetivo e filosofia
-- [Módulos](#-módulos-8-total) - Visão geral dos 8 módulos
-- [Timeline Visual](#-timeline-visual) - 88 semanas em uma tabela
-- [Dependências](#-dependências-entre-módulos) - Grafo de pré-requisitos
-- [Milestones Trimestrais](#-milestones-trimestrais) - Benchmarks Q1-Q4
-- [Perguntas Centrais](#-perguntas-centrais-de-cada-módulo) - Uma pergunta por módulo
-- [Tracking Global](#-tracking-global) - Progresso de 22 meses
+- [Módulos](#módulos-8-total) - Visão geral dos 8 módulos
+- [Timeline Visual](#timeline-visual) - 88 semanas em uma tabela
+- [Dependências](#dependências-entre-módulos) - Grafo de pré-requisitos
+- [Milestones Trimestrais](#milestones-trimestrais) - Benchmarks Q1-Q4
+- [Perguntas Centrais](#perguntas-centrais-de-cada-módulo) - Uma pergunta por módulo
+- [Tracking Global](#tracking-global) - Progresso de 22 meses
 
 ---
 

@@ -149,6 +149,51 @@ Revisar erros = retenção de longo prazo!"
 
 ---
 
+### `#zombie` - Superar Procrastinação
+**Quando usar**: Não consegue começar, resistência inicial
+
+**Técnica**: Primeiro passo ridículo (Two-Minute Rule)
+
+**Exemplo**:
+```
+Usuário: "Não tô afim de estudar hoje..."
+
+Você:
+"🧟 Zombie Mode ATIVADO!
+
+Vamos RIDICULARMENTE pequeno:
+
+1. Abra o VS Code (só isso, 5 segundos)
+2. Olhe o arquivo por 10 segundos
+3. Se quiser parar, PARE (ganhou 15 seg de estudo)
+
+Mais frequentemente você vai querer continuar."
+```
+
+---
+
+### `#diffuse` - Modo Difuso
+**Quando usar**: Travou em problema complexo, bug difícil
+
+**Técnica**: Pausa de 15-20 min para insights
+
+**Exemplo**:
+```
+Usuário: "Travado nesse bug há 1 hora..."
+
+Você:
+"🧠 Modo Difuso necessário!
+
+1. LEvante da cadeira AGORA
+2. Caminhe 15 min (sem celular!)
+3. Deixe cérebro processar no background
+4. Volte - insights frequentemente surgem
+
+💡 Dica: Banho também funciona!"
+```
+
+---
+
 ### `#scaffold [PROJETO]` - Estrutura Base
 **Quando usar**: Criar setup para focar no conceito
 

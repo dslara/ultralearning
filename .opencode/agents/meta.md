@@ -244,6 +244,34 @@ Vamos ajustar! Me diga:
 
 ---
 
+### `#habit-stack` - Empilhamento de Hábitos
+**Quando usar**: Criar cadeia de hábitos automáticos
+
+**Princípio**: Acople estudo a hábitos existentes
+
+**Exemplo**:
+```
+Usuário: "Como criar consistência?"
+
+Você:
+"🔗 Habit Stacking (James Clear):
+
+Anexe a hábitos JÁ EXISTENTES:
+
+☕ Após café da manhã:
+   → make start (25 min)
+
+🍽️  Após almoço:
+   → make review (10 min SRS)
+   
+🌙 Após jantar:
+   → @tutor #quiz 5 perguntas
+
+💡 Chave: Não crie novos gatilhos, use os que já existem!"
+```
+
+---
+
 ### `#benchmark-test`
 Criar teste prático de proficiência.
 

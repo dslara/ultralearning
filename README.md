@@ -1,6 +1,14 @@
-# 🚀 Ultralearning
+# 🚀 Ultralearning System
 
-Sistema de aprendizado autodirigido baseado em **Scott Young**, otimizado para OpenCode.
+Sistema de aprendizado autodirigido integrando três abordagens científicas:
+
+| Abordagem | Autor | Foco |
+|-----------|-------|------|
+| **Ultralearning** | Scott Young | Intensidade e imersão profunda |
+| **A Mind for Numbers** | Dra. Barbara Oakley | Eficiência cognitiva para exatas |
+| **Atomic Habits** | James Clear | Consistência e rituais sustentáveis |
+
+Otimizado para aprendizado acelerado de Ciência da Computação.
 
 ## ⚡ Quick Start
 
@@ -39,6 +47,8 @@ make end     # Salva + atualiza streak
 |---------|-----------|
 | `make review` | Spaced repetition (SRS) |
 | `make retro` | Retrospectiva semanal (3 perguntas) |
+| `make break` | Pausa de 15 min para modo difuso (Oakley) |
+| `make drill-extra` | Overlearning: 5 variações de drill (Oakley) |
 
 ### Utilitários
 | Comando | Descrição |
@@ -69,6 +79,8 @@ make end     # Salva + atualiza streak
 | `#feedback` | Revisão de código |
 | `#debug` | Guia de debug socrático |
 | `#intuition [conceito]` | Entender o "por quê" profundo |
+| `#zombie` | Superar procrastinação (Two-Minute Rule) |
+| `#diffuse` | Usar modo difuso quando travado |
 
 ### Keywords do @meta
 | Keyword | Uso |
@@ -78,6 +90,63 @@ make end     # Salva + atualiza streak
 | `#create-weekly-plan semana N` | Gerar plano semanal |
 | `#adjust-plan [situação]` | Reajustar cronograma |
 | `#benchmark-test` | Criar teste de proficiência |
+| `#habit-stack` | Criar cadeia de hábitos (Atomic Habits) |
+
+---
+
+## 📚 Fundamentação Científica
+
+Este sistema integra três abordagens complementares:
+
+| Abordagem | Autor | Foco | Implementação |
+|-----------|-------|------|---------------|
+| **Ultralearning** | Scott Young | Intensidade e imersão | 9 princípios + 24 técnicas |
+| **A Mind for Numbers** | Dra. Barbara Oakley | Eficiência cognitiva | Chunking, Foco/Difuso, Overlearning |
+| **Atomic Habits** | James Clear | Consistência e rituais | Cue-Routine-Reward, Habit Stacking, Two-Minute Rule |
+
+### Técnicas de James Clear (Atomic Habits)
+
+**Cue-Routine-Reward (Loop do Hábito):**
+Os comandos `make` implementam o loop completo:
+- **Cue**: Configurar ambiente (`environment-design.md`)
+- **Routine**: `make start` → `make study` → `make end`
+- **Reward**: Streak atualizado (`make status`)
+
+**Habit Stacking (Empilhamento):**
+Acople ao seu dia existente:
+```bash
+# Após café da manhã:
+make start  # 25 min de estudo
+
+# Após almoço:
+make review # SRS de 10 min
+```
+
+**Two-Minute Rule:**
+Comece ridicularmente pequeno:
+- "Vou abrir só o VS Code" (5 segundos)
+- "Vou ler 1 linha de código" (10 segundos)
+- Naturalmente continua além dos 2 minutos
+
+---
+
+### Técnicas da Dra. Barbara Oakley
+
+**Chunking (Blocos de Conhecimento):**
+- `drill.md` → Chunks de procedimentos
+- `feynman.md` → Chunks conceituais
+- `flashcards.md` → Chunks de fatos
+
+**Modos de Pensamento:**
+- `pomodoro.md` → Alternância foco/difuso
+- `focused-diffuse.md` → Gestão intencional dos modos
+
+**Transferência & Overlearning:**
+- `chunk-transfer.md` → Conectar entre domínios
+- `overlearning.md` → Praticar além do básico
+
+**Procrastinação:**
+- `procrastination-zombie.md` → Zombie Mode
 
 ---
 

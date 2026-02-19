@@ -4,12 +4,12 @@
 
 ### 📌 Índice Rápido
 - [Meta](#meta) - Objetivo e prazo
-- [Timeline Visual](#-timeline-visual) - Visão geral de 88 semanas
-- [Sistema de Sustentabilidade](#-sistema-de-sustentabilidade) - Buffers e mini-projetos
-- [Visão Geral das Phases](#-visão-geral-das-phases) - 6 phases + benchmarks
-- [Critérios de Sucesso](#-critérios-de-sucesso) - O que você será capaz de fazer
-- [Tracking](#-tracking) - Progresso, checkpoints e métricas
-- [Estrutura de Arquivos](#-estrutura-de-arquivos) - Onde encontrar cada semana
+- [Timeline Visual](#timeline-visual) - Visão geral de 88 semanas
+- [Sistema de Sustentabilidade](#sistema-de-sustentabilidade) - Buffers e mini-projetos
+- [Visão Geral das Phases](#visão-geral-das-phases) - 6 phases + benchmarks
+- [Critérios de Sucesso](#critérios-de-sucesso) - O que você será capaz de fazer
+- [Tracking](#tracking) - Progresso, checkpoints e métricas
+- [Estrutura de Arquivos](#estrutura-de-arquivos) - Onde encontrar cada semana
 
 ---
 

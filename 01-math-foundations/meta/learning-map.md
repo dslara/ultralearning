@@ -6,11 +6,11 @@
 
 ## 📋 Índice
 - [Meta](#meta) - Objetivo específico do módulo
-- [Framework 3D](#-framework-3d) - Conceitos, Fatos, Procedimentos
-- [Roadmap](#-roadmap) - 5 semanas detalhadas
-- [Recursos](#-recursos) - Tier 1/2/3
-- [Benchmark](#-benchmark-final) - Como saber que dominou
-- [Tracking](#-tracking) - Progresso semanal
+- [Framework 3D](#framework-3d) - Conceitos, Fatos, Procedimentos
+- [Roadmap](#roadmap) - 5 semanas detalhadas
+- [Recursos](#recursos) - Tier 1/2/3
+- [Benchmark](#benchmark-final) - Como saber que dominou
+- [Tracking](#tracking) - Progresso semanal
 
 ---
 

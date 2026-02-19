@@ -4,7 +4,7 @@
 
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
-.PHONY: help start study end module plan switch status review retro setup
+.PHONY: help start study end module plan switch status review retro break drill-extra setup
 
 # Cores
 BLUE := \033[0;34m
@@ -304,6 +304,54 @@ retro: ## 📝 Retrospectiva semanal (3 perguntas)
 
 ##@ 📊 Status (2 comandos)
 
+break: ## 🧠 Pausa de 15 min para modo difuso (Oakley)
+	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo -e "$(GREEN)🧠 Modo Difuso ATIVADO$(NC)"
+	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@echo -e "$(YELLOW)💡 Deixe o cérebro processar...$(NC)"
+	@echo ""
+	@echo "Atividades que ativam modo difuso:"
+	@echo "  🚶 Caminhar (sem celular)"
+	@echo "  🚿 Tomar banho"
+	@echo "  🧘 Meditar 10 min"
+	@echo "  🧹 Limpar algo (mecânico)"
+	@echo ""
+	@echo -e "$(YELLOW)⚠️  IMPORTANTE: Não olhe telas!$(NC)"
+	@echo ""
+	@echo "Dica: Insights frequentemente surgem na pausa."
+	@echo "Quando voltar, tente resolver o problema novamente."
+	@echo ""
+	@echo -e "$(GREEN)⏱️  Pausa de 15 min recomendada$(NC)"
+	@echo -e "$(YELLOW)Use: sleep 15m && echo 'Hora de voltar!'$(NC)"
+
+##@ 🔁 Overlearning (1 comando)
+
+drill-extra: ## 🎯 Overlearning: 5 variações extra de drill
+	@if [ "$(CURRENT_TOPIC)" = "nenhum" ]; then \
+		echo -e "$(RED)❌ Nenhum módulo ativo$(NC)"; \
+		exit 1; \
+	fi
+	@if ! command -v opencode &> /dev/null; then \
+		echo -e "$(YELLOW)⚠️  OpenCode não instalado$(NC)"; \
+		echo "Modo offline: não é possível gerar drills extras"; \
+		exit 0; \
+	fi
+	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo -e "$(GREEN)🎯 Overlearning - Variações Extra$(NC)"
+	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@read -p "Conceito já dominado: " concept; \
+	if [ -n "$$concept" ]; then \
+		echo -e "$(PURPLE)🎯 Gerando 5 variações de dificuldade...$(NC)"; \
+		echo ""; \
+		opencode run --agent @tutor "#drill $$concept com 5 variações: fácil → médio → difícil → edge case → transferência"; \
+	else \
+		echo -e "$(YELLOW)⚠️  Conceito não informado$(NC)"; \
+	fi
+
+##@ 📊 Status (2 comandos)
+
 status: ## 📊 Ver status geral (streak + módulo)
 	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo -e "$(GREEN)📊 Status Ultralearning$(NC)"
@@ -322,7 +370,7 @@ status: ## 📊 Ver status geral (streak + módulo)
 
 help: ## 📖 Mostra ajuda
 	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
-	@echo -e "$(GREEN)  Ultralearning - 13 Comandos$(NC)"
+	@echo -e "$(GREEN)  Ultralearning - 15 Comandos$(NC)"
 	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
 	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z_-]+:.*?##/ { printf "  $(YELLOW)%-12s$(NC) %s\n", $$1, $$2 } /^##@/ { printf "\n$(BLUE)%s$(NC)\n", substr($$0, 5) }' $(MAKEFILE_LIST)

@@ -7,19 +7,19 @@
 
 ## 📋 Índice
 
-- [O que é Directness](#-o-que-é-directness)
-- [Quando Usar](#-quando-usar-directness)
-- [Como Usar](#️-como-usar-passo-a-passo)
-- [Framework 3D](#-framework-3d-onde-directness-se-encaixa)
-- [Boas Práticas](#️-boas-práticas-como-fazer-directness-efetivo)
-- [Workflow](#-workflow-típico)
-- [Métricas](#-métricas-como-saber-se-funcionou)
-- [Resumo](#-resumo-regras-de-ouro)
-- [Exemplos Completos](#-exemplos-completos)
+- [O que é Directness](#o-que-e-directness)
+- [Quando Usar](#quando-usar-directness)
+- [Como Usar](#como-usar-passo-a-passo)
+- [Framework 3D](#framework-3d-onde-directness-se-encaixa)
+- [Boas Práticas](#boas-praticas-como-fazer-directness-efetivo)
+- [Workflow](#workflow-tipico)
+- [Métricas](#metricas-como-saber-se-funcionou)
+- [Resumo](#resumo-regras-de-ouro)
+- [Exemplos Completos](#exemplos-completos)
 
 ---
 
-## 🎯 O que é Directness?
+## 🎯 O que é Directness? 
 
 ### Definição
 **Directness** é aprender fazendo **projetos reais** no **contexto de uso**, em vez de tutoriais isolados.
@@ -308,6 +308,23 @@ make study
 1. #feynman → Entender conceito
 2. #drill → Automatizar skills individuais
 3. #directness → Integrar tudo em projeto
+
+---
+
+## 🔗 Técnicas Relacionadas
+
+### Técnicas que Implementam este Princípio
+
+| Técnica | Descrição | Quando usar |
+|---------|-----------|-------------|
+| [directness.md](../tecnicas/directness.md) | Aprendizado baseado em projetos reais | Integrar conhecimento em contexto real |
+
+### Técnicas Complementares
+
+- [drill.md](../tecnicas/drill.md) - Prática de skills antes de integrar
+- [feynman.md](../tecnicas/feynman.md) - Entender conceitos antes de aplicar
+- [flashcards.md](../tecnicas/flashcards.md) - Memorizar fatos necessários para o projeto
+- [decomposition.md](../tecnicas/decomposition.md) - Quebrar projetos grandes em partes
 
 ---
 
@@ -876,10 +893,10 @@ cargo run -- "pattern" file.txt
 
 ## 🔗 Links Relacionados
 
-- [FEYNMAN-GUIDE.md](8-GUIDE-FEYNMAN.md) - Entender conceitos antes
-- [DRILL-GUIDE.md](4-GUIDE-DRILL.md) - Automatizar skills antes
-- [FLASHCARDS-GUIDE.md](7-GUIDE-FLASHCARDS.md) - Memorizar fatos
-- [Master Learning Map](shared/master-learning-map.md) - Visão global
+- [feynman.md](../tecnicas/feynman.md) - Entender conceitos antes
+- [drill.md](../tecnicas/drill.md) - Automatizar skills antes
+- [flashcards.md](../tecnicas/flashcards.md) - Memorizar fatos
+- [Master Learning Map](../../shared/master-learning-map.md) - Visão global
 
 ---
 
