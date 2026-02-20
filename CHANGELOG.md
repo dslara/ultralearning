@@ -7,23 +7,30 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ## [Não Publicado]
 
+## [2.5.0] - 2026-02-19
+
 ### Added
-- Pasta `reviews/` com sistema de revisões do projeto
-- README para pasta `reviews/` documentando propósito e estrutura
-- README para pasta `planning/` com documentos de planejamento renomeados
-- README para pasta `guides/` documentando princípios e técnicas
-- Pasta `archived/` com sistema de arquivamento de projetos
-- Comando `make archive` para automatizar arquivamento
-- Template de relatório final para projetos arquivados (`_template-relatorio.md`)
-- Índice de projetos arquivados (`indice.md`)
+- Pasta `archived/` com sistema completo de arquivamento de projetos
+  * README.md com documentação completa
+  * indice.md para listar projetos arquivados  
+  * _template-relatorio.md para relatórios finais
+- Comando `make archive` para automatizar arquivamento de projetos
+- Pasta `reviews/` com README para revisões do projeto
+- Pasta `planning/` com README e documentos renomeados
+- Pasta `guides/README.md` documentando princípios e técnicas
+- CHANGELOG.md criado para rastrear versões
 
 ### Changed
-- Nomenclatura padronizada na pasta `planning`:
-  - `HOW-TO-USE-PROTOTYPE.md` → `howto-usar-prototipo.md`
-  - `PROTOTYPE-PHASE0-REPORT.md` → `report-prototipo-fase0.md`
-  - `plan-rust-to-zig.md` → `plano-migracao-rust-zig.md`
-  - `module-structure-proposal.md` → `proposta-estrutura-modular.md`
-- Total de comandos make: 13 → 14 (adicionado `make archive`)
+- Pasta `plans/` renomeada para `planning/`
+- Nomenclatura padronizada na pasta `planning/`:
+  * `HOW-TO-USE-PROTOTYPE.md` → `howto-usar-prototipo.md`
+  * `PROTOTYPE-PHASE0-REPORT.md` → `report-prototipo-fase0.md`
+  * `plan-rust-to-zig.md` → `plano-migracao-rust-zig.md`
+  * `module-structure-proposal.md` → `proposta-estrutura-modular.md`
+- README principal atualizado com:
+  * Seção "📁 Estrutura do Projeto" documentando todas as pastas
+  * Seção "📦 Arquivamento de Projetos" 
+  * Total de comandos: 13 → 14
 
 ## [2.4.0] - 2025-01-XX
 
@@ -116,7 +123,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - [ ] Retrospectivas trimestrais
 - [ ] Sistema de flashcards agregado
 
-### [2.5.0] - Planejado
+### [2.6.0] - Planejado
 - [ ] Revisão e ajuste da Fase 5B (reduzir densidade)
 - [ ] Adicionar tópico dedicado de Testing
 - [ ] Documentar Async Rust como estudo futuro
@@ -129,4 +136,3 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - As datas no formato "XX" indicam data aproximada ou não registrada
 - Versões anteriores a 2.0 não foram documentadas sistematicamente
 - Este changelog foi criado em 2026-02-19 e documenta o histórico retroativamente
-
