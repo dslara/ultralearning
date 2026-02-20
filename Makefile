@@ -384,6 +384,50 @@ help: ## 📖 Mostra ajuda
 	@echo ""
 	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 
+
+##@ 📦 Arquivamento (1 comando)
+
+archive: ## 📦 Arquivar projeto finalizado
+	@if [ "$(CURRENT_TOPIC)" = "nenhum" ]; then \
+		echo -e "$(RED)❌ Nenhum módulo ativo$(NC)"; \
+		exit 1; \
+	fi
+	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo -e "$(GREEN)📦 Arquivando Projeto$(NC)"
+	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@echo -e "$(YELLOW)⚠️  Atenção: O projeto será removido do módulo ativo$(NC)"
+	@echo ""
+	@read -p "Nome do projeto (ex: cli-tool): " proj_name; \
+	if [ -z "$$proj_name" ]; then \
+		echo -e "$(RED)❌ Nome não pode ser vazio$(NC)"; \
+		exit 1; \
+	fi; \
+	DATE=$$(date +%Y-%m-%d); \
+	ARCHIVE_DIR="archived/$(CURRENT_TOPIC)/$$DATE-$$proj_name"; \
+	if [ -d "$$ARCHIVE_DIR" ]; then \
+		echo -e "$(RED)❌ Projeto já existe: $$ARCHIVE_DIR$(NC)"; \
+		exit 1; \
+	fi; \
+	mkdir -p "$$ARCHIVE_DIR"; \
+	cp -r "$(TOPIC_PATH)/"* "$$ARCHIVE_DIR/" 2>/dev/null || true; \
+	cp archived/_template-relatorio.md "$$ARCHIVE_DIR/relatorio-final.md"; \
+	echo -e "$(GREEN)✅ Projeto copiado para: $$ARCHIVE_DIR$(NC)"; \
+	echo ""; \
+	echo -e "$(YELLOW)📝 Ações necessárias:$(NC)"; \
+	echo "  1. Preencha o relatório: $$ARCHIVE_DIR/relatorio-final.md"; \
+	echo "  2. Edite o índice: archived/indice.md"; \
+	echo ""; \
+	read -p "Remover projeto do módulo ativo? [s/N]: " confirm; \
+	if [ "$$confirm" = "s" ] || [ "$$confirm" = "S" ]; then \
+		rm -rf "$(TOPIC_PATH)"; \
+		echo "nenhum" > .current-topic; \
+		echo -e "$(GREEN)✅ Projeto removido do módulo$(NC)"; \
+	else \
+		echo -e "$(YELLOW)⚠️  Projeto mantido no módulo (remova manualmente)$(NC)"; \
+	fi; \
+	echo ""; \
+	echo -e "$(GREEN)🎉 Projeto arquivado com sucesso!$(NC)"
 ##@ 🛠️ Setup
 
 backup: ## 💾 Backup dos dados

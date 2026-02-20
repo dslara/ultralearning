@@ -25,7 +25,7 @@ make end     # Salva + atualiza streak
 
 ---
 
-## 📋 Comandos (13 total)
+## 📋 Comandos (14 total)
 
 ### Sessão Diária
 | Comando | Descrição |
@@ -57,6 +57,7 @@ make end     # Salva + atualiza streak
 | `make help` | Lista todos os comandos |
 | `make setup` | Configuração inicial |
 | `make backup` | Backup dos dados |
+| `make archive` | Arquivar projeto finalizado |
 
 ---
 
@@ -161,8 +162,30 @@ ultralearning/
 │   ├── meta/               # Planos, retrospectivas
 │   ├── projects/           # Projetos práticos
 │   └── knowledge/          # Conceitos aprendidos
-└── Makefile                # 13 comandos
+└── Makefile                # 14 comandos
 ```
+
+## 📁 Estrutura do Projeto
+
+O projeto está organizado em pastas especializadas:
+
+| Pasta | Propósito | Documentação |
+|-------|-----------|--------------|
+| `guides/` | Biblioteca de técnicas e princípios de aprendizado | [README](guides/README.md) |
+| `planning/` | Documentos de planejamento estratégico e propostas | [README](planning/README.md) |
+| `reviews/` | Revisões e avaliações críticas do plano | [README](reviews/README.md) |
+| `archived/` | Projetos finalizados e arquivados | [README](archived/README.md) |
+| `shared/` | Recursos compartilhados (scripts, flashcards, retrospectivas) | - |
+
+## 📦 Arquivamento de Projetos
+
+Quando um projeto é concluído, use `make archive` para:
+- Mover todos os arquivos para `archived/[modulo]/[data]-[nome]/`
+- Preservar logs, código, conhecimento e metadados
+- Criar um relatório final de lições aprendidas
+- Manter o módulo ativo limpo
+
+O projeto arquivado mantém todo o histórico e pode ser consultado futuramente.
 
 ---
 
