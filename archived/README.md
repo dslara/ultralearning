@@ -37,20 +37,20 @@ make archive
 ```
 
 Este comando irá:
-1. Verificar o módulo ativo
+1. Verificar o módulo ativo em `projects/`
 2. Pedir confirmação do nome do projeto
-3. Mover todos os arquivos para `archived/[modulo]/[data]-[nome]/`
+3. Mover todos os arquivos de `projects/[modulo]/` para `archived/[modulo]/[data]-[nome]/`
 4. Criar o relatório final a partir do template
 5. Atualizar o índice de projetos arquivados
-6. Remover o projeto do módulo ativo
+6. Remover o projeto da pasta `projects/`
 
 ### Método 2: Manual
 
 1. Crie a pasta no formato: `archived/[modulo]/YYYY-MM-DD-nome-do-projeto/`
-2. Copie todos os arquivos do projeto (README, logs, projects, knowledge, meta)
+2. Copie todos os arquivos de `projects/[modulo]/` (README, logs, projects, knowledge, meta)
 3. Preencha o `relatorio-final.md` usando o template
 4. Adicione o projeto ao `indice.md`
-5. Remova o projeto do módulo original
+5. Remova o projeto de `projects/[modulo]/`
 
 ## Convenções de Nomenclatura
 

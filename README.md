@@ -171,11 +171,12 @@ O projeto está organizado em pastas especializadas:
 
 | Pasta | Propósito | Documentação |
 |-------|-----------|--------------|
+| `projects/` | Módulos e projetos de aprendizado | [README](projects/README.md) |
 | `guides/` | Biblioteca de técnicas e princípios de aprendizado | [README](guides/README.md) |
 | `planning/` | Documentos de planejamento estratégico e propostas | [README](planning/README.md) |
 | `reviews/` | Revisões e avaliações críticas do plano | [README](reviews/README.md) |
 | `archived/` | Projetos finalizados e arquivados | [README](archived/README.md) |
-| `shared/` | Recursos compartilhados (scripts, flashcards, retrospectivas) | - |
+| `scripts/` | Scripts utilitários (streak, SRS) | - |
 
 ## 📦 Arquivamento de Projetos
 

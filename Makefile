@@ -17,7 +17,7 @@ NC := \033[0m
 # Configurações
 TODAY := $(shell date +%Y-%m-%d)
 CURRENT_TOPIC := $(shell cat .current-topic 2>/dev/null || echo "nenhum")
-TOPIC_PATH := $(CURRENT_TOPIC)
+TOPIC_PATH := projects/$(CURRENT_TOPIC)
 
 ##@ 📋 Sessão Diária (3 comandos)
 
@@ -138,7 +138,7 @@ end: ## 🏁 Encerrar sessão (salva + streak)
 	fi
 	@echo ""
 	@# Atualizar streak
-	@./shared/scripts/streak.sh session
+	@./scripts/streak.sh session
 	@echo ""
 	@echo -e "$(GREEN)📝 Log: $(TOPIC_PATH)/logs/daily/$(TODAY).md$(NC)"
 	@echo -e "$(GREEN)✅ Sessão encerrada! Bom trabalho! 🎉$(NC)"
@@ -150,17 +150,17 @@ module: ## 🆕 Criar novo módulo
 	@echo ""
 	@read -p "Nome do módulo (ex: python-backend): " topic; \
 	TOPIC_SLUG=$$(echo "$$topic" | tr '[:upper:]' '[:lower:]' | tr ' ' '-'); \
-	if [ -d "$$TOPIC_SLUG" ]; then \
+	if [ -d "projects/$$TOPIC_SLUG" ]; then \
 		echo -e "$(YELLOW)⚠️  Módulo já existe!$(NC)"; \
 		exit 1; \
 	fi; \
-	mkdir -p "$$TOPIC_SLUG"/{meta,projects,logs/daily,knowledge}; \
-	echo "# 📦 $$topic" > "$$TOPIC_SLUG/README.md"; \
-	echo "" >> "$$TOPIC_SLUG/README.md"; \
-	echo "**Status**: 🟢 Ativo" >> "$$TOPIC_SLUG/README.md"; \
-	echo "**Criado**: $(TODAY)" >> "$$TOPIC_SLUG/README.md"; \
+	mkdir -p "projects/$$TOPIC_SLUG"/{meta,projects,logs/daily,knowledge}; \
+	echo "# 📦 $$topic" > "projects/$$TOPIC_SLUG/README.md"; \
+	echo "" >> "projects/$$TOPIC_SLUG/README.md"; \
+	echo "**Status**: 🟢 Ativo" >> "projects/$$TOPIC_SLUG/README.md"; \
+	echo "**Criado**: $(TODAY)" >> "projects/$$TOPIC_SLUG/README.md"; \
 	echo "$$TOPIC_SLUG" > .current-topic; \
-	echo -e "$(GREEN)✅ Módulo criado: $$TOPIC_SLUG/$(NC)"; \
+	echo -e "$(GREEN)✅ Módulo criado: projects/$$TOPIC_SLUG/$(NC)"; \
 	echo ""; \
 	echo -e "$(YELLOW)Use @meta para planejar:$(NC)"; \
 	echo "opencode run --agent @meta \"#decompose-goal $$topic\""
@@ -169,7 +169,7 @@ switch: ## 🔄 Alternar módulo ativo
 	@echo -e "$(BLUE)📋 Módulos disponíveis:$(NC)"
 	@echo ""
 	@found=0; \
-	for dir in */; do \
+	for dir in projects/*/; do \
 		if [ -d "$$dir/meta" ] || [ -d "$$dir/logs" ]; then \
 			found=1; \
 			topic=$$(basename "$$dir"); \
@@ -187,8 +187,8 @@ switch: ## 🔄 Alternar módulo ativo
 	fi; \
 	echo ""; \
 	read -p "Ativar módulo: " topic; \
-	if [ -d "$$topic" ]; then \
-		mkdir -p "$$topic"/{meta,projects,logs/daily,knowledge}; \
+	if [ -d "projects/$$topic" ]; then \
+		mkdir -p "projects/$$topic"/{meta,projects,logs/daily,knowledge}; \
 		echo "$$topic" > .current-topic; \
 		echo -e "$(GREEN)✅ Ativo: $$topic$(NC)"; \
 	else \
@@ -244,14 +244,14 @@ review: ## 📚 Cards SRS + sessão interativa
 	@read -p "Opção [1]: " opt; \
 	opt=$${opt:-1}; \
 	case $$opt in \
-		1) ./shared/scripts/spaced-repetition.sh list ;; \
-		2) ./shared/scripts/spaced-repetition.sh review ;; \
+		1) ./scripts/spaced-repetition.sh list ;; \
+		2) ./scripts/spaced-repetition.sh review ;; \
 		3) \
 			read -p "Pergunta: " q; \
 			read -p "Resposta: " a; \
-			./shared/scripts/spaced-repetition.sh add "$$q" "$$a" "geral"; \
+			./scripts/spaced-repetition.sh add "$$q" "$$a" "geral"; \
 			;; \
-		4) ./shared/scripts/spaced-repetition.sh stats ;; \
+		4) ./scripts/spaced-repetition.sh stats ;; \
 	esac
 
 retro: ## 📝 Retrospectiva semanal (3 perguntas)
@@ -357,7 +357,7 @@ status: ## 📊 Ver status geral (streak + módulo)
 	@echo -e "$(GREEN)📊 Status Ultralearning$(NC)"
 	@echo -e "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
-	@./shared/scripts/streak.sh
+	@./scripts/streak.sh
 	@echo ""
 	@if [ "$(CURRENT_TOPIC)" != "nenhum" ]; then \
 		echo -e "$(YELLOW)📦 Módulo atual: $(CURRENT_TOPIC)$(NC)"; \
@@ -452,8 +452,8 @@ setup: ## ⚙️ Configuração inicial
 	@command -v bc >/dev/null 2>&1 && echo -e "  $(GREEN)✓$(NC) bc" || echo -e "  $(YELLOW)⚠️$(NC) bc (opcional, para SRS)"
 	@command -v opencode >/dev/null 2>&1 && echo -e "  $(GREEN)✓$(NC) opencode" || echo -e "  $(YELLOW)⚠️$(NC) opencode (instale para usar agentes)"
 	@echo ""
-	@mkdir -p shared/scripts .opencode/agents
-	@chmod +x shared/scripts/*.sh 2>/dev/null || true
+	@mkdir -p scripts .opencode/agents
+	@chmod +x scripts/*.sh 2>/dev/null || true
 	@if [ ! -f ".current-topic" ]; then echo "nenhum" > .current-topic; fi
 	@echo -e "$(GREEN)✅ Setup completo!$(NC)"
 	@echo ""

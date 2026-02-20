@@ -7,6 +7,30 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ## [Não Publicado]
 
+## [2.6.0] - 2026-02-20
+
+### Added
+- Pasta `projects/` na raiz para organizar todos os módulos
+  * README.md com documentação da estrutura
+  * Módulo `foundations-of-computing` movido para `projects/`
+  * Pasta `shared/` movida para `projects/shared/`
+- Pasta `scripts/` na raiz contendo scripts utilitários
+  * Movido de `shared/scripts/` para `scripts/`
+
+### Changed
+- **Reestruturação completa da organização de diretórios:**
+  * Módulos agora residem em `projects/` em vez da raiz
+  * `shared/scripts/` → `scripts/` (na raiz)
+  * Scripts compartilhados permanecem em `projects/shared/`
+- Makefile atualizado para usar caminhos em `projects/`
+  * `TOPIC_PATH` agora aponta para `projects/$(CURRENT_TOPIC)`
+  * Comando `module` cria módulos em `projects/`
+  * Comando `switch` busca módulos em `projects/`
+  * Comando `archive` move de `projects/` para `archived/`
+- READMEs atualizados para refletir nova estrutura
+  * `archived/README.md` atualizado com novos caminhos
+  * `README.md` principal atualizado com pasta `projects/`
+
 ## [2.5.0] - 2026-02-19
 
 ### Added
