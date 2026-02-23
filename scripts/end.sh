@@ -11,11 +11,17 @@ print_header "🏁 Encerrando Sessão"
 read -p "O que você aprendeu hoje? (breve): " learning
 
 if [ -n "$learning" ]; then
-    echo "" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "## 📊 Resumo da Sessão" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "$learning" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
+    # Verificar se o arquivo de log existe antes de escrever
+    if [ ! -f "$TOPIC_PATH/logs/daily/$TODAY.md" ]; then
+        print_error "Arquivo de log não encontrado. Execute 'make start' primeiro."
+        exit 1
+    fi
+    
+    safe_write "" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "## 📊 Resumo da Sessão" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "$learning" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
     print_success "Resumo salvo"
 fi
 

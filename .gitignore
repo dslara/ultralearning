@@ -60,6 +60,14 @@ ENV/
 temp-*.py
 draft-*.py
 
+# Ultralearning - Logs pessoais e stats
+projects/*/logs/daily/*.md
+!projects/*/logs/daily/.gitkeep
+.ultralearning-stats
+
+# Ultralearning - Dados pessoais de SRS
+projects/*/knowledge/spaced-repetition.jsonl
+
 # Logs (keep structure, ignore content)
 04-logs/daily/*.md
 !04-logs/daily/.gitkeep

@@ -54,4 +54,100 @@ Todos os documentos seguem o padrão:
 
 ---
 
+## 📋 Propostas e Planos do Agente @review
+
+Esta pasta também armazena **propostas de mudança e planos de migração** gerados pelo agente `@review` durante suas análises do framework.
+
+### Tipos de Documentos Gerados pelo @review
+
+| Tipo | Descrição | Exemplo |
+|------|-----------|---------|
+| **proposta** | Proposta de mudança estrutural | `proposta-migracao-python-2026-02-20.md` |
+| **plano** | Plano de migração detalhado | `plano-transicao-scripts-2026-02-20.md` |
+| **roadmap** | Roadmap estratégico de melhorias | `roadmap-melhorias-6meses-2026-02-20.md` |
+
+### Convenção de Nomenclatura
+
+```
+[TIPO]-[descricao]-YYYY-MM-DD.md
+
+Exemplos:
+- proposta-migracao-python-2026-02-20.md
+- plano-transicao-scripts-2026-02-20.md
+- roadmap-melhorias-6meses-2026-02-20.md
+```
+
+### Propostas e Planos Gerados
+
+| Arquivo | Tipo | Data | Status |
+|---------|------|------|--------|
+| *[Exemplo: proposta-migracao-python-2026-02-20.md]* | proposta | 2026-02-20 | 🟡 Em análise |
+
+### Como Gerar Propostas e Planos
+
+Usando o agente `@review`:
+
+```bash
+# Criar proposta de mudança estrutural
+opencode run --agent @review "#create-proposal migracao-python"
+
+# Criar plano de migração detalhado
+opencode run --agent @review "#create-plan transicao-python"
+
+# Propor roadmap estratégico
+opencode run --agent @review "#propose-roadmap 6"
+
+# Sugerir melhorias e salvar
+opencode run --agent @review "#suggest-improvements testes"
+```
+
+### Conteúdo dos Documentos
+
+**Propostas** (`proposta-[nome]-YYYY-MM-DD.md`):
+- 🎯 Problema identificado
+- 💡 Solução proposta
+- 🗺️ Plano de transição
+- ⚖️ Análise de impacto vs benefício
+- ✅ Checklist de implementação
+
+**Planos** (`plano-[nome]-YYYY-MM-DD.md`):
+- 📅 Cronograma detalhado por fases
+- ⚠️ Riscos e mitigações
+- 🔄 Plano de rollback
+- 📊 Métricas de acompanhamento
+
+**Roadmaps** (`roadmap-[periodo]-YYYY-MM-DD.md`):
+- 🧭 Direção estratégica
+- 🎯 Prioridades
+- 🏁 Milestones
+- 📈 Métricas de sucesso
+
+### Fluxo de Trabalho com @review
+
+```
+1. @review analisa o projeto (via #audit-quality ou #review-architecture)
+2. Identifica necessidade de mudança estrutural
+3. Gera proposta (#create-proposal)
+4. Usuário revisa proposta
+5. Se aprovada, @review gera plano detalhado (#create-plan)
+6. Implementação segue o plano
+```
+
+### Templates Disponíveis
+
+- [`_template-proposta.md`](./_template-proposta.md) - Para propostas de mudança
+- [`_template-plano-migracao.md`](./_template-plano-migracao.md) - Para planos de migração
+
+### Status dos Documentos Gerados
+
+| Status | Emoji | Significado |
+|--------|-------|-------------|
+| Proposta | 🟡 | Aguardando análise/decisão |
+| Aprovada | 🟢 | Aprovada para implementação |
+| Rejeitada | 🔴 | Não será implementada |
+| Em análise | ⏸️ | Sob revisão/feedback |
+| Implementada | ✅ | Já executada/concluída |
+
+---
+
 *Documentos de planejamento são referências históricas das decisões arquiteturais. Sempre que possível, mantenha-os atualizados com o status atual.*

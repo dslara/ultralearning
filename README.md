@@ -67,6 +67,7 @@ make end     # Salva + atualiza streak
 |--------|--------|
 | **@meta** | Planejamento estratégico, decomposição de objetivos |
 | **@tutor** | Mentor socrático, quiz, drills, feedback |
+| **@review** | Revisão arquitetural, auditoria, propostas de melhoria |
 
 ### Keywords do @tutor
 | Keyword | Uso |
@@ -92,6 +93,29 @@ make end     # Salva + atualiza streak
 | `#adjust-plan [situação]` | Reajustar cronograma |
 | `#benchmark-test` | Criar teste de proficiência |
 | `#habit-stack` | Criar cadeia de hábitos (Atomic Habits) |
+
+### Keywords do @review (Consultor Estratégico)
+
+**Papel**: Analisa o framework e **sugere** melhorias (não executa)
+
+**Revisões Técnicas** (gera análises):
+| Keyword | O que faz |
+|---------|-----------|
+| `#review-structure` | Analisa organização de pastas |
+| `#review-scripts` | Avalia qualidade dos scripts bash |
+| `#review-docs` | Verifica documentação |
+| `#review-makefile` | Revisa orquestração de comandos |
+| `#review-agents` | Analisa efetividade dos agentes |
+| `#review-consistency` | Verifica consistência geral |
+| `#audit-quality` | Auditoria completa de qualidade |
+| `#review-architecture` | Análise arquitetural profunda |
+| `#check-readiness [versão]` | Prontidão para release |
+
+**O @review não cria arquivos**, apenas gera análises em memória. Você pode:
+- ✅ Ler a análise e decidir o que fazer
+- ✅ Copiar conteúdo e salvar manualmente em `reviews/`
+- ✅ Criar `planning/proposta-[nome].md` baseado nas sugestões
+- ✅ Pedir para outro assistente (com permissões) salvar os arquivos
 
 ---
 
@@ -155,13 +179,18 @@ Comece ridicularmente pequeno:
 
 ```
 ultralearning/
-├── .opencode/agents/       # @meta, @tutor
-├── shared/scripts/         # streak.sh, spaced-repetition.sh
-├── [seu-modulo]/
-│   ├── logs/daily/         # Logs diários
-│   ├── meta/               # Planos, retrospectivas
-│   ├── projects/           # Projetos práticos
-│   └── knowledge/          # Conceitos aprendidos
+├── .opencode/agents/       # @meta, @tutor, @review
+├── scripts/                # 16 scripts bash (streak, SRS, etc.)
+├── projects/               # Módulos de aprendizado
+│   ├── [modulo]/
+│   │   ├── logs/daily/     # Logs diários
+│   │   ├── meta/           # Planos, retrospectivas
+│   │   ├── projects/       # Projetos práticos
+│   │   └── knowledge/      # Conceitos aprendidos
+│   └── shared/             # Recursos compartilhados
+├── guides/                 # 9 princípios + 24 técnicas
+├── reviews/                # Revisões técnicas do framework
+├── planning/               # Propostas e planos de migração
 └── Makefile                # 14 comandos
 ```
 
@@ -322,7 +351,7 @@ opencode --version
 
 **Streak não atualiza?**
 ```bash
-./shared/scripts/streak.sh reset  # Resetar stats
+./scripts/streak.sh reset  # Resetar stats
 ```
 
 ---

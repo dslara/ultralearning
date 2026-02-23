@@ -12,16 +12,21 @@ print_info "📦 Módulo: $CURRENT_TOPIC"
 print_info "📅 Data: $TODAY"
 echo ""
 
-mkdir -p "$TOPIC_PATH/logs/daily"
+# Criar diretório de logs
+if ! mkdir -p "$TOPIC_PATH/logs/daily"; then
+    print_error "Falha ao criar diretório de logs"
+    exit 1
+fi
 
+# Criar log diário se não existir
 if [ ! -f "$TOPIC_PATH/logs/daily/$TODAY.md" ]; then
-    echo "# 📅 $TODAY - $CURRENT_TOPIC" > "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "## 🎯 Objetivo" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "## 📝 Notas" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
-    echo "## ✅ Aprendizados" >> "$TOPIC_PATH/logs/daily/$TODAY.md"
+    safe_write "# 📅 $TODAY - $CURRENT_TOPIC" "$TOPIC_PATH/logs/daily/$TODAY.md" "overwrite" || exit 1
+    safe_write "" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "## 🎯 Objetivo" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "## 📝 Notas" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
+    safe_write "## ✅ Aprendizados" "$TOPIC_PATH/logs/daily/$TODAY.md" || exit 1
     print_success "📝 Log criado: $TOPIC_PATH/logs/daily/$TODAY.md"
 fi
 

@@ -2,6 +2,12 @@
 
 # common.sh - Funções e variáveis compartilhadas entre scripts
 
+# Error handling: Sair em caso de erro, variável não definida ou erro em pipe
+set -euo pipefail
+
+# Trap para mostrar linha de erro
+trap 'echo -e "\033[0;31m❌ Erro na linha $LINENO do script $(basename "$0"). Abortando.\033[0m" >&2' ERR
+
 # Cores
 export BLUE='\033[0;34m'
 export GREEN='\033[0;32m'
@@ -78,4 +84,64 @@ print_warning() {
 # Função: Info
 print_info() {
     echo -e "${YELLOW}$1${NC}"
+}
+
+# Função: Write seguro (evita perda de dados)
+safe_write() {
+    local content="$1"
+    local file="$2"
+    local mode="${3:-append}"  # append (default) ou overwrite
+    
+    if [ "$mode" = "overwrite" ]; then
+        if ! echo "$content" > "$file" 2>/dev/null; then
+            print_error "Falha ao escrever em $file (sem espaço em disco ou sem permissão)"
+            return 1
+        fi
+    else
+        if ! echo "$content" >> "$file" 2>/dev/null; then
+            print_error "Falha ao adicionar conteúdo em $file"
+            return 1
+        fi
+    fi
+    return 0
+}
+
+# Função: Validar nome de módulo
+validate_module_name() {
+    local name="$1"
+    
+    # Apenas letras minúsculas, números e hífens
+    if [[ ! "$name" =~ ^[a-z0-9-]+$ ]]; then
+        print_error "Nome de módulo inválido: '$name'"
+        print_info "Use apenas letras minúsculas (a-z), números (0-9) e hífens (-)"
+        print_info "Exemplos válidos: python-basics, cs-fundamentals, web-dev-2024"
+        return 1
+    fi
+    
+    # Não pode começar ou terminar com hífen
+    if [[ "$name" =~ ^- ]] || [[ "$name" =~ -$ ]]; then
+        print_error "Nome não pode começar ou terminar com hífen"
+        return 1
+    fi
+    
+    # Não pode ter hífens consecutivos
+    if [[ "$name" =~ -- ]]; then
+        print_error "Nome não pode ter hífens consecutivos"
+        return 1
+    fi
+    
+    # Mínimo 3 caracteres
+    if [ ${#name} -lt 3 ]; then
+        print_error "Nome muito curto (mínimo 3 caracteres)"
+        return 1
+    fi
+    
+    return 0
+}
+
+# Função: Sanitizar input de usuário
+sanitize_input() {
+    local input="$1"
+    # Remove caracteres perigosos mantendo apenas alfanuméricos, espaços, hífens e underscores
+    echo "$input" | tr -cd '[:alnum:][:space:]-_'
 }

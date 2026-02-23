@@ -30,28 +30,57 @@ mode=${mode:-1}
 case $mode in
     1|code)
         read -p "Qual desafio? " challenge
-        opencode run --agent @tutor "#directness $challenge"
+        challenge=$(sanitize_input "$challenge")
+        if [ -n "$challenge" ]; then
+            opencode run --agent @tutor "#directness $challenge"
+        else
+            print_error "Desafio inválido"
+        fi
         ;;
     2|drill)
         read -p "Qual conceito? " concept
-        opencode run --agent @tutor "#drill $concept"
+        concept=$(sanitize_input "$concept")
+        if [ -n "$concept" ]; then
+            opencode run --agent @tutor "#drill $concept"
+        else
+            print_error "Conceito inválido"
+        fi
         ;;
     3|feynman)
         read -p "Qual conceito explicar? " concept
-        opencode run --agent @tutor "#feynman $concept"
+        concept=$(sanitize_input "$concept")
+        if [ -n "$concept" ]; then
+            opencode run --agent @tutor "#feynman $concept"
+        else
+            print_error "Conceito inválido"
+        fi
         ;;
     4|scaffold)
         read -p "Descreva o projeto: " project
-        opencode run --agent @tutor "#scaffold $project"
+        project=$(sanitize_input "$project")
+        if [ -n "$project" ]; then
+            opencode run --agent @tutor "#scaffold $project"
+        else
+            print_error "Descrição de projeto inválida"
+        fi
         ;;
     5|experiment)
         read -p "Qual conceito explorar? " concept
-        opencode run --agent @tutor "#experiment $concept"
+        concept=$(sanitize_input "$concept")
+        if [ -n "$concept" ]; then
+            opencode run --agent @tutor "#experiment $concept"
+        else
+            print_error "Conceito inválido"
+        fi
         ;;
     6|feedback)
         echo "Cole seu código e pressione Ctrl+D:"
         code=$(cat)
-        opencode run --agent @tutor "#feedback $code"
+        if [ -n "$code" ]; then
+            opencode run --agent @tutor "#feedback $code"
+        else
+            print_error "Nenhum código fornecido"
+        fi
         ;;
     q|Q)
         echo "Saindo..."
