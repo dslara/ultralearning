@@ -41,7 +41,8 @@ Todos os documentos seguem o padrão:
 |---------|------|-----------|
 | [howto-usar-prototipo.md](./howto-usar-prototipo.md) | howto | Guia de uso do protótipo M1 + estrutura shared |
 | [report-prototipo-fase0.md](./report-prototipo-fase0.md) | report | Relatório da Fase 0 - validação da estrutura modular |
-| [plano-migracao-rust-zig.md](./plano-migracao-rust-zig.md) | plano | Plano para trocar Rust por Zig (não aplicado) |
+| [plano-migracao-rust-zig.md](./plano-migracao-rust-zig.md) | plano | **v2.0** Plano revisado para trocar Rust por Zig (não aplicado) |
+| [plano-migracao-rust-zig-v1.0-archive.md](./plano-migracao-rust-zig-v1.0-archive.md) | plano | v1.0 arquivada (supersedida por v2.0) |
 | [proposta-estrutura-modular.md](./proposta-estrutura-modular.md) | proposta | Proposta de divisão em 8 módulos independentes (aprovada) |
 
 ## Status dos Documentos
@@ -50,7 +51,7 @@ Todos os documentos seguem o padrão:
 |-----------|--------|---------|
 | Proposta de Estrutura Modular | ✅ **Aprovada** | Implementada com ajustes |
 | Protótipo Fase 0 | ✅ **Validado** | Estrutura testada e aprovada |
-| Migração Rust → Zig | ⏸️ **Não Aplicado** | Planejamento apenas |
+| Migração Rust → Zig v2.0 | ⏸️ **Não Aplicado** | Planejamento revisado (2026-02-23) |
 
 ---
 

@@ -96,67 +96,53 @@ ultralearning/
 
 ## 🔑 Keywords
 
-### 📁 Revisões Específicas (relatórios em memória)
+### 📁 Revisões Específicas
 
 **`#review-structure`** - Revisar estrutura do projeto  
-Verifica organização de pastas, nomenclatura, arquivos órfãos. **Liberdade**: Pode sugerir reestruturação completa com plano de migração.
+Verifica organização de pastas, nomenclatura, arquivos órfãos. **Liberdade**: Pode sugerir reestruturação completa com plano de migração. Gera análise detalhada. Usuário decide se salva em `reviews/`.
 
 **`#review-scripts`** - Revisar qualidade dos scripts bash  
-Analisa padrões de código, tratamento de erros, reuso, duplicação. **Liberdade**: Pode sugerir migração para outra linguagem se justificado.
+Analisa padrões de código, tratamento de erros, reuso, duplicação. **Liberdade**: Pode sugerir migração para outra linguagem se justificado. Gera relatório. Usuário copia/salva manualmente.
 
 **`#review-docs`** - Revisar documentação  
-Verifica coerência código-docs, links quebrados, desatualização. **Liberdade**: Pode sugerir novo formato ou estrutura de docs.
+Verifica coerência código-docs, links quebrados, desatualização. **Liberdade**: Pode sugerir novo formato ou estrutura de docs. Gera análise. Usuário salva se desejar.
 
 **`#review-makefile`** - Revisar orquestração  
-Checa comandos atualizados, obsoletos, eficiência. **Liberdade**: Pode sugerir alternativas ao Make (Just, Task, etc.).
+Checa comandos atualizados, obsoletos, eficiência. **Liberdade**: Pode sugerir alternativas ao Make (Just, Task, etc.). Gera sugestões. Você não modifica Makefile.
 
-**`#review-agents`** - Revisar agentes @meta e @tutor  
-Analisa efetividade das keywords, consistência, gaps. **Liberdade**: Pode sugerir novos agentes ou reorganização completa.
-
-**`#review-consistency`** - Verificar consistência geral  
-Mensagens uniformes, estilo de código, convenções de nomenclatura.
-
-### 🔍 Auditorias Completas (relatórios em memória)
-
-**`#audit-quality`** - Auditoria completa de qualidade  
-Executa todas as revisões específicas, análise de technical debt, avaliação arquitetural. Saída: Relatório executivo + roadmap de melhorias.
-
-**`#review-architecture`** - Análise arquitetural profunda  
-Analisa decisões fundamentais: "Por que bash?", "Escala?". **Liberdade**: Sugestões radicais incentivadas. Saída: Análise + proposta alternativa + plano de migração.
-
-### 💾 Comandos: Apenas Gera Conteúdo (Usuário Salva)
-
-**`#review-structure`** - Revisar estrutura do projeto  
-Gera análise detalhada. Usuário decide se salva em `reviews/`.
-
-**`#review-scripts`** - Revisar qualidade dos scripts bash  
-Gera relatório. Usuário copia/salva manualmente.
-
-**`#review-docs`** - Revisar documentação  
-Gera análise. Usuário salva se desejar.
-
-**`#review-makefile`** - Revisar orquestração  
-Gera sugestões. Você não modifica Makefile.
-
-**`#review-agents`** - Revisar agentes @meta e @tutor  
-Gera análise. Usuário atualiza agentes se achar necessário.
+**`#review-agents`** - Revisar agentes @meta, @tutor E @review  
+⚠️ **AUTO-ANÁLISE CRÍTICA INCLUÍDA!** Analisa efetividade das keywords, consistência, gaps. **Liberdade**: Pode sugerir novos agentes ou reorganização completa. Gera análise. Usuário atualiza agentes se achar necessário.
 
 **`#review-consistency`** - Verificar consistência geral  
-Gera relatório. Usuário implementa mudanças.
+Mensagens uniformes, estilo de código, convenções de nomenclatura. Gera relatório. Usuário implementa mudanças.
+
+### 🔍 Auditorias Completas
 
 **`#audit-quality`** - Auditoria completa de qualidade  
-Gera relatório executivo completo com todas as análises.
+Executa todas as revisões específicas, análise de technical debt, avaliação arquitetural. Gera relatório executivo completo com roadmap de melhorias.
 
 **`#review-architecture`** - Análise arquitetural profunda  
-Gera análise + proposta alternativa + plano de migração.
-
-**`#check-readiness [versao]`** - Verificar prontidão para release  
-Gera checklist e veredito (Go/No-go)
+Analisa decisões fundamentais: "Por que bash?", "Escala?". **Liberdade**: Sugestões radicais incentivadas. Gera análise + proposta alternativa + plano de migração.
 
 ### ✅ Verificação de Release
 
 **`#check-readiness [versao]`** - Verificar prontidão para release  
 Validação completa, identifica blockers, checklist de qualidade. Saída: Go/No-go com itens a resolver.
+
+### 🔮 Meta-revisão
+
+**`#meta-review tipo [revisao|proposta|plano]`** - Meta-revisão de documentos gerados por @review  
+**Quando usar**: Antes de implementar revisões, propostas ou planos complexos.  
+**Processo**:
+1. Leia documento alvo (`reviews/[arquivo]`, `planning/[arquivo]`)
+2. Gere análise crítica:
+   - Estrutura clara?
+   - Diagnóstico procede?
+   - Solução proposta é concreta/executável?
+   - Há gaps ou incoerências?
+   - Critérios de sucesso definidos?
+3. Proponha plano de implementação (se aplicável)
+**Output**: Relatório com problemas identificados, sugestões de melhoria e plano de implementação.
 
 ---
 

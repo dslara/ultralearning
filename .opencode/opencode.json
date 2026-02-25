@@ -5,19 +5,7 @@
     "opencode": {
       "models": {
         "claude-sonnet-4-5": {
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 16000
-            }
-          },
           "variants": {
-            "deep": {
-              "thinking": {
-                "type": "enabled",
-                "budgetTokens": 32000
-              }
-            },
             "fast": {
               "thinking": {
                 "type": "disabled"
