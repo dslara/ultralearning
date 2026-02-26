@@ -13,9 +13,9 @@ O framework Ultralearning possui **3 agentes IA** especializados:
 
 | Agente | Linhas | Keywords | Função Principal | Modelo |
 |--------|--------|----------|------------------|--------|
-| **@meta** | 382 | 6 principais | Planejamento estratégico, decomposição de objetivos | Claude Sonnet 4.5 |
-| **@tutor** | 444 | 11 principais | Mentor socrático, técnicas de aprendizado | Claude Sonnet 4.5 |
-| **@review** | 303 | 9 principais | Revisão arquitetural, auditoria, propostas | Claude Sonnet 4.5 |
+| **@meta** | 382 | 6 principais | Planejamento estratégico, decomposição de objetivos | Claude Sonnet 4.6 |
+| **@tutor** | 444 | 11 principais | Mentor socrático, técnicas de aprendizado | Claude Sonnet 4.6 |
+| **@review** | 303 | 9 principais | Revisão arquitetural, auditoria, propostas | Claude Sonnet 4.6 |
 
 **Total**: 1.129 linhas de instruções, 26 keywords documentadas
 
@@ -45,7 +45,7 @@ O framework Ultralearning possui **3 agentes IA** especializados:
 
 4. **Conexão explícita**: @meta documenta handoff para @tutor (linhas 353-378)
 
-5. **Modelo consistente**: Todos usam Claude Sonnet 4.5 (~0.015€/interação)
+5. **Modelo consistente**: Todos usam Claude Sonnet 4.6 (~0.015€/interação)
 
 6. **Idioma padronizado**: Português com termos técnicos em inglês
 

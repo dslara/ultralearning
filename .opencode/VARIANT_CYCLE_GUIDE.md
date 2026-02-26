@@ -2,7 +2,7 @@
 
 ## O que é?
 
-O **Variant Cycle** permite alternar rapidamente entre diferentes "modos" do modelo Claude Sonnet 4.5:
+O **Variant Cycle** permite alternar rapidamente entre diferentes "modos" do modelo Claude Sonnet 4.6:
 
 | Variante | Pensamento | Uso Ideal | Velocidade | Custo |
 |----------|-----------|-----------|------------|-------|

@@ -73,6 +73,7 @@ Exemplos:
 
 | Arquivo | Tipo | Data | Versão | Aspecto | Status |
 |---------|------|------|--------|---------|--------|
+| [agents-audit-2026-02-24-v1.0.0.md](./agents-audit-2026-02-24-v1.0.0.md) | agents | 2026-02-24 | v1.0.0 | Auditoria completa: 15 problemas, 3 críticos, proposta @session | ✅ Concluída |
 | [agents-review-2026-02-23-v2.8.0.md](./agents-review-2026-02-23-v2.8.0.md) | agents | 2026-02-23 | v2.8.0 | Revisão completa dos agentes @meta, @tutor e @review | ✅ Concluída |
 | [phase1-implementation-2026-02-20-v2.8.0.md](./phase1-implementation-2026-02-20-v2.8.0.md) | implementation | 2026-02-20 | v2.8.0 | Fase 1: Arquitetura Híbrida | ✅ Implementada |
 | [audit-complete-v2.7.0-2026-02-20.md](./audit-complete-v2.7.0-2026-02-20.md) | audit | 2026-02-20 | v2.7.0 | Auditoria Completa | ✅ Concluída |
