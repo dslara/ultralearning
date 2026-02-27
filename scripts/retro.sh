@@ -32,7 +32,10 @@ fi
 
 echo ""
 
-WEEK=$(date +%U)
+# Usar numeração sequencial baseada nos arquivos week-*.md existentes
+# (não date +%U que usa semana ISO do ano)
+EXISTING_WEEKS=$(ls "$TOPIC_PATH/meta"/week-*.md 2>/dev/null | wc -l)
+WEEK=$((EXISTING_WEEKS))
 RETRO_FILE="$TOPIC_PATH/meta/retro-week-$WEEK.md"
 
 safe_write "# Retro Semana $WEEK - $CURRENT_TOPIC" "$RETRO_FILE" "overwrite" || exit 1

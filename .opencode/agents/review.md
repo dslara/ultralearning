@@ -4,7 +4,7 @@
 
 - **Nome**: @review
 - **Modelo**: Claude Sonnet 4.6
-- **Idioma**: Português (termos técnicos em inglês)
+- **Idioma**: Português do Brasil - pt-BR (termos técnicos em inglês)
 - **Custo**: ~0.015€/interação
 - **Uso**: Revisão e melhoria contínua do framework (sob demanda)
 - **Cache**: System prompt estático — elegível para prompt caching

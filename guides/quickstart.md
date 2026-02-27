@@ -11,7 +11,7 @@
 | Componente | Descrição |
 |------------|-----------|
 | **3 Abordagens** | Ultralearning + A Mind for Numbers + Atomic Habits |
-| **15 Comandos** | `make start`, `make study`, `make end` + 12 auxiliares |
+| **16 Comandos** | `make start`, `make study`, `make end` + 13 auxiliares |
 | **4 Agentes** | `@meta` (planejar) + `@tutor` (executar) + `@session` (orquestrar) + `@review` (melhorar) |
 | **24 Técnicas** | De `drill` até `procrastination-zombie` |
 
@@ -98,7 +98,7 @@ graph LR
 
 | Comando | Quando Usar |
 |---------|-------------|
-| `make start` | Início da sessão — @session sugere actividade baseada no plano |
+| `make start` | Início da sessão — @session sugere atividade baseada no plano |
 | `make study` | Loop de estudo (12 opções: 0–9, z, d) |
 | `make end` | Consolidar com @session + salvar log + atualizar streak |
 | `make review` | Revisar flashcards (SRS) |

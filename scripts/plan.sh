@@ -14,8 +14,10 @@ fi
 print_header "📅 Planejando semana para: $CURRENT_TOPIC"
 echo ""
 
-WEEK=$(date +%U)
+# Usar numeração sequencial baseada nos arquivos existentes (não date +%U)
 mkdir -p "$TOPIC_PATH/meta"
+EXISTING_WEEKS=$(ls "$TOPIC_PATH/meta"/week-*.md 2>/dev/null | wc -l)
+WEEK=$((EXISTING_WEEKS + 1))
 
 opencode run --agent @meta "#create-weekly-plan semana $WEEK" | tee "$TOPIC_PATH/meta/week-$WEEK.md"
 

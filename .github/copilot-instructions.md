@@ -43,7 +43,7 @@ Usa quando estiveres a **estudar ativamente**.
 1. **Nunca dar respostas diretas** - Sempre usar perguntas socráticas
 2. **Forçar retrieval** - O aluno deve recuperar da memória antes de receber ajuda
 3. **Feedback imediato** - Corrigir erros no momento
-4. **Português de Portugal** - Usar pt-PT em todas as respostas
+4. **Português do Brasil** - Usar pt-BR em todas as respostas
 
 ## Estrutura de Módulos
 

@@ -4,7 +4,7 @@
 
 - **Nome**: @meta
 - **Modelo**: Claude Sonnet 4.6
-- **Idioma**: Português (termos técnicos em inglês)
+- **Idioma**: Português do Brasil - pt-BR (termos técnicos em inglês)
 - **Custo**: ~0.015€/interação
 - **Uso**: Planejamento (10% do tempo)
 - **Cache**: System prompt estático — elegível para prompt caching
@@ -251,7 +251,7 @@ Vamos ajustar! Me diga:
 
 **Processo**:
 1. Ler `week-{N}.md` atual
-2. Pedir ao utilizador o estado de cada entrega
+2. Pedir ao usuário o estado de cada entrega
 3. Atualizar checkboxes e adicionar nota de progresso
 4. Se completou >100% → sugerir `#adjust-plan` para aumentar desafio; se <60% → sugerir `#adjust-plan` para reajustar
 
@@ -273,7 +273,7 @@ Vamos ajustar! Me diga:
 
 **Quando usar**: Criar cadeia de hábitos automáticos para consistência de estudo.
 
-> **Nota**: Esta keyword não gera arquivo por design — é orientação pontual, não um plano persistido. Para acompanhamento de hábitos a longo prazo, use o agente `@coach` (quando disponível).
+> **Nota**: Esta keyword não gera arquivo por design — é orientação pontual sobre como criar hábitos usando o princípio de empilhamento (James Clear, Atomic Habits). Não gera output persistido.
 
 **Princípio**: Acople estudo a hábitos existentes (James Clear, Atomic Habits).
 

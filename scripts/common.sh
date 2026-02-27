@@ -46,12 +46,20 @@ check_deps() {
     local deps_ok=true
     
     if ! command -v jq &> /dev/null; then
-        echo -e "${RED}✗ jq não instalado (brew install jq)${NC}"
+        echo -e "${RED}✗ jq não instalado${NC}"
+        if command -v brew &> /dev/null; then
+            echo -e "${YELLOW}  → macOS: brew install jq${NC}"
+        elif command -v apt &> /dev/null; then
+            echo -e "${YELLOW}  → Linux: sudo apt install jq${NC}"
+        elif command -v dnf &> /dev/null; then
+            echo -e "${YELLOW}  → Fedora: sudo dnf install jq${NC}"
+        fi
         deps_ok=false
     fi
     
     if ! command -v opencode &> /dev/null; then
-        echo -e "${YELLOW}⚠️  opencode não instalado (npm install -g opencode)${NC}"
+        echo -e "${YELLOW}⚠️  opencode não instalado${NC}"
+        echo -e "${YELLOW}  → Baixe o binário em: https://github.com/opencode-ai/opencode/releases${NC}"
     fi
     
     $deps_ok

@@ -37,7 +37,8 @@ echo ""
 
 if check_opencode; then
     # Tentar carregar plano da semana actual como contexto
-    WEEK_FILE=$(ls "$TOPIC_PATH/meta/week-"*.md 2>/dev/null | sort | tail -1)
+    # Usar sort -V para ordenação natural (week-1, week-2, ... week-10)
+    WEEK_FILE=$(ls "$TOPIC_PATH/meta/week-"*.md 2>/dev/null | sort -V | tail -1)
 
     if [ -n "$WEEK_FILE" ]; then
         print_info "📅 Plano encontrado: $(basename "$WEEK_FILE")"
@@ -50,14 +51,18 @@ Data: $TODAY
 Plano da semana:
 $WEEK_CONTEXT"
     else
-        # Fallback: quiz genérico se não há plano da semana
-        print_warning "Nenhum plano de semana encontrado — quiz genérico de aquecimento."
+        # Fallback: sessão genérica se não há plano da semana
+        print_warning "Nenhum plano de semana encontrado — sessão genérica de aquecimento."
         print_info "Cria um plano com: @meta #create-weekly-plan"
-        opencode run --agent @tutor "#quiz 3 perguntas sobre $CURRENT_TOPIC"
+        opencode run --agent @session "#session-start
+Contexto do módulo: $CURRENT_TOPIC
+Data: $TODAY
+
+Nenhum plano de semana disponível. Sessão de aquecimento genérica."
     fi
 else
     print_warning "OpenCode não instalado. Quiz pulado."
-    print_info "Instale com: npm install -g opencode"
+    print_info "Instale o opencode (binário nativo)"
 fi
 
 echo ""

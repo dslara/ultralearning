@@ -2,15 +2,10 @@
 # streak.sh - Sistema simplificado de streak
 # Apenas: streak, total de sessões, última sessão
 
+source "$(dirname "$0")/common.sh"
+
 STATS_FILE="${STATS_FILE:-.ultralearning-stats}"
 TODAY=$(date +%Y-%m-%d)
-
-# Cores
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m'
 
 # Inicializar arquivo se não existir
 init_stats() {
@@ -24,22 +19,33 @@ EOF
     fi
 }
 
-# Carregar estatísticas
+# Carregar estatísticas com parsing seguro (sem source)
 load_stats() {
     init_stats
-    # Validar arquivo antes de carregar
-    if grep -q "streak=" "$STATS_FILE" 2>/dev/null; then
-        source "$STATS_FILE"
-    else
-        echo -e "${YELLOW}⚠️  Arquivo de stats corrompido. Recriando...${NC}"
-        rm -f "$STATS_FILE"
-        init_stats
-        source "$STATS_FILE"
-    fi
+    
+    # Parse seguro sem executar código arbitrário
+    streak=$(grep "^streak=" "$STATS_FILE" 2>/dev/null | cut -d= -f2)
+    best_streak=$(grep "^best_streak=" "$STATS_FILE" 2>/dev/null | cut -d= -f2)
+    total_sessions=$(grep "^total_sessions=" "$STATS_FILE" 2>/dev/null | cut -d= -f2)
+    last_session=$(grep "^last_session=" "$STATS_FILE" 2>/dev/null | cut -d= -f2)
+    
+    # Validar valores lidos (números inteiros)
+    if ! [[ "$streak" =~ ^[0-9]+$ ]]; then streak=0; fi
+    if ! [[ "$best_streak" =~ ^[0-9]+$ ]]; then best_streak=0; fi
+    if ! [[ "$total_sessions" =~ ^[0-9]+$ ]]; then total_sessions=0; fi
 }
 
-# Salvar estatísticas
+# Salvar estatísticas com sanitização
 save_stats() {
+    # Garantir valores inteiros
+    streak=${streak:-0}
+    best_streak=${best_streak:-0}
+    total_sessions=${total_sessions:-0}
+    
+    [[ "$streak" =~ ^[0-9]+$ ]] || streak=0
+    [[ "$best_streak" =~ ^[0-9]+$ ]] || best_streak=0
+    [[ "$total_sessions" =~ ^[0-9]+$ ]] || total_sessions=0
+    
     cat > "$STATS_FILE" << EOF
 streak=$streak
 best_streak=$best_streak

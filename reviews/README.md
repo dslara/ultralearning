@@ -73,6 +73,9 @@ Exemplos:
 
 | Arquivo | Tipo | Data | Versão | Aspecto | Status |
 |---------|------|------|--------|---------|--------|
+| [audit-complete-2026-02-27-v4.2.0.md](./audit-complete-2026-02-27-v4.2.0.md) | audit | 2026-02-27 | v4.2.0 | Auditoria completa: 0 críticos, 0 médios, 6 baixos — nota 9.3/10 | ✅ Concluída |
+| [audit-complete-2026-02-27-v4.1.0.md](./audit-complete-2026-02-27-v4.1.0.md) | audit | 2026-02-27 | v4.1.0 | Auditoria completa: 0 críticos, 2 médios, 6 baixos — nota 8.8/10 | ✅ Concluída |
+| [audit-complete-2026-02-26-v4.0.0.md](./audit-complete-2026-02-26-v4.0.0.md) | audit | 2026-02-26 | v4.0.0 | Auditoria completa: 3 críticos, 9 médios, 7 baixos — nota 8.2/10 | ✅ Concluída |
 | [agents-audit-2026-02-26-v3.1.0.md](./agents-audit-2026-02-26-v3.1.0.md) | agents | 2026-02-26 | v3.1.0 | Todos os problemas técnicos resolvidos — 0 abertos, só @coach pendente | ✅ Concluída |
 | [agents-cost-optimization-2026-02-25-v1.0.0.md](./agents-cost-optimization-2026-02-25-v1.0.0.md) | agents | 2026-02-25 | v1.0.0 | Otimização de custos: 5 problemas, 4 quick wins, model routing estratégico | ✅ Concluída |
 | [agents-audit-2026-02-25-v2.0.0.md](./agents-audit-2026-02-25-v2.0.0.md) | agents | 2026-02-25 | v2.0.0 | Pós-unificação: 0 críticos, 6 abertos, template criado | ✅ Supersedida por v3.1.0 |
@@ -89,11 +92,6 @@ Usando o agente `@review`:
 # Revisão em memória (não salva arquivo)
 opencode run --agent @review "#review-scripts"
 
-# Revisão e salvar automaticamente
-opencode run --agent @review "#save-review scripts"
-# ou
-opencode run --agent @review "#review-and-save scripts"
-
 # Auditoria completa do framework
 opencode run --agent @review "#audit-quality"
 
@@ -102,6 +100,10 @@ opencode run --agent @review "#review-architecture"
 
 # Verificar prontidão para release
 opencode run --agent @review "#check-readiness 3.0.0"
+
+# Gerar revisão e salvar manualmente
+opencode run --agent @review "#review-scripts"
+# Copie o output e salve em reviews/ manualmente
 ```
 
 ### Template Disponível

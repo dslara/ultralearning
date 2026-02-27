@@ -64,6 +64,7 @@ draft-*.py
 projects/*/logs/daily/*.md
 !projects/*/logs/daily/.gitkeep
 .ultralearning-stats
+backups/
 
 # Ultralearning - Dados pessoais de SRS
 projects/*/knowledge/spaced-repetition.jsonl

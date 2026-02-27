@@ -25,7 +25,7 @@ make end     # Salva + atualiza streak
 
 ---
 
-## 📋 Comandos (14 total)
+## 📋 Comandos (16 total)
 
 ### Sessão Diária
 | Comando | Descrição |
@@ -68,7 +68,7 @@ make end     # Salva + atualiza streak
 | **@meta** | Planejamento estratégico, decomposição de objetivos |
 | **@tutor** | Mentor socrático, quiz, drills, feedback |
 | **@review** | Revisão arquitetural, auditoria, propostas de melhoria |
-| **@session** | Orquestrador de sessões — sugere actividade com base no plano, consolida no final |
+| **@session** | Orquestrador de sessões — sugere atividade com base no plano, consolida no final |
 
 ### Keywords do @tutor
 | Keyword | Uso |
@@ -174,14 +174,14 @@ Comece ridicularmente pequeno:
 
 **Transferência & Overlearning:**
 - `chunk-transfer.md` → Conectar entre domínios
-- `overlearning.md` → Praticar além do básico
+- `drill.md` → Praticar além do básico
 
 **Procrastinação:**
 - `procrastination-zombie.md` → Zombie Mode
 
 ---
 
-## 📁 Estrutura
+## 📁 Estrutura do Projeto
 
 ```
 ultralearning/
@@ -197,10 +197,8 @@ ultralearning/
 ├── guides/                 # 9 princípios + 24 técnicas
 ├── reviews/                # Revisões técnicas do framework
 ├── planning/               # Propostas e planos de migração
-└── Makefile                # 14 comandos
+└── Makefile                # 16 comandos
 ```
-
-## 📁 Estrutura do Projeto
 
 O projeto está organizado em pastas especializadas:
 

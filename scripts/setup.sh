@@ -12,7 +12,15 @@ echo "Verificando dependências..."
 if command -v jq &> /dev/null; then
     echo -e "  ${GREEN}✓${NC} jq"
 else
-    echo -e "  ${RED}✗${NC} jq (instale: brew install jq)"
+    echo -e "  ${RED}✗${NC} jq"
+    echo -e "  ${YELLOW}  Instale:${NC}"
+    if command -v brew &> /dev/null; then
+        echo -e "    macOS: brew install jq"
+    elif command -v apt &> /dev/null; then
+        echo -e "    Linux (Debian/Ubuntu): sudo apt install jq"
+    elif command -v dnf &> /dev/null; then
+        echo -e "    Linux (Fedora): sudo dnf install jq"
+    fi
 fi
 
 if command -v bc &> /dev/null; then
@@ -24,7 +32,10 @@ fi
 if command -v opencode &> /dev/null; then
     echo -e "  ${GREEN}✓${NC} opencode"
 else
-    echo -e "  ${YELLOW}⚠️${NC} opencode (instale: npm install -g opencode)"
+    echo -e "  ${YELLOW}⚠️${NC} opencode"
+    echo -e "  ${YELLOW}  Instale:${NC}"
+    echo -e "    Baixe o binário: https://github.com/opencode-ai/opencode/releases"
+    echo -e "    Ou: npm install -g opencode (se tiver Node.js)"
 fi
 
 echo ""

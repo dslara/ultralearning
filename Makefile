@@ -3,7 +3,7 @@
 
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
-.PHONY: help start study end module switch plan resources review retro break drill-extra status archive backup setup
+.PHONY: help start study end module switch plan resources review retro break drill-extra status archive backup setup sync-flashcards
 
 ##@ 📋 Sessão Diária (3 comandos)
 
@@ -49,10 +49,13 @@ drill-extra: ## 🎯 Overlearning: 5 variações de drill
 status: ## 📊 Ver status geral
 	@./scripts/status.sh
 
-##@ 📦 Arquivamento (1 comando)
+##@ 📦 Arquivamento (2 comandos)
 
 archive: ## 📦 Arquivar projeto finalizado
 	@./scripts/archive.sh
+
+sync-flashcards: ## 🔄 Sincronizar flashcards (Anki)
+	@./projects/shared/flashcards/sync-script.sh
 
 ##@ 🛠️ Setup e Backup (2 comandos)
 

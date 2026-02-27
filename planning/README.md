@@ -89,18 +89,21 @@ Exemplos:
 Usando o agente `@review`:
 
 ```bash
-# Criar proposta de mudança estrutural
-opencode run --agent @review "#create-proposal migracao-python"
+# Análise arquitetural que identifica necessidade de mudança
+opencode run --agent @review "#review-architecture"
 
-# Criar plano de migração detalhado
-opencode run --agent @review "#create-plan transicao-python"
+# Auditoria completa que pode gerar recomendações
+opencode run --agent @review "#audit-quality"
 
-# Propor roadmap estratégico
-opencode run --agent @review "#propose-roadmap 6"
-
-# Sugerir melhorias e salvar
-opencode run --agent @review "#suggest-improvements testes"
+# Para criar documentos manualmente, use os templates disponíveis
+# e siga a convenção de nomenclatura descrita acima
 ```
+
+O @review recomenda mudanças através de análise, mas **não gera automaticamente** propostas ou planos. O fluxo é:
+1. @review analisa o projeto (via `#audit-quality` ou `#review-architecture`)
+2. Identifica necessidade de mudança estrutural
+3. Gera recomendações no relatório
+4. Usuário decide se quer criar proposta/plano manualmente usando templates
 
 ### Conteúdo dos Documentos
 
@@ -127,10 +130,10 @@ opencode run --agent @review "#suggest-improvements testes"
 
 ```
 1. @review analisa o projeto (via #audit-quality ou #review-architecture)
-2. Identifica necessidade de mudança estrutural
-3. Gera proposta (#create-proposal)
-4. Usuário revisa proposta
-5. Se aprovada, @review gera plano detalhado (#create-plan)
+2. Identifica necessidade de mudança estrutural no relatório
+3. Usuário revisa recomendações
+4. Se aprovada, usuário cria proposta manualmente usando template
+5. Se aprovada, usuário cria plano manualmente usando template
 6. Implementação segue o plano
 ```
 
