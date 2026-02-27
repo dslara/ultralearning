@@ -8,6 +8,18 @@ check_module
 
 print_header "🏁 Encerrando Sessão"
 
+# Reflexão estruturada com @session antes de salvar o log
+if check_opencode; then
+    echo -e "${PURPLE}💭 Consolidando sessão com @session...${NC}"
+    echo -e "${YELLOW}  (pressiona Ctrl+C para saltar e escrever diretamente)${NC}"
+    echo ""
+    opencode run --agent @session "#session-end" || true
+    echo ""
+    print_info "📋 Copia o texto gerado acima para o resumo abaixo."
+    echo -e "${YELLOW}  (ou escreve um resumo livre se não usaste @session)${NC}"
+    echo ""
+fi
+
 read -p "O que você aprendeu hoje? (breve): " learning
 
 if [ -n "$learning" ]; then

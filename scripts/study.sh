@@ -15,19 +15,41 @@ fi
 print_header "💻 Modo Estudo - $CURRENT_TOPIC"
 
 echo "Escolha o modo:"
+echo "  0. 🎯 Session   - Sugestão baseada no plano da semana"
+echo "  ──────────────────────────────────────────"
 echo "  1. 💻 Code      - Projeto prático"
 echo "  2. 🎯 Drill     - Exercícios focados"
-echo "  3. 💡 Feynman   - Explicar conceito"
+echo "  3. 💡 Feynman   - Validar compreensão"
 echo "  4. 🏗️  Scaffold  - Criar estrutura"
 echo "  5. 🧪 Experiment- Comparar soluções"
 echo "  6. 📝 Feedback  - Revisar código"
+echo "  7. 🔍 Explain   - Introdução a conceito novo"
+echo "  8. 🧠 Intuition - Entender o 'por quê'"
+echo "  9. 🐛 Debug     - Debug socrático"
+echo "  z. 🧟 Zombie    - Superar procrastinação"
+echo "  d. 🌊 Diffuse   - Modo difuso (bloqueado)"
 echo "  q. Sair"
 echo ""
 
-read -p "Opção [1]: " mode
-mode=${mode:-1}
+read -p "Opção [0]: " mode
+mode=${mode:-0}
 
 case $mode in
+    0|session)
+        WEEK_FILE=$(ls "$TOPIC_PATH/meta/week-"*.md 2>/dev/null | sort | tail -1)
+        if [ -n "$WEEK_FILE" ]; then
+            WEEK_CONTEXT=$(cat "$WEEK_FILE")
+            opencode run --agent @session "#session-start
+
+Contexto do módulo: $CURRENT_TOPIC
+Data: $TODAY
+
+Plano da semana:
+$WEEK_CONTEXT"
+        else
+            opencode run --agent @session "#session-start"
+        fi
+        ;;
     1|code)
         read -p "Qual desafio? " challenge
         challenge=$(sanitize_input "$challenge")
@@ -81,6 +103,39 @@ case $mode in
         else
             print_error "Nenhum código fornecido"
         fi
+        ;;
+    7|explain)
+        read -p "Qual conceito introduzir? " concept
+        concept=$(sanitize_input "$concept")
+        if [ -n "$concept" ]; then
+            opencode run --agent @tutor "#explain $concept"
+        else
+            print_error "Conceito inválido"
+        fi
+        ;;
+    8|intuition)
+        read -p "Qual conceito aprofundar? " concept
+        concept=$(sanitize_input "$concept")
+        if [ -n "$concept" ]; then
+            opencode run --agent @tutor "#intuition $concept"
+        else
+            print_error "Conceito inválido"
+        fi
+        ;;
+    9|debug)
+        read -p "Descreve o problema: " problem
+        problem=$(sanitize_input "$problem")
+        if [ -n "$problem" ]; then
+            opencode run --agent @tutor "#debug $problem"
+        else
+            print_error "Problema inválido"
+        fi
+        ;;
+    z|zombie)
+        opencode run --agent @tutor "#zombie"
+        ;;
+    d|diffuse)
+        opencode run --agent @tutor "#diffuse"
         ;;
     q|Q)
         echo "Saindo..."

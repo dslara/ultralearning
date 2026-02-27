@@ -73,7 +73,10 @@ Exemplos:
 
 | Arquivo | Tipo | Data | Versão | Aspecto | Status |
 |---------|------|------|--------|---------|--------|
-| [agents-audit-2026-02-24-v1.0.0.md](./agents-audit-2026-02-24-v1.0.0.md) | agents | 2026-02-24 | v1.0.0 | Auditoria completa: 15 problemas, 3 críticos, proposta @session | ✅ Concluída |
+| [agents-audit-2026-02-26-v3.1.0.md](./agents-audit-2026-02-26-v3.1.0.md) | agents | 2026-02-26 | v3.1.0 | Todos os problemas técnicos resolvidos — 0 abertos, só @coach pendente | ✅ Concluída |
+| [agents-cost-optimization-2026-02-25-v1.0.0.md](./agents-cost-optimization-2026-02-25-v1.0.0.md) | agents | 2026-02-25 | v1.0.0 | Otimização de custos: 5 problemas, 4 quick wins, model routing estratégico | ✅ Concluída |
+| [agents-audit-2026-02-25-v2.0.0.md](./agents-audit-2026-02-25-v2.0.0.md) | agents | 2026-02-25 | v2.0.0 | Pós-unificação: 0 críticos, 6 abertos, template criado | ✅ Supersedida por v3.1.0 |
+| [agents-audit-2026-02-24-v1.0.0.md](./agents-audit-2026-02-24-v1.0.0.md) | agents | 2026-02-24 | v1.0.0 | Auditoria completa: 14 problemas, 3 críticos, proposta template | ✅ Supersedida por v2.0.0 |
 | [agents-review-2026-02-23-v2.8.0.md](./agents-review-2026-02-23-v2.8.0.md) | agents | 2026-02-23 | v2.8.0 | Revisão completa dos agentes @meta, @tutor e @review | ✅ Concluída |
 | [phase1-implementation-2026-02-20-v2.8.0.md](./phase1-implementation-2026-02-20-v2.8.0.md) | implementation | 2026-02-20 | v2.8.0 | Fase 1: Arquitetura Híbrida | ✅ Implementada |
 | [audit-complete-v2.7.0-2026-02-20.md](./audit-complete-v2.7.0-2026-02-20.md) | audit | 2026-02-20 | v2.7.0 | Auditoria Completa | ✅ Concluída |

@@ -2,34 +2,18 @@
 # Sistema de Spaced Repetition (Algoritmo SM-2 simplificado)
 # Baseado em: SuperMemo, Anki
 
-set -e
+source "$(dirname "$0")/common.sh"
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-
-# Cores
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-RED='\033[0;31m'
-NC='\033[0m'
-
-# Arquivo de database
-CURRENT_TOPIC=$(cat "$PROJECT_ROOT/.current-topic" 2>/dev/null || echo "nenhum")
-
-if [ "$CURRENT_TOPIC" = "nenhum" ]; then
-    echo -e "${RED}❌ Nenhum módulo ativo. Use: make switch${NC}"
-    exit 1
-fi
+check_module
 
 # Verificar dependências
 if ! command -v jq &> /dev/null; then
-    echo -e "${RED}❌ 'jq' não instalado. Execute: brew install jq${NC}"
+    print_error "'jq' não instalado. Execute: brew install jq"
     exit 1
 fi
 
-CARDS_DB="$PROJECT_ROOT/$CURRENT_TOPIC/knowledge/spaced-repetition.jsonl"
-mkdir -p "$PROJECT_ROOT/$CURRENT_TOPIC/knowledge"
+CARDS_DB="$TOPIC_PATH/knowledge/spaced-repetition.jsonl"
+mkdir -p "$TOPIC_PATH/knowledge"
 touch "$CARDS_DB"
 
 # Função para calcular próxima revisão (algoritmo SM-2 simplificado)
@@ -199,7 +183,7 @@ review_cards() {
 
 # Função para importar do knowledge base
 import_from_knowledge() {
-    local concepts_dir="$PROJECT_ROOT/$CURRENT_TOPIC/knowledge/concepts"
+    local concepts_dir="$TOPIC_PATH/knowledge/concepts"
     
     if [ ! -d "$concepts_dir" ]; then
         echo -e "${RED}❌ Diretório concepts/ não encontrado${NC}"

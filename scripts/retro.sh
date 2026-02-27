@@ -35,24 +35,24 @@ echo ""
 WEEK=$(date +%U)
 RETRO_FILE="$TOPIC_PATH/meta/retro-week-$WEEK.md"
 
-echo "# Retro Semana $WEEK - $CURRENT_TOPIC" > "$RETRO_FILE"
-echo "" >> "$RETRO_FILE"
-echo "**Data**: $TODAY" >> "$RETRO_FILE"
-echo "" >> "$RETRO_FILE"
+safe_write "# Retro Semana $WEEK - $CURRENT_TOPIC" "$RETRO_FILE" "overwrite" || exit 1
+safe_write "" "$RETRO_FILE" || exit 1
+safe_write "**Data**: $TODAY" "$RETRO_FILE" || exit 1
+safe_write "" "$RETRO_FILE" || exit 1
 
 read -p "✅ O que funcionou? " worked
-echo "## ✅ O que funcionou" >> "$RETRO_FILE"
-echo "$worked" >> "$RETRO_FILE"
-echo "" >> "$RETRO_FILE"
+safe_write "## ✅ O que funcionou" "$RETRO_FILE" || exit 1
+safe_write "$worked" "$RETRO_FILE" || exit 1
+safe_write "" "$RETRO_FILE" || exit 1
 
 read -p "❌ O que não funcionou? " failed
-echo "## ❌ O que não funcionou" >> "$RETRO_FILE"
-echo "$failed" >> "$RETRO_FILE"
-echo "" >> "$RETRO_FILE"
+safe_write "## ❌ O que não funcionou" "$RETRO_FILE" || exit 1
+safe_write "$failed" "$RETRO_FILE" || exit 1
+safe_write "" "$RETRO_FILE" || exit 1
 
 read -p "🎯 Foco próxima semana? " next
-echo "## 🎯 Próxima semana" >> "$RETRO_FILE"
-echo "$next" >> "$RETRO_FILE"
-echo "" >> "$RETRO_FILE"
+safe_write "## 🎯 Próxima semana" "$RETRO_FILE" || exit 1
+safe_write "$next" "$RETRO_FILE" || exit 1
+safe_write "" "$RETRO_FILE" || exit 1
 
 print_success "Salvo: $RETRO_FILE"

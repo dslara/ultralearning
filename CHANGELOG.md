@@ -7,6 +7,36 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ## [Não Publicado]
 
+## [3.0.0] - 2026-02-26
+
+### Added
+- **Agente `@session`** — orquestrador de sessões de estudo
+  * `#session-start` — lê `week-{N}.md` e sugere keyword do @tutor com base no plano
+  * `#session-end` — consolida sessão com reflexão estruturada + texto para log
+  * `#session-plan` — consulta progresso das entregas da semana
+- **Keywords novas no @tutor**
+  * `#explain [conceito]` — introdução a conceito novo (antes de `#feynman`)
+  * `#wrap-up` — consolidação de sessão com 4 blocos + texto para `make end`
+- **Keywords novas no @meta**
+  * `#update-plan semana [N]` — registar progresso sem reescrever plano
+- **Keyword nova no @review**
+  * `#review-costs` — auditoria de otimização de tokens; incluída em `#audit-quality`
+- **Template unificado** `_template-agent.md` com 8 seções obrigatórias
+- **Otimizações de custo** nos agentes: nota de cache na Identidade, instrução de concisão no Checklist Final, exemplos compostos em vez de duplicados
+
+### Changed
+- **`start.sh`** — detecta `week-{N}.md` mais recente e invoca `@session #session-start` com contexto real; fallback para quiz genérico se sem plano
+- **`end.sh`** — invoca `@session #session-end` antes do `read`; hint de fallback para resumo livre
+- **`study.sh`** — opção `0` (default) para `@session`; 5 keywords novas no menu (`#explain`, `#intuition`, `#debug`, `#zombie`, `#diffuse`); total de 12 opções
+- **`@tutor #scaffold`** — exemplo substituído por processo tecnologia-neutro (4 passos + 6 regras de geração)
+- **`@review`** — keywords consolidadas, `#review-architecture` completa, contradição "cria/não cria" resolvida
+- Todos os agentes migrados para formato unificado do template
+
+### Documentation
+- `README.md` actualizado — 4 agentes, 13 keywords @tutor, 7 keywords @meta, 11 keywords @review, 3 keywords @session, workflow com 12 opções
+- `guides/quickstart.md` actualizado — contagem de agentes, diagrama e Quick Reference
+- `reviews/agents-audit-2026-02-26-v3.1.0.md` — auditoria final: 0 críticos, 0 técnicos abertos
+
 ## [2.7.1] - 2026-02-20
 
 ### Added

@@ -7,6 +7,7 @@
 - **Idioma**: Português (termos técnicos em inglês)
 - **Custo**: ~0.015€/interação
 - **Uso**: [% do tempo / contexto de uso]
+- **Cache**: System prompt estático — elegível para prompt caching
 
 ---
 
@@ -88,6 +89,10 @@ Você:
 
 ## 📎 Quick Reference
 
+> **Nota sobre a 3ª coluna**: adapte o cabeçalho ao perfil do agente.  
+> Use `Output` para agentes que produzem artefactos (@meta, @review).  
+> Use `Restrição` para agentes cujo valor está no comportamento, não no artefacto (@tutor).
+
 | Keyword | Quando usar | Output |
 |---------|-------------|--------|
 | `#[keyword]` | [Situação] | [O que produz] |
@@ -121,6 +126,7 @@ Antes de enviar cada resposta, valide:
 - [ ] [Critério de qualidade 1]
 - [ ] [Critério de qualidade 2]
 - [ ] [Critério de qualidade 3]
+- [ ] Resposta no tamanho mínimo necessário para a keyword? (sem expansão não solicitada)
 
 ### Diretrizes
 

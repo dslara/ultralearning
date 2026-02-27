@@ -68,14 +68,16 @@ make end     # Salva + atualiza streak
 | **@meta** | Planejamento estratégico, decomposição de objetivos |
 | **@tutor** | Mentor socrático, quiz, drills, feedback |
 | **@review** | Revisão arquitetural, auditoria, propostas de melhoria |
+| **@session** | Orquestrador de sessões — sugere actividade com base no plano, consolida no final |
 
 ### Keywords do @tutor
 | Keyword | Uso |
 |---------|-----|
+| `#explain [conceito]` | Introdução a conceito novo (nunca viu) |
 | `#directness [desafio]` | Projeto prático guiado |
+| `#feynman [conceito]` | Explicar para validar compreensão |
 | `#drill [conceito]` | Exercícios repetitivos (5-10x) |
 | `#quiz N perguntas` | Retrieval practice rápido |
-| `#feynman [conceito]` | Explicar para validar compreensão |
 | `#scaffold [projeto]` | Criar estrutura base |
 | `#experiment [conceito]` | Comparar 3 soluções diferentes |
 | `#feedback` | Revisão de código |
@@ -83,6 +85,7 @@ make end     # Salva + atualiza streak
 | `#intuition [conceito]` | Entender o "por quê" profundo |
 | `#zombie` | Superar procrastinação (Two-Minute Rule) |
 | `#diffuse` | Usar modo difuso quando travado |
+| `#wrap-up` | Consolidar sessão antes de `make end` |
 
 ### Keywords do @meta
 | Keyword | Uso |
@@ -90,32 +93,35 @@ make end     # Salva + atualiza streak
 | `#decompose-goal [objetivo]` | Decompor objetivo em plano acionável |
 | `#map-resources [tópico]` | Curar recursos em 3 tiers |
 | `#create-weekly-plan semana N` | Gerar plano semanal |
-| `#adjust-plan [situação]` | Reajustar cronograma |
+| `#update-plan semana [N]` | Registar progresso sem reescrever plano |
+| `#adjust-plan [situação]` | Reajustar cronograma por desvio |
 | `#benchmark-test` | Criar teste de proficiência |
 | `#habit-stack` | Criar cadeia de hábitos (Atomic Habits) |
 
 ### Keywords do @review (Consultor Estratégico)
 
-**Papel**: Analisa o framework e **sugere** melhorias (não executa)
+**Papel**: Analisa o framework e **sugere** melhorias. Cria arquivos em `reviews/` quando pedido explicitamente.
 
-**Revisões Técnicas** (gera análises):
 | Keyword | O que faz |
 |---------|-----------|
 | `#review-structure` | Analisa organização de pastas |
 | `#review-scripts` | Avalia qualidade dos scripts bash |
-| `#review-docs` | Verifica documentação |
+| `#review-docs` | Verifica coerência da documentação |
 | `#review-makefile` | Revisa orquestração de comandos |
 | `#review-agents` | Analisa efetividade dos agentes |
 | `#review-consistency` | Verifica consistência geral |
-| `#audit-quality` | Auditoria completa de qualidade |
 | `#review-architecture` | Análise arquitetural profunda |
+| `#review-costs` | Auditoria de otimização de tokens |
+| `#audit-quality` | Auditoria completa (executa todas as anteriores) |
 | `#check-readiness [versão]` | Prontidão para release |
+| `#meta-review [arquivo]` | Revisa documento gerado pelo @review |
 
-**O @review não cria arquivos**, apenas gera análises em memória. Você pode:
-- ✅ Ler a análise e decidir o que fazer
-- ✅ Copiar conteúdo e salvar manualmente em `reviews/`
-- ✅ Criar `planning/proposta-[nome].md` baseado nas sugestões
-- ✅ Pedir para outro assistente (com permissões) salvar os arquivos
+### Keywords do @session
+| Keyword | Uso |
+|---------|-----|
+| `#session-start` | Inicia sessão com contexto do plano — sugere keyword do @tutor |
+| `#session-end` | Consolida sessão — gera reflexão + texto para `make end` |
+| `#session-plan` | Consulta progresso das entregas da semana |
 
 ---
 
@@ -179,7 +185,7 @@ Comece ridicularmente pequeno:
 
 ```
 ultralearning/
-├── .opencode/agents/       # @meta, @tutor, @review
+├── .opencode/agents/       # @meta, @tutor, @review, @session
 ├── scripts/                # 16 scripts bash (streak, SRS, etc.)
 ├── projects/               # Módulos de aprendizado
 │   ├── [modulo]/
@@ -227,12 +233,18 @@ O projeto arquivado mantém todo o histórico e pode ser consultado futuramente.
 │  └── Quiz automático (3 perguntas)  │
 ├─────────────────────────────────────┤
 │  make study    (50 min)             │
+│  ├── 0. Session   → Sugestão do plano│
 │  ├── 1. Code      → Projeto prático │
 │  ├── 2. Drill     → Exercícios      │
 │  ├── 3. Feynman   → Explicar        │
 │  ├── 4. Scaffold  → Estrutura       │
 │  ├── 5. Experiment→ Comparar        │
-│  └── 6. Feedback  → Revisar código  │
+│  ├── 6. Feedback  → Revisar código  │
+│  ├── 7. Explain   → Introdução      │
+│  ├── 8. Intuition → Por quê         │
+│  ├── 9. Debug     → Debug socrático │
+│  ├── z. Zombie    → Procrastinação  │
+│  └── d. Diffuse   → Modo difuso     │
 ├─────────────────────────────────────┤
 │  make end      (5 min)              │
 │  └── Salva log + atualiza streak    │
@@ -298,12 +310,18 @@ Escolha baseado no que precisa:
 
 | Situação | Opção | Por quê |
 |----------|-------|--------|
-| Aprender algo novo | 1. Code | Aprende fazendo |
+| Não sabe o que fazer hoje | 0. Session | @session lê o plano e sugere |
+| Conceito completamente novo | 7. Explain | Analogia primeiro, prática depois |
+| Aprender fazendo | 1. Code | Aprende fazendo |
 | Praticar sintaxe | 2. Drill | Repetição = automatização |
 | Revisar conceito | 3. Feynman | Se não explica, não entendeu |
 | Começar projeto | 4. Scaffold | Estrutura pronta, foco no código |
 | Comparar abordagens | 5. Experiment | Entender trade-offs |
 | Revisar seu código | 6. Feedback | Identificar melhorias |
+| Entender o "por quê" | 8. Intuition | Princípios profundos |
+| Bug difícil | 9. Debug | Guia socrático |
+| Sem vontade de estudar | z. Zombie | Two-Minute Rule |
+| Travado há >30min | d. Diffuse | Deixar cérebro processar |
 
 **🏁 Fim (5 min)**
 ```bash

@@ -2,7 +2,7 @@
 
 > Guia rápido para primeira sessão. Leia em 5 minutos, execute em 3.
 
-**Última atualização**: 2026-02-18
+**Última atualização**: 2026-02-26
 
 ---
 
@@ -12,7 +12,7 @@
 |------------|-----------|
 | **3 Abordagens** | Ultralearning + A Mind for Numbers + Atomic Habits |
 | **15 Comandos** | `make start`, `make study`, `make end` + 12 auxiliares |
-| **2 Agentes** | `@meta` (planejamento) + `@tutor` (mentoria socrática) |
+| **4 Agentes** | `@meta` (planejar) + `@tutor` (executar) + `@session` (orquestrar) + `@review` (melhorar) |
 | **24 Técnicas** | De `drill` até `procrastination-zombie` |
 
 ---
@@ -55,13 +55,19 @@ make end     # Encerra e salva progresso
 │       │                    └──────────────┘                   │
 │       └────────────────────────────────────────────────────→│
 │                                                              │
-│  OPÇÕES DO make study:                                      │
+  │  OPÇÕES DO make study:                                      │
+│  0. Session (@session) → Sugestão baseada no plano          │
 │  1. Code (#directness) → Projeto prático                    │
-│  2. Drill (#drill) → Repetição de procedimentos            │
+│  2. Drill (#drill) → Repetição de procedimentos             │
 │  3. Feynman (#feynman) → Explicar conceito                  │
-│  4. Scaffold (#scaffold) → Estrutura base                     │
+│  4. Scaffold (#scaffold) → Estrutura base                   │
 │  5. Experiment (#experiment) → Comparar abordagens          │
 │  6. Feedback (#feedback) → Revisar código                   │
+│  7. Explain (#explain) → Introdução a conceito novo         │
+│  8. Intuition (#intuition) → Entender o "por quê"           │
+│  9. Debug (#debug) → Debug socrático                        │
+│  z. Zombie (#zombie) → Superar procrastinação               │
+│  d. Diffuse (#diffuse) → Modo difuso (travado)              │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -92,9 +98,9 @@ graph LR
 
 | Comando | Quando Usar |
 |---------|-------------|
-| `make start` | Início da sessão (ativa memória) |
-| `make study` | Loop de estudo (6 opções) |
-| `make end` | Finalizar e salvar |
+| `make start` | Início da sessão — @session sugere actividade baseada no plano |
+| `make study` | Loop de estudo (12 opções: 0–9, z, d) |
+| `make end` | Consolidar com @session + salvar log + atualizar streak |
 | `make review` | Revisar flashcards (SRS) |
 | `make break` | Travou? Pausa de 15 min (modo difuso) |
 | `make status` | Ver streak e progresso |
@@ -103,11 +109,15 @@ graph LR
 
 | Keyword | Uso |
 |---------|-----|
-| `#drill [skill]` | Praticar procedimento 5-10x |
+| `#explain [conceito]` | Introdução a conceito novo |
 | `#feynman [conceito]` | Testar compreensão |
+| `#drill [skill]` | Praticar procedimento 5-10x |
 | `#quiz N perguntas` | Recuperar memória |
+| `#intuition [conceito]` | Entender o "por quê" profundo |
+| `#debug` | Guia de debug socrático |
 | `#zombie` | Não consegue começar? |
 | `#diffuse` | Travou no problema? |
+| `#wrap-up` | Consolidar sessão antes de `make end` |
 
 ---
 
