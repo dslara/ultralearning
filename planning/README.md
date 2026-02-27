@@ -82,7 +82,8 @@ Exemplos:
 
 | Arquivo | Tipo | Data | Status |
 |---------|------|------|--------|
-| *[Exemplo: proposta-migracao-python-2026-02-20.md]* | proposta | 2026-02-20 | 🟡 Em análise |
+| [plano-implementacao-skills-2026-02-27.md](./plano-implementacao-skills-2026-02-27.md) | plano | 2026-02-27 | 🟡 Aprovado — Aguardando implementação |
+| [plano-migracao-glm-2026-02-27.md](./plano-migracao-glm-2026-02-27.md) | plano | 2026-02-27 | ✅ Implementado — 2026-02-27 |
 
 ### Como Gerar Propostas e Planos
 

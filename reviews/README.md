@@ -73,6 +73,7 @@ Exemplos:
 
 | Arquivo | Tipo | Data | Versão | Aspecto | Status |
 |---------|------|------|--------|---------|--------|
+| [opencode-agents-best-practices-2026-02-27-v1.0.0.md](./opencode-agents-best-practices-2026-02-27-v1.0.0.md) | agents | 2026-02-27 | v1.0.0 | Implementado: GLM-5/4.7 + frontmatter + agent config | ✅ Concluída |
 | [audit-complete-2026-02-27-v4.2.0.md](./audit-complete-2026-02-27-v4.2.0.md) | audit | 2026-02-27 | v4.2.0 | Auditoria completa: 0 críticos, 0 médios, 6 baixos — nota 9.3/10 | ✅ Concluída |
 | [audit-complete-2026-02-27-v4.1.0.md](./audit-complete-2026-02-27-v4.1.0.md) | audit | 2026-02-27 | v4.1.0 | Auditoria completa: 0 críticos, 2 médios, 6 baixos — nota 8.8/10 | ✅ Concluída |
 | [audit-complete-2026-02-26-v4.0.0.md](./audit-complete-2026-02-26-v4.0.0.md) | audit | 2026-02-26 | v4.0.0 | Auditoria completa: 3 críticos, 9 médios, 7 baixos — nota 8.2/10 | ✅ Concluída |

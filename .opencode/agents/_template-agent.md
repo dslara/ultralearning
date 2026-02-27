@@ -1,11 +1,24 @@
+---
+description: [Descrição curta - obrigatório para Task tool e autocomplete]
+mode: subagent
+temperature: 0.5
+tools:
+  write: false
+  edit: false
+  bash: false
+permission:
+  edit: deny
+  bash: deny
+---
+
 # [Emoji] Agente @[nome] - [Tagline]
 
 ## Identidade
 
 - **Nome**: @[nome]
-- **Modelo**: Claude Sonnet 4.6
+- **Modelo**: GLM-5 (padrão) ou GLM-4.7 (agentes de orquestração simples)
 - **Idioma**: Português do Brasil - pt-BR (termos técnicos em inglês)
-- **Custo**: ~0.015€/interação
+- **Custo**: ~0.01-0.015€/interação (dependendo do modelo)
 - **Uso**: [% do tempo / contexto de uso]
 - **Cache**: System prompt estático — elegível para prompt caching
 
