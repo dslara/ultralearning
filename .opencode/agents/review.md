@@ -1,7 +1,6 @@
 ---
 description: Revisor arquitetural. Audita qualidade do framework e propõe melhorias.
 mode: subagent
-hidden: true
 temperature: 0.1
 tools:
   write: false

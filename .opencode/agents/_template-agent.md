@@ -1,5 +1,5 @@
 ---
-description: [Descrição curta - obrigatório para Task tool e autocomplete]
+description: Descrição curta - obrigatório para Task tool e autocomplete
 mode: subagent
 temperature: 0.5
 tools:

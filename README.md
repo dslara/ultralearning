@@ -61,42 +61,103 @@ make end     # Salva + atualiza streak
 
 ---
 
-## 🤖 Agentes
+## 🤖 Agentes & Skills
 
-| Agente | Função |
-|--------|--------|
-| **@meta** | Planejamento estratégico, decomposição de objetivos |
-| **@tutor** | Mentor socrático, quiz, drills, feedback |
-| **@review** | Revisão arquitetural, auditoria, propostas de melhoria |
-| **@session** | Orquestrador de sessões — sugere atividade com base no plano, consolida no final |
+### Arquitetura
 
-### Keywords do @tutor
-| Keyword | Uso |
-|---------|-----|
-| `#explain [conceito]` | Introdução a conceito novo (nunca viu) |
-| `#directness [desafio]` | Projeto prático guiado |
-| `#feynman [conceito]` | Explicar para validar compreensão |
-| `#drill [conceito]` | Exercícios repetitivos (5-10x) |
-| `#quiz N perguntas` | Retrieval practice rápido |
-| `#scaffold [projeto]` | Criar estrutura base |
-| `#experiment [conceito]` | Comparar 3 soluções diferentes |
-| `#feedback` | Revisão de código |
-| `#debug` | Guia de debug socrático |
-| `#intuition [conceito]` | Entender o "por quê" profundo |
-| `#zombie` | Superar procrastinação (Two-Minute Rule) |
-| `#diffuse` | Usar modo difuso quando travado |
-| `#wrap-up` | Consolidar sessão antes de `make end` |
+```
+┌─────────────────────────────────────────────────────────────┐
+│  AGENTES (.opencode/agents/)                                │
+│  ════════════════════════════════════════════════════════    │
+│  @meta (primary) → Planejamento estratégico                 │
+│  @tutor (subagent) → Execução de sessões                    │
+│  @review (subagent, hidden) → Auditoria do framework        │
+│  @session (subagent) → Orquestração início/fim              │
+│                                                              │
+│  Carregam skills ON-DEMAND → reduzem tokens permanentes      │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            │ skill({ name: "drill" })
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│  SKILLS (.opencode/skills/)                                  │
+│  ════════════════════════════════════════════════════════    │
+│  10 Skills carregadas sob demanda:                          │
+│  - drill → Prática deliberada 5-10x                         │
+│  - feynman → Validar compreensão explicando                 │
+│  - directness → Projetos reais                              │
+│  - explain-concept → Introduzir conceito novo               │
+│  - quiz → Retrieval practice rápido                         │
+│  - zombie-mode → Superar procrastinação                     │
+│  - debug-socratic → Guia socrático de bugs                  │
+│  - scaffold → Criar boilerplate                            │
+│  - decomposition → Dividir objetivos (@meta)               │
+│  - benchmarking → Testes de proficiência (@meta)           │
+│                                                              │
+│  Skills SUGEREM comandos → NÃO executam scripts             │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            │ Handoff para
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│  MAKEFILE & SCRIPTS                                          │
+│  ════════════════════════════════════════════════════════    │
+│  16 comandos make → 18 scripts bash                          │
+│                                                              │
+│  Scripts são a INTERFACE → Agentes executam o comportamento  │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### Keywords do @meta
-| Keyword | Uso |
-|---------|-----|
-| `#decompose-goal [objetivo]` | Decompor objetivo em plano acionável |
-| `#map-resources [tópico]` | Curar recursos em 3 tiers |
-| `#create-weekly-plan semana N` | Gerar plano semanal |
-| `#update-plan semana [N]` | Registar progresso sem reescrever plano |
-| `#adjust-plan [situação]` | Reajustar cronograma por desvio |
-| `#benchmark-test` | Criar teste de proficiência |
-| `#habit-stack` | Criar cadeia de hábitos (Atomic Habits) |
+### Separação de Responsabilidades
+
+| Camada | Responsabilidade | Executa? |
+|--------|------------------|----------|
+| **Skills** | Instruções de comportamento (O QUE) | ❌ Só sugerem |
+| **Agentes** | Executam comportamento com tools | ✅ Com permissions |
+| **Scripts** | Interface bash para usuário | ✅ |
+
+### Agentes
+
+| Agente | Modelo | Função |
+|--------|--------|--------|
+| **@meta** | GLM-5 | Planejamento estratégico, decomposição de objetivos |
+| **@tutor** | GLM-5 | Mentor socrático, quiz, drills, feedback |
+| **@review** | GLM-5 | Revisão arquitetural, auditoria (hidden) |
+| **@session** | GLM-4.7 | Orquestrador de sessões — lightweight |
+
+### Skills do @tutor
+
+| Skill | Keyword | Uso |
+|-------|---------|-----|
+| `directness` | `#directness [desafio]` | Projeto prático guiado |
+| `drill` | `#drill [conceito]` | Exercícios repetitivos (5-10x) |
+| `feynman` | `#feynman [conceito]` | Explicar para validar compreensão |
+| `explain-concept` | `#explain [conceito]` | Introdução a conceito novo |
+| `quiz` | `#quiz N [tópico]` | Retrieval practice rápido |
+| `scaffold` | `#scaffold [projeto]` | Criar estrutura base |
+| `debug-socratic` | `#debug` | Guia socrático de bugs |
+| `zombie-mode` | `#zombie` | Superar procrastinação |
+
+**Outras keywords** (mantidas inline no agente):
+- `#experiment [conceito]` — Comparar 3 soluções diferentes
+- `#feedback` — Revisão de código
+- `#intuition [conceito]` — Entender o "por quê" profundo
+- `#diffuse` — Usar modo difuso quando travado
+- `#wrap-up` — Consolidar sessão antes de `make end`
+
+### Skills do @meta
+
+| Skill | Keyword | Uso |
+|-------|---------|-----|
+| `decomposition` | `#decompose-goal [objetivo]` | Decompor objetivo em plano acionável |
+| `benchmarking` | `#benchmark-test` | Criar teste de proficiência |
+
+**Outras keywords** (mantidas inline):
+- `#map-resources [tópico]` — Curar recursos em 3 tiers
+- `#create-weekly-plan semana N` — Gerar plano semanal
+- `#update-plan semana [N]` — Registar progresso
+- `#adjust-plan [situação]` — Reajustar cronograma
+- `#habit-stack` — Criar cadeia de hábitos
 
 ### Keywords do @review (Consultor Estratégico)
 
@@ -185,25 +246,30 @@ Comece ridicularmente pequeno:
 
 ```
 ultralearning/
-├── .opencode/agents/       # @meta, @tutor, @review, @session
-├── scripts/                # 16 scripts bash (streak, SRS, etc.)
-├── projects/               # Módulos de aprendizado
+├── .opencode/
+│   ├── agents/           # @meta, @tutor, @review, @session
+│   ├── skills/           # 10 skills carregadas on-demand
+│   └── opencode.json     # Config de modelos + agents
+├── scripts/              # 18 scripts bash (streak, SRS, etc.)
+├── projects/            # Módulos de aprendizado
 │   ├── [modulo]/
-│   │   ├── logs/daily/     # Logs diários
-│   │   ├── meta/           # Planos, retrospectivas
-│   │   ├── projects/       # Projetos práticos
-│   │   └── knowledge/      # Conceitos aprendidos
-│   └── shared/             # Recursos compartilhados
-├── guides/                 # 9 princípios + 24 técnicas
-├── reviews/                # Revisões técnicas do framework
-├── planning/               # Propostas e planos de migração
-└── Makefile                # 16 comandos
+│   │   ├── logs/daily/   # Logs diários
+│   │   ├── meta/         # Planos, retrospectivas
+│   │   ├── projects/     # Projetos práticos
+│   │   └── knowledge/    # Conceitos aprendidos
+│   └── shared/           # Recursos compartilhados
+├── guides/               # 9 princípios + 24 técnicas
+├── reviews/              # Revisões técnicas do framework
+├── planning/             # Propostas e planos de migração
+└── Makefile              # 16 comandos
 ```
 
 O projeto está organizado em pastas especializadas:
 
 | Pasta | Propósito | Documentação |
 |-------|-----------|--------------|
+| `.opencode/agents/` | Agentes OpenCode com frontmatter YAML | [README](.opencode/agents/) |
+| `.opencode/skills/` | Skills carregadas on-demand pelos agentes | [Template](.opencode/skills/_template-skill/SKILL.md) |
 | `projects/` | Módulos e projetos de aprendizado | [README](projects/README.md) |
 | `guides/` | Biblioteca de técnicas e princípios de aprendizado | [README](guides/README.md) |
 | `planning/` | Documentos de planejamento estratégico e propostas | [README](planning/README.md) |
@@ -251,11 +317,18 @@ O projeto arquivado mantém todo o histórico e pode ser consultado futuramente.
 
 ---
 
-## 💰 Custo Estimado
+## 💰 Custo Estimado (GLM-5 via OpenCode Zen)
 
-- **Por sessão (1h)**: ~0.02€
-- **Por mês (30 dias)**: ~0.60€
-- **Orçamento**: 15€/mês
+| Modelo | Input | Output | Cached |
+|--------|-------|--------|--------|
+| **GLM-5** | $1.00/M | $3.20/M | $0.20/M |
+| **GLM-4.7** | $0.60/M | $2.20/M | $0.10/M |
+
+**Economia vs Claude**: ~70% mais barato
+
+- **Por sessão (1h)**: ~0.01€
+- **Por mês (30 dias)**: ~0.30€
+- **Orçamento**: 15€/mês (margem generosa)
 
 ---
 
@@ -297,6 +370,7 @@ make plan
 ```bash
 make start
 ```
+- @session carrega skill automaticamente
 - Quiz automático testa o que você estudou ontem
 - Ativa memória antes de aprender novo conteúdo
 
@@ -304,22 +378,19 @@ make start
 ```bash
 make study
 ```
-Escolha baseado no que precisa:
+Escolha baseado no que precisa (skills carregadas automaticamente):
 
-| Situação | Opção | Por quê |
-|----------|-------|--------|
-| Não sabe o que fazer hoje | 0. Session | @session lê o plano e sugere |
-| Conceito completamente novo | 7. Explain | Analogia primeiro, prática depois |
-| Aprender fazendo | 1. Code | Aprende fazendo |
-| Praticar sintaxe | 2. Drill | Repetição = automatização |
-| Revisar conceito | 3. Feynman | Se não explica, não entendeu |
-| Começar projeto | 4. Scaffold | Estrutura pronta, foco no código |
-| Comparar abordagens | 5. Experiment | Entender trade-offs |
-| Revisar seu código | 6. Feedback | Identificar melhorias |
-| Entender o "por quê" | 8. Intuition | Princípios profundos |
-| Bug difícil | 9. Debug | Guia socrático |
-| Sem vontade de estudar | z. Zombie | Two-Minute Rule |
-| Travado há >30min | d. Diffuse | Deixar cérebro processar |
+| Situação | Opção | Skill carregada | Por quê |
+|----------|-------|-----------------|--------|
+| Não sabe o que fazer hoje | 0. Session | — | @session lê o plano e sugere |
+| Conceito completamente novo | 7. Explain | `explain-concept` | Analogia primeiro |
+| Aprender fazendo | 1. Code | `directness` | Projeto real |
+| Praticar sintaxe | 2. Drill | `drill` | Repetição = automatização |
+| Revisar conceito | 3. Feynman | `feynman` | Se não explica, não entendeu |
+| Começar projeto | 4. Scaffold | `scaffold` | Estrutura pronta |
+| Bug difícil | 9. Debug | `debug-socratic` | Guia socrático |
+| Sem vontade de estudar | z. Zombie | `zombie-mode` | Two-Minute Rule |
+| Travado há >30min | d. Diffuse | — (inline) | Deixar cérebro processar |
 
 **🏁 Fim (5 min)**
 ```bash
@@ -363,12 +434,62 @@ make switch  # Lista módulos disponíveis
 ```bash
 # Verifique se OpenCode está instalado
 opencode --version
+
+# Verifique se GLM-5 está selecionado
+# No TUI: /models → deve mostrar opencode/glm-5
+```
+
+**Skills não carregam?**
+```bash
+# Verifique se as skills existem
+ls .opencode/skills/*/SKILL.md
+
+# Teste manual
+opencode run --agent @tutor "#drill binary search"
 ```
 
 **Streak não atualiza?**
 ```bash
 ./scripts/streak.sh reset  # Resetar stats
 ```
+
+---
+
+## 🏗️ Arquitetura & Design
+
+### Por que Skills?
+
+**Antes** (sem skills):
+```
+@tutor: 584 linhas carregadas SEMPRE
+→ Mesmo se só vai usar #zombie (5 linhas relevantes)
+→ Tokens desperdiçados
+```
+
+**Depois** (com skills):
+```
+@tutor: ~150 linhas (identity + quick reference)
+→ #drill invocado → skill carrega +130 linhas
+→ Tokens economizados em sessões simples
+```
+
+### Benefícios
+
+| Benefício | Antes | Depois |
+|-----------|-------|--------|
+| Manutenção | Editar agente (584 linhas) | Editar skill (130 linhas) |
+| Guias conectados | Não usados | Derivam de guides/ |
+| Makefile Integration | Não existia | Handoffs documentados |
+| Extensibilidade | +50 linhas no agente | Criar nova SKILL.md |
+
+### Model Routing
+
+| Situação | Modelo | Por quê |
+|----------|--------|--------|
+| Default | GLM-5 | Melhor raciocínio |
+| @session | GLM-4.7 | Orquestração simples |
+| small_model | GLM-4.7 | Títulos, sumarização |
+| #zombie, #quiz | GLM-4.7 | Tarefas leves |
 
 ---
 

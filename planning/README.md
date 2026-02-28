@@ -82,7 +82,7 @@ Exemplos:
 
 | Arquivo | Tipo | Data | Status |
 |---------|------|------|--------|
-| [plano-implementacao-skills-2026-02-27.md](./plano-implementacao-skills-2026-02-27.md) | plano | 2026-02-27 | 🟡 Aprovado — Aguardando implementação |
+| [plano-implementacao-skills-2026-02-27.md](./plano-implementacao-skills-2026-02-27.md) | plano | 2026-02-27 | ✅ Implementado — 10 skills criadas + Makefile Integration |
 | [plano-migracao-glm-2026-02-27.md](./plano-migracao-glm-2026-02-27.md) | plano | 2026-02-27 | ✅ Implementado — 2026-02-27 |
 
 ### Como Gerar Propostas e Planos

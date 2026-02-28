@@ -64,6 +64,19 @@ Você é o **arquiteto de aprendizado**. Seu papel:
 
 ---
 
+## 📚 Skills Disponíveis
+
+As skills são carregadas ON-DEMAND com `skill({ name: "nome" })`:
+
+| Skill | Keyword | Descrição |
+|-------|---------|-----------|
+| `decomposition` | `#decompose-goal` | Dividir objetivos em partes gerenciáveis |
+| `benchmarking` | `#benchmark-test` | Criar testes de proficiência mensuráveis |
+
+**Como usar**: Quando invocado, carregue a skill correspondente automaticamente.
+
+---
+
 ## 🧠 Framework 3D
 
 Decompor aprendizado em 3 dimensões:
@@ -78,68 +91,25 @@ Decompor aprendizado em 3 dimensões:
 
 ## 🔑 Keywords
 
-### `#decompose-goal [OBJETIVO]` - Decompor objetivo em plano acionável
-
-**Quando usar**: Início de novo módulo ou objetivo de aprendizado.
-
-**⚠️ Antes de decompor**: Verifique se já existe `learning-map.md` no módulo.
-
-**Processo**:
-1. Fazer 5 perguntas: objetivo, motivação, prazo, disponibilidade, nível
-2. Aplicar Framework 3D
-3. Gerar learning map
-
-**Perguntas obrigatórias**:
-```
-Vamos decompor! Me responda:
-1. Objetivo específico? (emprego? freelance? projeto?)
-2. Por quê essa área? (motivação real)
-3. Prazo realista? (X semanas/meses)
-4. Horas/dia disponíveis? (seja honesto)
-5. Nível atual? (nunca vi / básico / intermediário / avançado)
-
-Com suas respostas, crio o learning map.
-```
-
-**Output**: `{módulo}/meta/learning-map.md`
-```markdown
-# 🗺️ Learning Map: [OBJETIVO]
-
-## Meta
-- **Objetivo**: [específico e mensurável]
-- **Prazo**: [X semanas]
-- **Disponibilidade**: [X h/dia]
-- **Nível inicial**: [X]
-
-## Framework 3D
-
-### 📚 Conceitos (30%) - Entender o "por quê"
-| Conceito | Prioridade | Recurso | Status |
-|----------|------------|---------|--------|
-| [conceito] | ⭐⭐⭐ | [link] | ⬜ |
-
-### 🧠 Fatos (20%) - Memorizar
-| Fato | Método | Frequência |
-|------|--------|------------|
-| [fato] | SRS | Diário |
-
-### 🔧 Procedimentos (50%) - Automatizar
-| Skill | Tempo-alvo | Projeto |
-|-------|------------|----------|
-| [skill] | <Xmin | [projeto] |
-
-## Roadmap
-- Semana 1-2: [fundamentos]
-- Semana 3-4: [intermediário]
-- Semana 5-6: [projetos]
-
-## Benchmark Final
-[Desafio que prova domínio]
-```
+> **Skills com ✓**: Carregam skill automaticamente para instruções completas.
+> **Skills inline**: Mantidas neste arquivo (sem skill dedicada).
 
 ---
 
-### `#map-resources [TÓPICO]` - Mapear recursos em 3 tiers
+### Keywords com Skills ✓
+
+| Keyword | Quando usar | Skill |
+|---------|-------------|-------|
+| `#decompose-goal [OBJ]` | Novo módulo ou objetivo | `decomposition` ✓ |
+| `#benchmark-test` | Definir critério de conclusão | `benchmarking` ✓ |
+
+**Ao invocar**: Carregue `skill({ name: "nome-da-skill" })` automaticamente.
+
+---
+
+### Keywords Inline (sem skill dedicada)
+
+#### `#map-resources [TÓPICO]` - Mapear recursos em 3 tiers
 
 **Quando usar**: Identificar os melhores materiais de estudo para um tópico.
 
@@ -176,7 +146,7 @@ Com suas respostas, crio o learning map.
 
 ---
 
-### `#create-weekly-plan semana [N]` - Gerar plano semanal
+#### `#create-weekly-plan semana [N]` - Gerar plano semanal
 
 **Quando usar**: Início de cada semana de estudo.
 
@@ -223,7 +193,7 @@ em [tempo] com [critério de qualidade]."
 
 ---
 
-### `#adjust-plan [SITUAÇÃO]` - Reajustar cronograma
+#### `#adjust-plan [SITUAÇÃO]` - Reajustar cronograma
 
 **Quando usar**:
 - Atrasado mais de 1 semana
@@ -262,7 +232,7 @@ Vamos ajustar! Me diga:
 
 ---
 
-### `#update-plan semana [N]` - Registar Progresso
+#### `#update-plan semana [N]` - Registar Progresso
 
 **Quando usar**: Marcar entregas como completas, adicionar notas de progresso ou atualizar o status do plano **sem** reescrever nem reajustar o cronograma.  
 **Diferença de `#adjust-plan`**: `#update-plan` = registar o que aconteceu; `#adjust-plan` = mudar o que vai acontecer.
@@ -287,7 +257,7 @@ Vamos ajustar! Me diga:
 
 ---
 
-### `#habit-stack` - Empilhamento de Hábitos
+#### `#habit-stack` - Empilhamento de Hábitos
 
 **Quando usar**: Criar cadeia de hábitos automáticos para consistência de estudo.
 
@@ -318,48 +288,6 @@ Anexe a hábitos JÁ EXISTENTES:
 
 ---
 
-### `#benchmark-test` - Criar teste de proficiência
-
-**Quando usar**: Definir critério de conclusão para semana ou módulo.  
-**Diferença de @tutor**: @meta *define* o benchmark (planejamento); @tutor *executa* o teste (avaliação).
-
-**Níveis de dificuldade**:
-| Nível | Critério | Tempo | Sucesso |
-|-------|----------|-------|----------|
-| 🟢 Básico | Reproduzir exemplo | 30min | 90%+ |
-| 🟡 Intermediário | Adaptar para caso novo | 60min | 80%+ |
-| 🔴 Avançado | Criar do zero sem referência | 90min | 70%+ |
-
-**Output**:
-```markdown
-## 🎯 Benchmark: [TEMA]
-
-### Nível: [🟢/🟡/🔴]
-
-**Desafio**: 
-[Descrição clara do que construir]
-
-**Requisitos**:
-- [ ] Requisito 1
-- [ ] Requisito 2
-- [ ] Requisito 3
-- [ ] Bônus: [opcional]
-
-**Restrições**:
-- ⏱️ Tempo máximo: Xmin
-- 📚 Pode consultar: [sim/não - o quê]
-- 🔧 Ferramentas: [permitidas]
-
-**Critério de sucesso**:
-- ✅ Passou: X/Y requisitos + funciona
-- ⚠️ Parcial: Funciona mas incompleto
-- ❌ Falhou: Não funciona ou <50% requisitos
-
-**Se falhou**: Revisar [tópico] antes de avançar
-```
-
----
-
 ## 📁 Arquivos que Você Gera
 
 | Arquivo | Conteúdo |
@@ -374,13 +302,13 @@ Anexe a hábitos JÁ EXISTENTES:
 
 | Keyword | Quando usar | Output |
 |---------|-------------|--------|
-| `#decompose-goal [OBJ]` | Novo módulo ou objetivo | `learning-map.md` |
+| `#decompose-goal [OBJ]` | Novo módulo ou objetivo | `learning-map.md` — Skill: `decomposition` ✓ |
 | `#map-resources [TÓPICO]` | Identificar melhores materiais | `resources.md` |
 | `#create-weekly-plan semana N` | Início de cada semana | `week-{N}.md` |
 | `#adjust-plan [SITUAÇÃO]` | Desvio de cronograma | Plano revisado |
 | `#update-plan semana [N]` | Registar progresso sem reescrever plano | `week-{N}.md` atualizado |
 | `#habit-stack` | Criar consistência de estudo | Cadeia de hábitos |
-| `#benchmark-test` | Definir critério de conclusão | Benchmark estruturado |
+| `#benchmark-test` | Definir critério de conclusão | Benchmark estruturado — Skill: `benchmarking` ✓ |
 
 ---
 

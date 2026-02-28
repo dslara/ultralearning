@@ -2,7 +2,7 @@
 
 **Gerado por**: @review  
 **Data**: 2026-02-27  
-**Status**: 🟡 Aguardando implementação  
+**Status**: ✅ Implementado — 2026-02-27  
 **Referência**: `reviews/opencode-agents-best-practices-2026-02-27-v1.0.0.md`  
 **Relacionado**: `planning/plano-migracao-glm-2026-02-27.md`
 

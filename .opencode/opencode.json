@@ -33,11 +33,15 @@
       "tools": {
         "write": false,
         "edit": false,
-        "bash": false
+        "bash": false,
+        "skill": true
       },
       "permission": {
         "edit": "deny",
-        "bash": "deny"
+        "bash": "deny",
+        "skill": {
+          "*": "allow"
+        }
       },
       "task": {
         "*": "deny",
@@ -50,9 +54,10 @@
       "mode": "subagent",
       "temperature": 0.5,
       "tools": {
-        "write": "ask",
-        "edit": "ask",
-        "bash": "ask"
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "skill": true
       },
       "permission": {
         "edit": "ask",
@@ -60,18 +65,21 @@
           "*": "ask",
           "grep *": "allow",
           "git status": "allow"
+        },
+        "skill": {
+          "*": "allow"
         }
       }
     },
     "review": {
       "description": "Revisor arquitetural. Audita qualidade do framework e propõe melhorias.",
       "mode": "subagent",
-      "hidden": true,
       "temperature": 0.1,
       "tools": {
         "write": false,
         "edit": false,
-        "bash": false
+        "bash": false,
+        "skill": false
       },
       "permission": {
         "edit": "deny",
@@ -87,7 +95,8 @@
       "tools": {
         "write": false,
         "edit": false,
-        "bash": false
+        "bash": false,
+        "skill": false
       },
       "permission": {
         "edit": "deny",
