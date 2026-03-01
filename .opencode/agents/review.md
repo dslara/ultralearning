@@ -1,14 +1,16 @@
 ---
 description: Revisor arquitetural. Audita qualidade do framework e propõe melhorias.
-mode: subagent
+mode: primary
+model: opencode/glm-5
 temperature: 0.1
 tools:
-  write: false
-  edit: false
-  bash: false
+  write: true
+  edit: true
+  bash: true
 permission:
-  edit: deny
-  bash: deny
+  edit: ask
+  write: ask
+  bash: allow
   webfetch: allow
 ---
 

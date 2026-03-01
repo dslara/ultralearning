@@ -31,14 +31,14 @@
       "model": "opencode/glm-5",
       "temperature": 0.2,
       "tools": {
-        "write": false,
-        "edit": false,
-        "bash": false,
+        "write": true,
+        "edit": true,
+        "bash": true,
         "skill": true
       },
       "permission": {
-        "edit": "deny",
-        "bash": "deny",
+        "edit": "ask",
+        "bash": "allow",
         "skill": {
           "*": "allow"
         }
@@ -51,7 +51,7 @@
     },
     "tutor": {
       "description": "Mentor socrático de ultralearning. Guia sessões com #directness, #feynman, #drill, #quiz.",
-      "mode": "subagent",
+      "mode": "primary",
       "temperature": 0.5,
       "tools": {
         "write": true,
@@ -73,17 +73,18 @@
     },
     "review": {
       "description": "Revisor arquitetural. Audita qualidade do framework e propõe melhorias.",
-      "mode": "subagent",
+      "mode": "primary",
       "temperature": 0.1,
       "tools": {
-        "write": false,
-        "edit": false,
-        "bash": false,
+        "write": true,
+        "edit": true,
+        "bash": true,
         "skill": false
       },
       "permission": {
-        "edit": "deny",
-        "bash": "deny",
+        "edit": "ask",
+        "write": "ask",
+        "bash": "allow",
         "webfetch": "allow"
       }
     },

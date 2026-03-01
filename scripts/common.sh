@@ -153,3 +153,11 @@ sanitize_input() {
     # Remove caracteres perigosos mantendo apenas alfanuméricos, espaços, hífens e underscores
     echo "$input" | tr -cd '[:alnum:][:space:]-_'
 }
+
+# Função: Obter contexto da semana mais recente
+get_week_context() {
+    local week_file=$(ls "$TOPIC_PATH/meta/week-"*.md 2>/dev/null | sort -V | tail -1)
+    if [ -n "$week_file" ]; then
+        echo "$week_file"
+    fi
+}

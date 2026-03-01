@@ -11,114 +11,117 @@ As revisões servem para:
 - **Documentar** decisões e mudanças importantes
 - **Acompanhar** a evolução do projeto ao longo do tempo
 
-## Estrutura das Revisões
-
-Cada revisão deve incluir:
-
-| Seção | Descrição |
-|-------|-----------|
-| **Resumo Executivo** | Veredito geral e nota |
-| **Pontos Fortes** | O que funciona bem |
-| **Pontos de Atenção** | Riscos e problemas identificados |
-| **Sugestões de Melhoria** | Ações concretas (imediatas e futuras) |
-| **Avaliação Final** | Notas por aspecto e veredito geral |
-
-## Convenção de Nomenclatura
+## Estrutura
 
 ```
-review-v{versão}.md
+reviews/
+├── README.md                    # Este arquivo
+├── _template-framework-review.md
+├── archived/                    # Revisões supersedidas/implementadas
+│   └── README.md
+└── [revisões atuais]
 ```
-
-Exemplos:
-- `review-v2.4.md` - Revisão da versão 2.4 do plano
-- `review-v3.0.md` - Revisão da versão 3.0
-
-## Revisões Existentes
-
-| Arquivo | Versão | Data | Veredito |
-|---------|--------|------|----------|
-| [review-v2.4.md](./review-v2.4.md) | 2.4 | 2025-01-XX | ⭐⭐⭐⭐½ - Pronto para execução |
 
 ---
 
 ## 🔍 Revisões Técnicas do Framework
 
-Além das revisões de plano de estudos, esta pasta também armazena **revisões técnicas do próprio framework**, geradas pelo agente `@review`.
-
-### Tipos de Revisões Técnicas
-
-| Tipo | Descrição | Exemplo |
-|------|-----------|---------|
-| **structure** | Organização de pastas e arquivos | `structure-review-2026-02-20-v2.7.0.md` |
-| **scripts** | Qualidade dos scripts bash | `scripts-audit-2026-02-20-v2.7.0.md` |
-| **docs** | Coerência da documentação | `docs-review-2026-02-20-v2.7.0.md` |
-| **makefile** | Comandos e orquestração | `makefile-review-2026-02-20-v2.7.0.md` |
-| **agents** | Efetividade dos agentes @meta e @tutor | `agents-review-2026-02-20-v2.7.0.md` |
-| **consistency** | Consistência geral do projeto | `consistency-review-2026-02-20-v2.7.0.md` |
-| **architecture** | Análise arquitetural profunda | `architecture-review-2026-02-20-v2.7.0.md` |
-| **complete** | Auditoria completa de qualidade | `complete-audit-2026-02-20-v2.7.0.md` |
+Revisões técnicas do próprio framework, geradas pelo agente `@review`.
 
 ### Convenção de Nomenclatura
 
 ```
 [tipo]-[descricao]-YYYY-MM-DD-v[X.Y.Z].md
-
-Exemplos:
-- scripts-audit-2026-02-20-v2.7.0.md
-- architecture-review-2026-02-20-v2.7.0.md
-- complete-audit-2026-02-20-v2.7.0.md
 ```
 
-### Revisões Técnicas Realizadas
+Exemplos:
+- `audit-complete-2026-02-27-v5.0.0.md`
+- `architecture-review-2026-02-27-v1.0.0.md`
+- `agents-audit-2026-02-26-v3.1.0.md`
 
-| Arquivo | Tipo | Data | Versão | Aspecto | Status |
-|---------|------|------|--------|---------|--------|
-| [opencode-agents-best-practices-2026-02-27-v1.0.0.md](./opencode-agents-best-practices-2026-02-27-v1.0.0.md) | agents | 2026-02-27 | v1.0.0 | Implementado: GLM-5/4.7 + frontmatter + agent config | ✅ Concluída |
-| [audit-complete-2026-02-27-v4.2.0.md](./audit-complete-2026-02-27-v4.2.0.md) | audit | 2026-02-27 | v4.2.0 | Auditoria completa: 0 críticos, 0 médios, 6 baixos — nota 9.3/10 | ✅ Concluída |
-| [audit-complete-2026-02-27-v4.1.0.md](./audit-complete-2026-02-27-v4.1.0.md) | audit | 2026-02-27 | v4.1.0 | Auditoria completa: 0 críticos, 2 médios, 6 baixos — nota 8.8/10 | ✅ Concluída |
-| [audit-complete-2026-02-26-v4.0.0.md](./audit-complete-2026-02-26-v4.0.0.md) | audit | 2026-02-26 | v4.0.0 | Auditoria completa: 3 críticos, 9 médios, 7 baixos — nota 8.2/10 | ✅ Concluída |
-| [agents-audit-2026-02-26-v3.1.0.md](./agents-audit-2026-02-26-v3.1.0.md) | agents | 2026-02-26 | v3.1.0 | Todos os problemas técnicos resolvidos — 0 abertos, só @coach pendente | ✅ Concluída |
-| [agents-cost-optimization-2026-02-25-v1.0.0.md](./agents-cost-optimization-2026-02-25-v1.0.0.md) | agents | 2026-02-25 | v1.0.0 | Otimização de custos: 5 problemas, 4 quick wins, model routing estratégico | ✅ Concluída |
-| [agents-audit-2026-02-25-v2.0.0.md](./agents-audit-2026-02-25-v2.0.0.md) | agents | 2026-02-25 | v2.0.0 | Pós-unificação: 0 críticos, 6 abertos, template criado | ✅ Supersedida por v3.1.0 |
-| [agents-audit-2026-02-24-v1.0.0.md](./agents-audit-2026-02-24-v1.0.0.md) | agents | 2026-02-24 | v1.0.0 | Auditoria completa: 14 problemas, 3 críticos, proposta template | ✅ Supersedida por v2.0.0 |
-| [agents-review-2026-02-23-v2.8.0.md](./agents-review-2026-02-23-v2.8.0.md) | agents | 2026-02-23 | v2.8.0 | Revisão completa dos agentes @meta, @tutor e @review | ✅ Concluída |
-| [phase1-implementation-2026-02-20-v2.8.0.md](./phase1-implementation-2026-02-20-v2.8.0.md) | implementation | 2026-02-20 | v2.8.0 | Fase 1: Arquitetura Híbrida | ✅ Implementada |
-| [audit-complete-v2.7.0-2026-02-20.md](./audit-complete-v2.7.0-2026-02-20.md) | audit | 2026-02-20 | v2.7.0 | Auditoria Completa | ✅ Concluída |
+### Tipos de Revisões
 
-### Como Gerar Revisões Técnicas
+| Tipo | Descrição | Keyword |
+|------|-----------|---------|
+| **audit** | Auditoria completa de qualidade | `#audit-quality` |
+| **structure** | Organização de pastas e arquivos | `#review-structure` |
+| **scripts** | Qualidade dos scripts bash | `#review-scripts` |
+| **docs** | Coerência da documentação | `#review-docs` |
+| **makefile** | Comandos e orquestração | `#review-makefile` |
+| **agents** | Efetividade dos agentes | `#review-agents` |
+| **consistency** | Consistência geral | `#review-consistency` |
+| **architecture** | Análise arquitetural | `#review-architecture` |
+| **costs** | Otimização de tokens | `#review-costs` |
+| **consolidated** | Análise consolidada de múltiplas reviews | `#meta-review` |
+
+---
+
+## Revisão Ativa
+
+| Arquivo | Tipo | Data | Versão | Resumo |
+|---------|------|------|--------|--------|
+| [consolidated-analysis-2026-02-28-v1.0.0.md](./consolidated-analysis-2026-02-28-v1.0.0.md) | consolidated | 2026-02-28 | v1.0.0 | Análise de 14 reviews: 83% problemas resolvidos, nota 9.1/10 |
+
+---
+
+## Revisões Arquivadas
+
+Todas as revisões técnicas foram consolidadas e arquivadas.
+
+Consulte [`archived/README.md`](./archived/README.md) para o histórico completo.
+
+---
+
+## Como Gerar Revisões Técnicas
 
 Usando o agente `@review`:
 
 ```bash
-# Revisão em memória (não salva arquivo)
+# Revisão específica
 opencode run --agent @review "#review-scripts"
+opencode run --agent @review "#review-agents"
+opencode run --agent @review "#review-docs"
 
-# Auditoria completa do framework
+# Auditoria completa (todas as revisões)
 opencode run --agent @review "#audit-quality"
 
-# Análise arquitetural profunda
+# Análise arquitetural
 opencode run --agent @review "#review-architecture"
+
+# Otimização de custos
+opencode run --agent @review "#review-costs"
 
 # Verificar prontidão para release
 opencode run --agent @review "#check-readiness 3.0.0"
 
-# Gerar revisão e salvar manualmente
-opencode run --agent @review "#review-scripts"
-# Copie o output e salve em reviews/ manualmente
+# Meta-revisão de documento
+opencode run --agent @review "#meta-review [arquivo]"
 ```
 
-### Template Disponível
+---
+
+## Template Disponível
 
 - [`_template-framework-review.md`](./_template-framework-review.md) - Template para revisões técnicas
 
-### Diferença: Revisões de Plano vs Revisões Técnicas
+---
+
+## Diferença: Revisões de Plano vs Revisões Técnicas
 
 | Aspecto | Revisões de Plano | Revisões Técnicas |
 |---------|-------------------|-------------------|
 | **Foco** | Plano de estudos (CS Fundamentals) | Código, arquitetura, scripts |
 | **Gerado por** | Humano | Agente @review |
 | **Convenção** | `review-v{X.Y}.md` | `[tipo]-[desc]-YYYY-MM-DD-v{X.Y.Z}.md` |
-| **Público** | Estudante revisando próprio progresso | Mantenedor revisando qualidade do sistema |
+| **Público** | Estudante revisando progresso | Mantenedor revisando qualidade |
+
+---
+
+## Histórico de Consolidacões
+
+| Data | Documento | Reviews Analisadas | Veredito |
+|------|-----------|-------------------|----------|
+| 2026-02-28 | `consolidated-analysis-2026-02-28-v1.0.0.md` | 14 | 9.1/10, 83% resolvidos |
 
 ---
 

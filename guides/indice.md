@@ -2,7 +2,7 @@
 
 > **Biblioteca completa de referência**. Navegue entre princípios e técnicas.
 
-**Última atualização**: 2026-02-18  
+**Última atualização**: 2026-02-27  
 **Versão**: 2.0
 
 ---
@@ -133,7 +133,7 @@ Este sistema integra três abordagens de aprendizado:
 | **Focar** | pomodoro, timeboxing, environment-design, focused-diffuse |
 | **Entender** | feynman, analogy, first-principles, chunk-transfer |
 | **Memorizar** | flashcards, srs, mnemonics, interleaving |
-| **Praticar** | drill, directness, overlearning |
+| **Praticar** | drill, directness |
 | **Testar** | quiz, feynman |
 | **Avaliar** | feedback-loop, code-review, retrospective, quiz |
 | **Procrastinação** | procrastination-zombie |

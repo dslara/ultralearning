@@ -37,8 +37,7 @@ echo ""
 
 if check_opencode; then
     # Tentar carregar plano da semana actual como contexto
-    # Usar sort -V para ordenação natural (week-1, week-2, ... week-10)
-    WEEK_FILE=$(ls "$TOPIC_PATH/meta/week-"*.md 2>/dev/null | sort -V | tail -1)
+    WEEK_FILE=$(get_week_context)
 
     if [ -n "$WEEK_FILE" ]; then
         print_info "📅 Plano encontrado: $(basename "$WEEK_FILE")"

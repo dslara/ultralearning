@@ -55,7 +55,7 @@ archive: ## 📦 Arquivar projeto finalizado
 	@./scripts/archive.sh
 
 sync-flashcards: ## 🔄 Sincronizar flashcards (Anki)
-	@./projects/shared/flashcards/sync-script.sh
+	@./scripts/sync-flashcards.sh
 
 ##@ 🛠️ Setup e Backup (2 comandos)
 

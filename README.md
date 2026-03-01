@@ -102,7 +102,7 @@ make end     # Salva + atualiza streak
 ┌─────────────────────────────────────────────────────────────┐
 │  MAKEFILE & SCRIPTS                                          │
 │  ════════════════════════════════════════════════════════    │
-│  16 comandos make → 18 scripts bash                          │
+│  16 comandos make → 19 scripts bash                          │
 │                                                              │
 │  Scripts são a INTERFACE → Agentes executam o comportamento  │
 └─────────────────────────────────────────────────────────────┘
@@ -123,7 +123,7 @@ make end     # Salva + atualiza streak
 | **@meta** | GLM-5 | Planejamento estratégico, decomposição de objetivos |
 | **@tutor** | GLM-5 | Mentor socrático, quiz, drills, feedback |
 | **@review** | GLM-5 | Revisão arquitetural, auditoria (hidden) |
-| **@session** | GLM-4.7 | Orquestrador de sessões — lightweight |
+| **@session** | opencode/glm-4.7 | Orquestrador de sessões — lightweight |
 
 ### Skills do @tutor
 
@@ -192,7 +192,7 @@ Este sistema integra três abordagens complementares:
 
 | Abordagem | Autor | Foco | Implementação |
 |-----------|-------|------|---------------|
-| **Ultralearning** | Scott Young | Intensidade e imersão | 9 princípios + 24 técnicas |
+| **Ultralearning** | Scott Young | Intensidade e imersão | 9 princípios + 23 técnicas |
 | **A Mind for Numbers** | Dra. Barbara Oakley | Eficiência cognitiva | Chunking, Foco/Difuso, Overlearning |
 | **Atomic Habits** | James Clear | Consistência e rituais | Cue-Routine-Reward, Habit Stacking, Two-Minute Rule |
 
@@ -250,17 +250,19 @@ ultralearning/
 │   ├── agents/           # @meta, @tutor, @review, @session
 │   ├── skills/           # 10 skills carregadas on-demand
 │   └── opencode.json     # Config de modelos + agents
-├── scripts/              # 18 scripts bash (streak, SRS, etc.)
+├── scripts/              # 19 scripts bash (streak, SRS, etc.)
 ├── projects/            # Módulos de aprendizado
 │   ├── [modulo]/
 │   │   ├── logs/daily/   # Logs diários
-│   │   ├── meta/         # Planos, retrospectivas
+│   │   ├── meta/         # Planos ativos (learning-map, weeks)
+│   │   ├── planning/     # Planos de mudança do currículo
 │   │   ├── projects/     # Projetos práticos
 │   │   └── knowledge/    # Conceitos aprendidos
 │   └── shared/           # Recursos compartilhados
-├── guides/               # 9 princípios + 24 técnicas
+│       └── planning/     # Planejamento multi-módulo
+├── guides/               # 9 princípios + 23 técnicas
 ├── reviews/              # Revisões técnicas do framework
-├── planning/             # Propostas e planos de migração
+├── planning/             # Propostas de mudança do FRAMEWORK
 └── Makefile              # 16 comandos
 ```
 
@@ -268,14 +270,23 @@ O projeto está organizado em pastas especializadas:
 
 | Pasta | Propósito | Documentação |
 |-------|-----------|--------------|
-| `.opencode/agents/` | Agentes OpenCode com frontmatter YAML | [README](.opencode/agents/) |
+| `.opencode/agents/` | Agentes opencode com frontmatter YAML | — |
 | `.opencode/skills/` | Skills carregadas on-demand pelos agentes | [Template](.opencode/skills/_template-skill/SKILL.md) |
 | `projects/` | Módulos e projetos de aprendizado | [README](projects/README.md) |
 | `guides/` | Biblioteca de técnicas e princípios de aprendizado | [README](guides/README.md) |
-| `planning/` | Documentos de planejamento estratégico e propostas | [README](planning/README.md) |
-| `reviews/` | Revisões e avaliações críticas do plano | [README](reviews/README.md) |
+| `planning/` | Propostas de mudança do framework (scripts, agentes) | [README](planning/README.md) |
+| `reviews/` | Revisões técnicas do framework (consolidadas) | [README](reviews/README.md) |
 | `archived/` | Projetos finalizados e arquivados | [README](archived/README.md) |
 | `scripts/` | Scripts utilitários (streak, SRS) | - |
+
+### Separação de Planejamento
+
+| Domínio | Local |
+|---------|-------|
+| **Framework** (scripts, agentes, Makefile) | `planning/` |
+| **Módulo específico** (currículo, migração de linguagem) | `projects/{modulo}/planning/` |
+| **Compartilhado** (múltiplos módulos) | `projects/shared/planning/` |
+| **Planos ativos** (learning-map, weeks, phases) | `projects/{modulo}/meta/` |
 
 ## 📦 Arquivamento de Projetos
 
@@ -317,7 +328,7 @@ O projeto arquivado mantém todo o histórico e pode ser consultado futuramente.
 
 ---
 
-## 💰 Custo Estimado (GLM-5 via OpenCode Zen)
+## 💰 Custo Estimado (GLM-5 via opencode Zen)
 
 | Modelo | Input | Output | Cached |
 |--------|-------|--------|--------|
@@ -432,7 +443,7 @@ make switch  # Lista módulos disponíveis
 
 **Quiz não funciona?**
 ```bash
-# Verifique se OpenCode está instalado
+# Verifique se opencode está instalado
 opencode --version
 
 # Verifique se GLM-5 está selecionado

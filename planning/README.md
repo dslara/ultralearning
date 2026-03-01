@@ -1,32 +1,74 @@
-# 📐 Planejamento
+# 📐 Planejamento do Framework
 
-Pasta destinada a documentos de planejamento estratégico, propostas arquiteturais, relatórios e guias técnicos.
+Pasta destinada a documentos de planejamento estratégico do **framework Ultralearning** — propostas de mudança em arquitetura, agentes, scripts e configuração.
 
-## Propósito
+> **Nota**: Planos relacionados a projetos de estudo (currículo, fases, migração de linguagem) ficam em `projects/{modulo}/planning/`.
 
-Esta pasta centraliza documentação sobre:
+---
 
-- **Propostas de arquitetura** - Mudanças estruturais no projeto
-- **Planos de migração** - Transições entre tecnologias/abordagens
-- **Relatórios** - Documentação de fases, protótipos e experimentos
-- **Guias práticos** - Instruções específicas de uso
+## Estrutura
+
+```
+planning/
+├── README.md
+├── _template-proposta.md
+├── _template-plano-migracao.md
+├── archived/                    # Documentos implementados/supersedidos
+│   └── README.md
+└── [documentos ativos]
+```
+
+---
+
+## Documentos Ativos
+
+| Arquivo | Tipo | Descrição | Status |
+|---------|------|-----------|--------|
+| [consolidated-analysis-2026-02-28-v1.0.0.md](./consolidated-analysis-2026-02-28-v1.0.0.md) | análise | Consolidação de todos os plannings | ✅ Ativo |
+| [proposta-memoria-automatica-2026-02-28.md](./proposta-memoria-automatica-2026-02-28.md) | proposta | Carregamento automático de contexto no `make start` | 🟡 Proposta |
+
+---
+
+## Documentos Arquivados
+
+Documentos implementados ou supersedidos são movidos para [`archived/`](./archived/).
+
+Consulte [`archived/README.md`](./archived/README.md) para o histórico completo.
+
+| Arquivo | Status |
+|---------|--------|
+| `plano-implementacao-skills-2026-02-27.md` | ✅ Implementado |
+| `plano-migracao-glm-2026-02-27.md` | ✅ Implementado |
+| `proposta-estrutura-modular.md` | ⚠️ Parcial (40%) |
+| `report-prototipo-fase0.md` | ✅ Validado |
+
+---
+
+## Separação de Responsabilidades
+
+| Domínio | Local |
+|---------|-------|
+| **Framework** (scripts, agentes, Makefile, arquitetura) | `planning/` (esta pasta) |
+| **Projeto de estudo** (currículo, fases, migração de linguagem) | `projects/{modulo}/planning/` |
+| **Guias compartilhados** | `projects/shared/planning/` |
+| **Planos ativos do projeto** | `projects/{modulo}/meta/` |
+
+---
 
 ## Convenção de Nomenclatura
 
-Todos os documentos seguem o padrão:
-
 ```
-[TIPO]-[descricao].md
+[TIPO]-[descricao]-YYYY-MM-DD.md
 ```
 
 ### Tipos de Documento
 
 | Tipo | Uso | Exemplo |
 |------|-----|---------|
-| `howto` | Guias práticos, tutoriais | `howto-usar-prototipo.md` |
+| `proposta` | Propostas de mudança no framework | `proposta-memoria-automatica-2026-02-28.md` |
+| `plano` | Planos de migração ou implementação | `plano-migracao-glm-2026-02-27.md` |
 | `report` | Relatórios de fases, protótipos | `report-prototipo-fase0.md` |
-| `plano` | Planos de migração ou mudança | `plano-migracao-rust-zig.md` |
-| `proposta` | Propostas de estrutura/arquitetura | `proposta-estrutura-modular.md` |
+| `consolidated-analysis` | Análise consolidada de múltiplos documentos | `consolidated-analysis-2026-02-28-v1.0.0.md` |
 
 ### Regras
 
@@ -35,57 +77,22 @@ Todos os documentos seguem o padrão:
 - Sem acentos ou caracteres especiais
 - Descrição curta e objetiva (máx. 4-5 palavras)
 
-## Documentos Existentes
-
-| Arquivo | Tipo | Descrição |
-|---------|------|-----------|
-| [howto-usar-prototipo.md](./howto-usar-prototipo.md) | howto | Guia de uso do protótipo M1 + estrutura shared |
-| [report-prototipo-fase0.md](./report-prototipo-fase0.md) | report | Relatório da Fase 0 - validação da estrutura modular |
-| [plano-migracao-rust-zig.md](./plano-migracao-rust-zig.md) | plano | **v2.0** Plano revisado para trocar Rust por Zig (não aplicado) |
-| [plano-migracao-rust-zig-v1.0-archive.md](./plano-migracao-rust-zig-v1.0-archive.md) | plano | v1.0 arquivada (supersedida por v2.0) |
-| [proposta-estrutura-modular.md](./proposta-estrutura-modular.md) | proposta | Proposta de divisão em 8 módulos independentes (aprovada) |
+---
 
 ## Status dos Documentos
 
-| Documento | Status | Decisão |
-|-----------|--------|---------|
-| Proposta de Estrutura Modular | ✅ **Aprovada** | Implementada com ajustes |
-| Protótipo Fase 0 | ✅ **Validado** | Estrutura testada e aprovada |
-| Migração Rust → Zig v2.0 | ⏸️ **Não Aplicado** | Planejamento revisado (2026-02-23) |
+| Status | Emoji | Significado |
+|--------|-------|-------------|
+| Proposta | 🟡 | Aguardando análise/decisão |
+| Aprovada | 🟢 | Aprovada para implementação |
+| Rejeitada | 🔴 | Não será implementada |
+| Em análise | ⏸️ | Sob revisão/feedback |
+| Implementada | ✅ | Já executada/concluída |
+| Parcial | ⚠️ | Implementada parcialmente |
 
 ---
 
-## 📋 Propostas e Planos do Agente @review
-
-Esta pasta também armazena **propostas de mudança e planos de migração** gerados pelo agente `@review` durante suas análises do framework.
-
-### Tipos de Documentos Gerados pelo @review
-
-| Tipo | Descrição | Exemplo |
-|------|-----------|---------|
-| **proposta** | Proposta de mudança estrutural | `proposta-migracao-python-2026-02-20.md` |
-| **plano** | Plano de migração detalhado | `plano-transicao-scripts-2026-02-20.md` |
-| **roadmap** | Roadmap estratégico de melhorias | `roadmap-melhorias-6meses-2026-02-20.md` |
-
-### Convenção de Nomenclatura
-
-```
-[TIPO]-[descricao]-YYYY-MM-DD.md
-
-Exemplos:
-- proposta-migracao-python-2026-02-20.md
-- plano-transicao-scripts-2026-02-20.md
-- roadmap-melhorias-6meses-2026-02-20.md
-```
-
-### Propostas e Planos Gerados
-
-| Arquivo | Tipo | Data | Status |
-|---------|------|------|--------|
-| [plano-implementacao-skills-2026-02-27.md](./plano-implementacao-skills-2026-02-27.md) | plano | 2026-02-27 | ✅ Implementado — 10 skills criadas + Makefile Integration |
-| [plano-migracao-glm-2026-02-27.md](./plano-migracao-glm-2026-02-27.md) | plano | 2026-02-27 | ✅ Implementado — 2026-02-27 |
-
-### Como Gerar Propostas e Planos
+## Como Gerar Documentos
 
 Usando o agente `@review`:
 
@@ -95,18 +102,25 @@ opencode run --agent @review "#review-architecture"
 
 # Auditoria completa que pode gerar recomendações
 opencode run --agent @review "#audit-quality"
-
-# Para criar documentos manualmente, use os templates disponíveis
-# e siga a convenção de nomenclatura descrita acima
 ```
 
 O @review recomenda mudanças através de análise, mas **não gera automaticamente** propostas ou planos. O fluxo é:
-1. @review analisa o projeto (via `#audit-quality` ou `#review-architecture`)
+
+1. @review analisa o projeto
 2. Identifica necessidade de mudança estrutural
 3. Gera recomendações no relatório
-4. Usuário decide se quer criar proposta/plano manualmente usando templates
+4. Usuário decide se quer criar proposta/plano manualmente
 
-### Conteúdo dos Documentos
+---
+
+## Templates Disponíveis
+
+- [`_template-proposta.md`](./_template-proposta.md) - Para propostas de mudança
+- [`_template-plano-migracao.md`](./_template-plano-migracao.md) - Para planos de migração
+
+---
+
+## Conteúdo dos Documentos
 
 **Propostas** (`proposta-[nome]-YYYY-MM-DD.md`):
 - 🎯 Problema identificado
@@ -121,37 +135,19 @@ O @review recomenda mudanças através de análise, mas **não gera automaticame
 - 🔄 Plano de rollback
 - 📊 Métricas de acompanhamento
 
-**Roadmaps** (`roadmap-[periodo]-YYYY-MM-DD.md`):
-- 🧭 Direção estratégica
-- 🎯 Prioridades
-- 🏁 Milestones
-- 📈 Métricas de sucesso
+**Análises Consolidadas** (`consolidated-analysis-[data]-v[X.Y.Z].md`):
+- 📊 Resumo de todos os documentos analisados
+- ✅ Checklist de implementação por documento
+- 📋 Pontos pendentes priorizados
+- 🎯 Roadmap de ações
 
-### Fluxo de Trabalho com @review
+---
 
-```
-1. @review analisa o projeto (via #audit-quality ou #review-architecture)
-2. Identifica necessidade de mudança estrutural no relatório
-3. Usuário revisa recomendações
-4. Se aprovada, usuário cria proposta manualmente usando template
-5. Se aprovada, usuário cria plano manualmente usando template
-6. Implementação segue o plano
-```
+## Histórico de Consolidacões
 
-### Templates Disponíveis
-
-- [`_template-proposta.md`](./_template-proposta.md) - Para propostas de mudança
-- [`_template-plano-migracao.md`](./_template-plano-migracao.md) - Para planos de migração
-
-### Status dos Documentos Gerados
-
-| Status | Emoji | Significado |
-|--------|-------|-------------|
-| Proposta | 🟡 | Aguardando análise/decisão |
-| Aprovada | 🟢 | Aprovada para implementação |
-| Rejeitada | 🔴 | Não será implementada |
-| Em análise | ⏸️ | Sob revisão/feedback |
-| Implementada | ✅ | Já executada/concluída |
+| Data | Documento | Documentos Analisados | Veredito |
+|------|-----------|----------------------|----------|
+| 2026-02-28 | `consolidated-analysis-2026-02-28-v1.0.0.md` | 5 | 7/10, 60% implementado |
 
 ---
 

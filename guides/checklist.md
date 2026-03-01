@@ -2,7 +2,7 @@
 
 > Valide sua preparação antes de cada sessão. 2 minutos que economizam 30.
 
-**Última atualização**: 2026-02-18
+**Última atualização**: 2026-02-27
 
 ---
 
@@ -19,7 +19,7 @@ Confirme antes de começar:
 - [ ] **Make disponível**
   ```bash
   make help
-  # Deve listar 15 comandos
+  # Deve listar 16 comandos
   ```
 
 - [ ] **Módulo ativo definido**

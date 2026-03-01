@@ -36,7 +36,7 @@ mode=${mode:-0}
 
 case $mode in
     0|session)
-        WEEK_FILE=$(ls "$TOPIC_PATH/meta/week-"*.md 2>/dev/null | sort | tail -1)
+        WEEK_FILE=$(get_week_context)
         if [ -n "$WEEK_FILE" ]; then
             WEEK_CONTEXT=$(cat "$WEEK_FILE")
             opencode run --agent @session "#session-start

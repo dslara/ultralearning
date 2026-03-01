@@ -1,24 +1,25 @@
 #!/bin/bash
-# Script para agregar flashcards de todos os módulos ao master-deck.csv
 
-set -e
+# sync-flashcards.sh - Agregar flashcards de todos os módulos ao master-deck.csv
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MASTER_DECK="$SCRIPT_DIR/master-deck.csv"
-BY_MODULE_DIR="$SCRIPT_DIR/by-module"
+source "$(dirname "$0")/common.sh"
 
-echo "🔄 Sincronizando flashcards ao master-deck..."
+FLASHCARDS_DIR="projects/shared/flashcards"
+MASTER_DECK="$FLASHCARDS_DIR/master-deck.csv"
+BY_MODULE_DIR="$FLASHCARDS_DIR/by-module"
+
+print_header "🔄 Sincronizando Flashcards"
 
 # Criar backup do master-deck
 if [ -f "$MASTER_DECK" ]; then
     cp "$MASTER_DECK" "$MASTER_DECK.backup"
-    echo "✅ Backup criado: master-deck.csv.backup"
+    print_success "Backup criado: master-deck.csv.backup"
 fi
 
 # Criar header se master-deck não existe
 if [ ! -f "$MASTER_DECK" ]; then
     echo "front,back,module,difficulty,last_reviewed,next_review,interval_days" > "$MASTER_DECK"
-    echo "✅ Master-deck criado com header"
+    print_success "Master-deck criado com header"
 fi
 
 # Agregar cards de cada módulo
@@ -29,7 +30,7 @@ if [ -d "$BY_MODULE_DIR" ]; then
     for module_file in "$BY_MODULE_DIR"/*.csv; do
         if [ -f "$module_file" ]; then
             MODULE_NAME=$(basename "$module_file" .csv)
-            echo "📚 Processando: $MODULE_NAME"
+            print_info "📚 Processando: $MODULE_NAME"
             
             # Pular header e adicionar cards ao master
             tail -n +2 "$module_file" >> "$MASTER_DECK"
@@ -50,8 +51,8 @@ if [ -f "$MASTER_DECK" ]; then
 fi
 
 echo ""
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "✅ Sincronização completa!"
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+print_success "Sincronização completa!"
 echo "📊 Módulos processados: $MODULES_FOUND"
 echo "📇 Total de cards no master-deck: $(tail -n +2 "$MASTER_DECK" | wc -l)"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
