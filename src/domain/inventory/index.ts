@@ -1,4 +1,0 @@
-// Inventory feature — exports placeholder
-export interface InventoryState {
-  
-}

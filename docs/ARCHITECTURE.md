@@ -21,7 +21,7 @@ Arquitetura escolhida maximiza **desafio técnico** dentro dessas restrições. 
 | # | Decisão | Alternativa Rejeitada | Por Quê |
 |---|---------|----------------------|---------|
 | 1 | **Processors event-driven** | ECS-lite com tick contínuo | Pi recria processo Node.js a cada sessão. `setInterval` morre entre interações. Processors sobrevivem recalculando estado no boot. |
-| 2 | **Domínio 100% funcional puro** | Classes OO mutáveis (`Player.gainXp()`) | Imutabilidade = time-travel debugging, replay de sessões inteiras, hot reload de reducers. Propriedade arquitetural rara em games. |
+| 2 | **Core 100% funcional puro** | Classes OO mutáveis (`Player.gainXp()`) | Imutabilidade = time-travel debugging, replay de sessões inteiras, hot reload de reducers. Propriedade arquitetural rara em games. |
 | 3 | **Skin system profundo** | Skin simples (evento → mensagem fixa) | Template engine + expression evaluator + eventos atmosféricos = mini-DSL. Mesma mecânica gera 4 experiências completamente distintas. |
 | 4 | **Combos + passivas completos** | Apenas níveis de técnica | Sistema de progression real com agência do jogador. Interações não-triviais entre mecânicas. |
 | 5 | **SRS penalty + ghost run no MVP** | Adiar para pós-MVP | Penalty como camada sobre SM-2 puro (zero breaking change). Ghost run híbrido: matching simples + fingerprint Jaccard. Card-generator por LLM adiado (dependência externa de alto risco). |
@@ -70,7 +70,7 @@ Arquitetura escolhida maximiza **desafio técnico** dentro dessas restrições. 
 │  │  Middleware: persistência em SQLite                 │    │
 │  └─────────────────────────────────────────────────────┘    │
 ├─────────────────────────────────────────────────────────────┤
-│  DOMAIN / FUNCTIONAL CORE (100% puro, zero deps externas)   │
+│  CORE / FUNCTIONAL CORE (100% puro, zero deps externas)     │
 │  ┌──────────┐ ┌─────────────────┐ ┌──────────┐ ┌──────────┐│
 │  │ Reducers │ │   Processors    │ │Algorithms│ │ Entities ││
 │  │ (pure)   │ │ (state-event)   │ │(SM-2,   │ │(Session, ││
@@ -111,7 +111,7 @@ Arquitetura escolhida maximiza **desafio técnico** dentro dessas restrições. 
 │   │   └── utils/
 │   │       └── (compose, clamp, deepEquals)
 │   │
-│   ├── domain/                          # 100% puro, zero deps externas
+│   ├── core/                            # 100% puro, zero deps externas
 │   │   ├── player/
 │   │   │   ├── index.ts
 │   │   │   ├── types.ts
@@ -188,12 +188,12 @@ Arquitetura escolhida maximiza **desafio técnico** dentro dessas restrições. 
 
 | Onde | O que | Não pode |
 |------|-------|----------|
-| `src/shared/` | Types base, algorithms genéricos, helpers puros | Importar de `domain/`, `effects/`, `presentation/` |
-| `src/domain/` | Regras de negócio, estado, processors | Importar `fs`, Pi SDK, ou qualquer dep externa |
+| `src/shared/` | Types base, algorithms genéricos, helpers puros | Importar de `core/`, `effects/`, `presentation/` |
+| `src/core/` | Regras de negócio, estado, processors | Importar `fs`, Pi SDK, ou qualquer dep externa |
 | `src/store/` | Single source of truth, middleware | Conter regra de negócio (só orquestra reducers) |
 | `src/effects/` | Side effects: SQLite, Pi SDK, timer | Conter regra de negócio (só orquestra) |
 | `src/presentation/` | Skin system, persona builder | Modificar estado (só traduz core → string) |
-| `.pi/extensions/lori/` | Entry point Pi, adapter | Conter domain (só importa de `src/`) |
+| `.pi/extensions/lori/` | Entry point Pi, adapter | Conter core (só importa de `src/`) |
 | `tests/` na raiz | Integração Pi + e2e | Conter testes unitários (estes são co-located) |
 
 **Testes unitários são co-located.** Cada feature/ arquivo em `src/` leva seu `.test.ts` ao lado. Testes de integração (store + effects + Pi adapter) ficam em `tests/` na raiz.
@@ -316,25 +316,25 @@ Commands (`/lori-*`), tools (`lori_timer_status`), widgets (`setWidget`), status
 ## 7. Roadmap de Implementação
 
 ### Fase 1 — Fundação
-1. `store/` (Redux-like à mão) + `domain/reducers/` (player, session)
+1. `store/` (Redux-like à mão) + `core/reducers/` (player, session)
 2. `effects/persist.ts` (SQLite, schema versionado, WAL, prepared statements)
-3. `domain/reducers/session.ts` (timer stateless) + `effects/timer.ts`
-4. `domain/processors/lifecycle-processor.ts` (session resume, abandon guard)
+3. `core/reducers/session.ts` (timer stateless) + `effects/timer.ts`
+4. `core/processors/lifecycle-processor.ts` (session resume, abandon guard)
 5. `presentation/views/dashboard.ts` + `effects/pi-extension.ts` (entry point)
 6. Skin `minimal` built-in (`skin/provider.ts`, `skin/loader.ts`, `skin/validator.ts`)
 
 ### Fase 2 — Aprendizado Ativo
-7. `domain/algorithms/sm2.ts` + `domain/reducers/srs.ts` (SM-2 puro)
-8. `domain/algorithms/srs-penalty.ts` (penalty layer sobre SM-2)
-9. `domain/reducers/weaknesses.ts` + `domain/processors/runtime-processor.ts` (debuffs)
+7. `core/algorithms/sm2.ts` + `core/reducers/srs.ts` (SM-2 puro)
+8. `core/algorithms/srs-penalty.ts` (penalty layer sobre SM-2)
+9. `core/reducers/weaknesses.ts` + `core/processors/runtime-processor.ts` (debuffs)
 10. Primeiras técnicas: `Pomodoro`, `Feynman`, `Active Recall`
 11. Cards manuais (`/lori-card`) + templates fixos
 
 ### Fase 3 — Gamificação Profunda
-12. `domain/reducers/techniques.ts` (27 rituais, passivas, combos)
-13. `domain/processors/runtime-processor.ts` (passives, modifiers, combo detection)
-14. `domain/reducers/inventory.ts` + `domain/reducers/achievements.ts` + `domain/processors/content-processor.ts`
-15. `domain/algorithms/combo.ts` + `domain/entities/combo.ts`
+12. `core/reducers/techniques.ts` (27 rituais, passivas, combos)
+13. `core/processors/runtime-processor.ts` (passives, modifiers, combo detection)
+14. `core/reducers/inventory.ts` + `core/reducers/achievements.ts` + `core/processors/content-processor.ts`
+15. `core/algorithms/combo.ts` + `core/entities/combo.ts`
 16. `data/story-quests.ts`
 
 ### Fase 4 — Personalização
@@ -343,9 +343,9 @@ Commands (`/lori-*`), tools (`lori_timer_status`), widgets (`setWidget`), status
 19. `effects/suggestion-engine.ts`
 
 ### Fase 5 — Polimento
-20. `domain/processors/ghost-processor.ts` (matching simples + fingerprint Jaccard)
+20. `core/processors/ghost-processor.ts` (matching simples + fingerprint Jaccard)
 21. `effects/export.ts` + `effects/import.ts` (JSON/Markdown/CSV)
-22. `domain/processors/content-processor.ts` (card-generator com LLM/heurística — pós-MVP de verdade, agora com foundation sólido)
+22. `core/processors/content-processor.ts` (card-generator com LLM/heurística — pós-MVP de verdade, agora com foundation sólido)
 23. Estatísticas avançadas e leaderboard pessoal
 24. Documentação para criação de skins por terceiros
 25. Empacotamento como Pi Package
@@ -356,7 +356,7 @@ Commands (`/lori-*`), tools (`lori_timer_status`), widgets (`setWidget`), status
 
 | # | Regra | Violação = |
 |---|-------|-----------|
-| 1 | `domain/` não importa nada de fora (nem Pi SDK, nem `fs`, nem `skin`) | Refatorar |
+| 1 | `core/` não importa nada de fora (nem Pi SDK, nem `fs`, nem `skin`) | Refatorar |
 | 2 | `skin/` e `persona/` não modificam estado. Só traduzem. | Bug |
 | 3 | `effects/` não contém regra de negócio. Só orquestra. | Refatorar |
 | 4 | Actions são serializáveis (JSON). Podem ser logadas/replayadas. | Corrigir |
