@@ -8,8 +8,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["@types/bun", "vitest/globals", "node"],
+    "types": ["bun", "node"],
     "noEmit": true
   },
-  "include": ["src/**/*", "tests/**/*", ".pi/**/*"]
+  "include": ["src/**/*", "extensions/**/*"]
 }
