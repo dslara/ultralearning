@@ -10,6 +10,8 @@ Cliffhanger: o clear revela a primeira cena do próximo Chapter, travada.
 Sustain suave: cleared Nodes ganham poeira visível com o tempo. Regar dá bônus, ignorar nunca tira nada.
 Unlock: o clear abre o próximo Chapter, uma técnica e uma quest narrativa.
 
+>Acho que nao deveriamos definir a duracao. Na minha opiniao uma sessao de estudos sem correr contra o relojo e mais tranquila e agradavel.
+
 ## Chapter 1: Ler e rodar
 
 Nodes: JSX como função de estado. Componente e props. Render condicional. Listas e keys.
