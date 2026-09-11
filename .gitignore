@@ -65,3 +65,4 @@ package-lock.json
 bun.lock
 .env
 .lori
+.pi
