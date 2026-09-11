@@ -2,37 +2,37 @@
 
 > Throwaway. Asset do ticket Fases e progressão por domínio. Nada aqui é implementação.
 
-## Contrato de capítulo (vale para todo capítulo)
+## Chapter contract (vale para todo Chapter)
 
-Entrada: player declara Domain, técnica e duração. Nós do capítulo acendem apagados.
-Saída: prova de saída completa carimba o capítulo. Sem prova, sem carimbo.
-Cliffhanger: o carimbo revela a primeira cena do próximo capítulo, travada.
-Sustain suave: nós carimbados ganham poeira visível com o tempo. Regar dá bônus, ignorar nunca tira nada.
-Desbloqueio: carimbo abre o capítulo seguinte, uma técnica e uma quest narrativa.
+Entrada: player declara Domain, técnica e duração. Nodes do Chapter começam locked.
+Saída: exit proof completa dá clear no Chapter. Sem proof, sem clear.
+Cliffhanger: o clear revela a primeira cena do próximo Chapter, travada.
+Sustain suave: cleared Nodes ganham poeira visível com o tempo. Regar dá bônus, ignorar nunca tira nada.
+Unlock: o clear abre o próximo Chapter, uma técnica e uma quest narrativa.
 
-## Capítulo 1: Ler e rodar
+## Chapter 1: Ler e rodar
 
-Nós: JSX como função de estado. Componente e props. Render condicional. Listas e keys.
-Prova: montar tela de lista com filtro funcionando, sem tutorial aberto.
-Cliffhanger: a lista funciona, mas o contador zera a cada filtro. O capítulo 2 mostra por quê.
-Desbloqueia: técnica Pomodoro, quest diária de sessão.
+Nodes: JSX como função de estado. Componente e props. Render condicional. Listas e keys.
+Exit proof: montar tela de lista com filtro funcionando, sem tutorial aberto.
+Cliffhanger: a lista funciona, mas o contador zera a cada filtro. O Chapter 2 mostra por quê.
+Unlock: técnica Pomodoro, quest diária de sessão.
 
-## Capítulo 2: Estado e eventos
+## Chapter 2: Estado e eventos
 
-Nós: useState. Estado derivado. Eventos e formulários. Elevação de estado.
-Prova: formulário com validação local e estado consistente entre dois componentes.
-Cliffhanger: tudo funciona até o dado vir da rede. Tela pisca, dado some. O capítulo 3 mostra o ciclo.
-Desbloqueia: técnica Active Recall, reviews SRS.
+Nodes: useState. Estado derivado. Eventos e formulários. Elevação de estado.
+Exit proof: formulário com validação local e estado consistente entre dois componentes.
+Cliffhanger: tudo funciona até o dado vir da rede. Tela pisca, dado some. O Chapter 3 mostra o ciclo.
+Unlock: técnica Active Recall, reviews SRS.
 
-## Capítulo 3: Efeitos e ciclo
+## Chapter 3: Efeitos e ciclo
 
-Nós: useEffect e dependências. Limpeza. Requisições e loading. Erro e retry.
-Prova: tela que busca, mostra loading, erro com retry e nunca vaza listener.
-Cliffhanger: a tela funciona, mas o código virou espaguete copiado em três lugares. O capítulo 4 cobra a conta.
-Desbloqueia: técnica Feynman, forja de fraquezas.
+Nodes: useEffect e dependências. Limpeza. Requisições e loading. Erro e retry.
+Exit proof: tela que busca, mostra loading, erro com retry e nunca vaza listener.
+Cliffhanger: a tela funciona, mas o código virou espaguete copiado em três lugares. O Chapter 4 cobra a conta.
+Unlock: técnica Feynman, forja de fraquezas.
 
-## Capítulo 4: Composição e prova final
+## Chapter 4: Composição e prova final
 
-Nós: custom hooks. Composição sobre herança. Divisão de responsabilidade. Revisão do arco.
-Prova final: extrair um hook reutilizável do espaguete do capítulo 3 e cobrir os 3 capítulos num mini app.
-Carimbo do Domain: React base conquistado. Abre sustain do Domain e novo Domain.
+Nodes: custom hooks. Composição sobre herança. Divisão de responsabilidade. Revisão do arco.
+Final proof: extrair um hook reutilizável do espaguete do Chapter 3 e cobrir os 3 Chapters num mini app.
+Domain clear: React base conquistado. Abre sustain do Domain e novo Domain.
