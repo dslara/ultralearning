@@ -7,7 +7,7 @@
 Entrada: player declara Domain, técnica e duração. Nodes do Chapter começam locked.
 Saída: exit proof completa dá clear no Chapter. Sem proof, sem clear.
 Cliffhanger: o clear revela a primeira cena do próximo Chapter, travada.
-Sustain suave: cleared Nodes ganham poeira visível com o tempo. Regar dá bônus, ignorar nunca tira nada.
+Sustain suave: cleared Nodes exibem decay visível com o tempo. Upkeep dá bônus, ignorar nunca tira nada.
 Unlock: o clear abre o próximo Chapter, uma técnica e uma quest narrativa.
 
 >Acho que nao deveriamos definir a duracao. Na minha opiniao uma sessao de estudos sem correr contra o relojo e mais tranquila e agradavel.
