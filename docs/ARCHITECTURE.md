@@ -1,8 +1,9 @@
-# Lori — Arquitetura Recomendada (Final)
+# Lori — Arquitetura
 
-> **Status:** Consolidado após iteração de 8 branches arquiteturais  
-> **Data:** 2026-04-25  
-> **Driver:** Desafio técnico > Oportunidade de aprendizado > Alinhamento com produto
+> **Status:** Fase 1 travada via [Mapa: arquitetura da Lori](https://github.com/dslara/lori/issues/25), 7 de 7
+> **Data:** 2026-09-12
+> **Driver:** Simplicidade e YAGNI > Didático > Desafio técnico
+> **Base:** `CONTEXT.md`, `docs/GAME_DESIGN.md`, `docs/LORI_PROJECT.md`, `docs/adr/0001-no-malus-regime.md`, `docs/wayfinder/research/`
 
 ---
 
@@ -12,291 +13,162 @@ Lori é **extensão Pi** que transforma terminal em RPG single-player de aprendi
 
 Não é app standalone. Não tem backend. Não roda fora do Pi.
 
-Arquitetura escolhida maximiza **desafio técnico** dentro dessas restrições. Cada camada introduz conceito não-trivial de software ou game dev.
+Arquitetura escolhe o mais simples que fecha a Fase 1: abrir e fechar Lori session com veredito sobre persistência local. Cada camada futura paga seu didático quando chegar, nunca antes. Regime sem malus em tudo: nada subtrai, fazer soma mais.
 
 ---
 
-## 2. Decisões Arquiteturais Consolidadas
+## 2. Decisões da Fase 1
 
 | # | Decisão | Alternativa Rejeitada | Por Quê |
 |---|---------|----------------------|---------|
-| 1 | **Processors event-driven** | ECS-lite com tick contínuo | Pi recria processo Node.js a cada sessão. `setInterval` morre entre interações. Processors sobrevivem recalculando estado no boot. |
-| 2 | **Core 100% funcional puro** | Classes OO mutáveis (`Player.gainXp()`) | Imutabilidade = time-travel debugging, replay de sessões inteiras, hot reload de reducers. Propriedade arquitetural rara em games. |
-| 3 | **Skin system profundo** | Skin simples (evento → mensagem fixa) | Template engine + expression evaluator + eventos atmosféricos = mini-DSL. Mesma mecânica gera 4 experiências completamente distintas. |
-| 4 | **Combos + passivas completos** | Apenas níveis de técnica | Sistema de progression real com agência do jogador. Interações não-triviais entre mecânicas. |
-| 5 | **SRS penalty + ghost run no MVP** | Adiar para pós-MVP | Penalty como camada sobre SM-2 puro (zero breaking change). Ghost run híbrido: matching simples + fingerprint Jaccard. Card-generator por LLM adiado (dependência externa de alto risco). |
-| 6 | **Event log append-only + replay** | Snapshots periódicos apenas | Event sourcing enxuto. Cada action = row em `events`. Replay = `events.reduce(reducer, initialState)`. Debugging e audit trail gloriosos. |
-| 7 | **SQLite puro, hot/cold split** | JSONL para event log | Queries complexas nativas, transacional, single file. Hot = carrega no boot. Cold = lazy-loaded quando view pede. |
-| 8 | **TUI via Pi SDK nativo** | Processo standalone / ncurses | Commands, tools, widgets, status bar — tudo via Pi Extension API. Zero processo persistente fora do Pi. |
+| 1 | **Store simples, sem `subscribe`** | Redux-like com middleware | Sem processo persistente, effects chamam direto. Persist é chamada explícita após `dispatch`. |
+| 2 | **Core funcional puro com ban de imports** | OO com classes mutáveis | Dados planos mais funções puras serializam de graça e testam sem mock. `core/` não importa `fs`, Pi SDK, skin ou store. |
+| 3 | **Snapshot JSON atômico versionado** | Event log com replay | Zero query na Fase 1. Replay vira fog para quando SRS e ghost pedirem audit. Tipos Action e Event mantidos para migração barata. |
+| 4 | **`bun:sqlite` como upgrade, `better-sqlite3` fora** | SQLite via `better-sqlite3` | Pi embute Bun: `node:sqlite` não resolve, `better-sqlite3` é risco nativo sem necessidade. Research em `docs/wayfinder/research/sqlite-vs-flat-files.md`. |
+| 5 | **Lifecycle com timer stateless e abandon neutro** | Timeout punitivo de 24h | ADR sem malus enterrou punição. Timestamps sobrevivem ao processo, pausa sempre retoma. |
+| 6 | **Skin Minimal sem DSL** | Mini-DSL já | Template é função pura `(params) => string`. Parser e condicionais esperam uso real. |
+| 7 | **`State.hot` só com player, session e skinConfig** | Hot completo mais cold lazy | YAGNI até SRS e ghost existirem. Cold split é fog. |
+| 8 | **Rebuild em `session_start`, nada na factory** | Processo próprio ou init na factory | Instância é religada por sessão. Research em `docs/wayfinder/research/pi-extension-lifecycle.md`. `appendEntry` só para metadados de agent session. |
 
 ---
 
-## 3. Arquitetura em Camadas
+## 3. Arquitetura em Camadas (Fase 1)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  PRESENTATION (runtime only, não persiste)                  │
-│  ┌─────────────────┐  ┌──────────────────────────────────┐ │
-│  │ Skin System     │  │ Persona System                   │ │
-│  │ - SkinProvider  │  │ - Loader (principle + skin)      │ │
-│  │ - TemplateEngine│  │ - Builder (systemPrompt)         │ │
-│  │ - ExprEvaluator │  │ - Switcher (auto/manual)         │ │
-│  │ - AtmosphereGen │  │                                  │ │
-│  │ Entrada: CoreEvent │ Entrada: CoreState + user msg   │ │
-│  │ Saída: PresentationEvent │ Saída: systemPrompt string │ │
-│  └─────────────────┘  └──────────────────────────────────┘ │
+│  Skin Minimal: provider (loadSkin + render)                 │
+│  Entrada: CoreEvent tipado + params. Saída: string.         │
+│  Evento desconhecido cai no Minimal. Skin nunca toca estado.│
+│  Persona: fog (loader, builder, switcher).                  │
 ├─────────────────────────────────────────────────────────────┤
-│  EFFECTS / IMPERATIVE SHELL (side effects isolados)         │
-│  ┌─────────────┐  ┌─────────────────────────────┐  ┌────────┐│
-│  │ Pi Adapters │  │ Persistence                 │  │ Timer  ││
-│  │ - commands  │  │ - SQLite (hot + cold + WAL) │  │ Stateless│
-│  │ - tools     │  │ - Event log append-only     │  │ (timestamps)
-│  │ - listeners │  │ - Schema versionado         │  │        ││
-│  │ - TUI       │  │ - Prepared statements       │  │        ││
-│  │   contracts │  │ - Log rotation / compaction │  │        ││
-│  └─────────────┘  └─────────────────────────────┘  └────────┘│
+│  EFFECTS (side effects isolados)                            │
+│  - Pi adapter: entry point único, rebuild em session_start  │
+│  - Persist: snapshot JSON atômico + schemaVersion no projeto│
+│  - UI: commands /lori-*, setStatus, setWidget               │
+│  - Sem timers, processos ou watchers. Timer é derivado.     │
 ├─────────────────────────────────────────────────────────────┤
-│  APPLICATION / STORE (Single Source of Truth)               │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │ Redux-like Store                                    │    │
-│  │                                                     │    │
-│  │  State.hot (memória): { player, quests, tree,      │    │
-│  │    session, techniques, inventory, skinConfig }     │    │
-│  │  State.cold (lazy SQLite): { srsCards, history,    │    │
-│  │    ghostSnapshots, allWeaknesses }                  │    │
-│  │                                                     │    │
-│  │  Dispatch: action → rootReducer → newState          │    │
-│  │  Subscribe: store.subscribe(effectHandler)          │    │
-│  │  Middleware: persistência em SQLite                 │    │
-│  └─────────────────────────────────────────────────────┘    │
+│  STORE (single source of truth, sem regra de negócio)       │
+│  - dispatch + getState, sem subscribe, sem middleware       │
+│  - State.hot: { player, session, skinConfig }               │
+│  - rootReducer em src/store/, só combina slices             │
+│  - Selectors co-located por reducer                         │
 ├─────────────────────────────────────────────────────────────┤
-│  CORE / FUNCTIONAL CORE (100% puro, zero deps externas)     │
-│  ┌──────────┐ ┌─────────────────┐ ┌──────────┐ ┌──────────┐│
-│  │ Reducers │ │   Processors    │ │Algorithms│ │ Entities ││
-│  │ (pure)   │ │ (state-event)   │ │(SM-2,   │ │(Session, ││
-│  │          │ │                 │ │ XP calc,│ │Flashcard,││
-│  │ player   │ │ RuntimeProc     │ │ combo,  │ │ Weakness,││
-│  │ quests   │ │ (modifiers,     │ │ streak, │ │Technique,││
-│  │ skillTree│ │  combos,        │ │ level,  │ │ Modifier,││
-│  │ session  │ │  passives)      │ │ penalty)│ │  Combo)  ││
-│  │ srs      │ │ LifecycleProc   │ │         │ │          ││
-│  │ ...      │ │ (timer state,   │ │         │ │          ││
-│  │          │ │  streak,        │ │         │ │          ││
-│  │          │ │  abandon)       │ │         │ │          ││
-│  │          │ │ ContentProc     │ │         │ │          ││
-│  │          │ │ (quests, cards, │ │         │ │          ││
-│  │          │ │  achievements,  │ │         │ │          ││
-│  │          │ │  story unlock)  │ │         │ │          ││
-│  │          │ │ GhostProc       │ │         │ │          ││
-│  │          │ │ (match +        │ │         │ │          ││
-│  │          │ │  fingerprint)   │ │         │ │          ││
-│  └──────────┘ └─────────────────┘ └──────────┘ └──────────┘│
+│  CORE (100% puro, zero deps externas)                       │
+│  - Reducers: player, session (guards de invariante dentro)  │
+│  - Entities: dados planos (Session, Verdict, Player)        │
+│  - LifecycleProc: deriva elapsed, marca pausa, sem persistir│
+│  - Runtime, content, ghost: fog                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 3. Estrutura de Pastas
+## 3. Estrutura de Pastas (Fase 1)
 
 ```
 .
 ├── src/
-│   ├── shared/                          # Types + algorithms cross-cutting
-│   │   ├── types.ts
-│   │   ├── algorithms/
-│   │   │   ├── sm2.ts
-│   │   │   ├── jaccard.ts
-│   │   │   ├── xp-calc.ts
-│   │   │   └── level-calc.ts
-│   │   └── utils/
-│   │       └── (compose, clamp, deepEquals)
-│   │
 │   ├── core/                            # 100% puro, zero deps externas
 │   │   ├── player/
-│   │   │   ├── index.ts
 │   │   │   ├── types.ts
 │   │   │   ├── reducer.ts
 │   │   │   ├── selectors.ts
 │   │   │   └── player.test.ts
-│   │   ├── quests/
-│   │   │   ├── index.ts
-│   │   │   └── ...
-│   │   ├── skill-tree/
-│   │   ├── session/
-│   │   ├── techniques/
-│   │   ├── inventory/
-│   │   ├── srs/
-│   │   ├── weaknesses/
-│   │   ├── achievements/
-│   │   ├── story/
-│   │   └── processors/                  # Cross-cutting (não são features)
-│   │       ├── runtime/
-│   │       ├── lifecycle/
-│   │       ├── content/
-│   │       └── ghost/
-│   │
-│   ├── store/                           # Redux-like à mão
+│   │   ├── session/                     # Mesmo shape do player
+│   │   └── processors/
+│   │       └── lifecycle/               # runtime, content, ghost = fog
+│   ├── store/                           # Só orquestra, sem regra
 │   │   ├── index.ts
-│   │   ├── store.ts
-│   │   ├── root-reducer.ts
-│   │   ├── middleware/
-│   │   │   └── persist.ts
+│   │   ├── store.ts                     # dispatch + getState
+│   │   ├── root-reducer.ts              # Só combina, sem lógica
 │   │   └── store.test.ts
-│   │
-│   ├── effects/                         # Imperative shell (side effects)
+│   ├── effects/
 │   │   ├── pi-extension.ts              # Único entry point Pi
 │   │   ├── pi-commands.ts
-│   │   ├── pi-tools.ts
-│   │   ├── persist.ts
-│   │   ├── timer.ts
+│   │   ├── persist.ts                   # Snapshot atômico + schemaVersion
 │   │   └── ui.ts
-│   │
-│   └── presentation/                    # Skin + Persona (runtime only)
-│       ├── skin/
-│       │   ├── provider.ts
-│       │   ├── loader.ts
-│       │   ├── validator.ts
-│       │   ├── template-engine.ts
-│       │   └── expression-evaluator.ts
-│       └── persona/
+│   └── presentation/
+│       └── skin/
+│           ├── provider.ts              # loadSkin + render + fallback
 │           ├── loader.ts
-│           ├── builder.ts
-│           └── switcher.ts
-│
-├── skins/                               # Assets de skins (JSON/TS)
-│   ├── minimal.json
-│   ├── rpg.json
-│   └── ...
-│
-├── .pi/
-│   ├── extensions/
-│   │   └── lori/
-│   │       └── index.ts                 # Adapter puro; importa de src/
-│   ├── prompts/                         # Prompts Pi
-│   │   └── ...
-│   └── themes/                          # Temas Pi
-│       └── ...
-│
-├── tests/                               # Testes de integração + e2e Pi
-│   └── ...
-│
-├── package.json
-└── docs/
+│           └── validator.ts
+├── skins/
+│   └── minimal.json                     # Built-in; custom com fallback
+├── docs/
+│   └── wayfinder/research/              # Achados dos tickets research
+├── tests/                               # Integração Pi + e2e
+└── package.json
 ```
 
 **Regras de localização:**
 
 | Onde | O que | Não pode |
 |------|-------|----------|
-| `src/shared/` | Types base, algorithms genéricos, helpers puros | Importar de `core/`, `effects/`, `presentation/` |
-| `src/core/` | Regras de negócio, estado, processors | Importar `fs`, Pi SDK, ou qualquer dep externa |
-| `src/store/` | Single source of truth, middleware | Conter regra de negócio (só orquestra reducers) |
-| `src/effects/` | Side effects: SQLite, Pi SDK, timer | Conter regra de negócio (só orquestra) |
-| `src/presentation/` | Skin system, persona builder | Modificar estado (só traduz core → string) |
-| `.pi/extensions/lori/` | Entry point Pi, adapter | Conter core (só importa de `src/`) |
+| `src/core/` | Regras de negócio, estado, lifecycle processor | Importar `fs`, Pi SDK, skin, store ou qualquer dep externa |
+| `src/store/` | Single source of truth, sem middleware | Conter regra de negócio (só orquestra reducers) |
+| `src/effects/` | Side effects: snapshot, Pi SDK | Conter regra de negócio (só orquestra) |
+| `src/presentation/` | Skin Minimal, provider e fallback | Modificar estado, parser ou condicionais (só traduz core → string) |
+| `.pi/extensions/lori/` | Entry point Pi, adapter | Conter core (só importa de `src/`), abrir recursos na factory |
 | `tests/` na raiz | Integração Pi + e2e | Conter testes unitários (estes são co-located) |
 
-**Testes unitários são co-located.** Cada feature/ arquivo em `src/` leva seu `.test.ts` ao lado. Testes de integração (store + effects + Pi adapter) ficam em `tests/` na raiz.
+**Testes unitários são co-located.** Cada arquivo em `src/` leva seu `.test.ts` ao lado.
 
 ---
 
-## 4. Conceitos Técnicos e Patterns Explorados
+## 4. Conceitos e Patterns (Fase 1 travada, resto fog)
 
-### 4.1 Event Sourcing Enxuto
+### 4.1 Snapshot direto, event sourcing no fog
 
-Toda mutação de estado passa por action serializável. Actions são logadas em tabela `events` (append-only). Estado reconstruído por `events.reduce(rootReducer, initialState)`.
+Toda mutação passa por action serializável. Fase 1 persiste snapshot direto; replay vira fog. Distinção Action contra Event segue nos tipos.
 
-**Patterns:** Event Sourcing (Fowler), CQRS light (leitura via selectors, escrita via actions).
+**Patterns:** Unidirectional Data Flow, Functional Composition.
 
-**Desafio:** Compaction de eventos antigos sem perder audit trail. Snapshots periódicas do estado para boot rápido.
+### 4.2 Store simples sem framework
 
-### 4.2 Redux em TypeScript sem Framework
+`dispatch` mais `getState`, sem `subscribe`, sem middleware. Actions como discriminated unions, nenhum `any` no fluxo.
 
-Store implementado à mão com `dispatch`, `subscribe`, `getState`. Reducers compostos via `combineReducers`. Selectors tipados. Middleware para persistência.
+### 4.3 Lifecycle processor, resto fog
 
-**Patterns:** Unidirectional Data Flow, Pure Functions, Functional Composition.
+Só `LifecycleProcessor`: roda no boot e após `dispatch` de session, deriva elapsed e marca pausa retomável. Runtime, content e ghost são fog.
 
-**Desafio:** Type safety total em actions discriminated unions. Nenhum `any` no fluxo de estado.
+**Patterns:** Derivation, State Machine (open, paused, closed com veredito).
 
-### 4.3 Game Architecture: Processors vs Systems
+### 4.4 Template como função, mini-DSL no fog
 
-`RuntimeProcessor`, `LifecycleProcessor`, `ContentProcessor`, `GhostProcessor` rodam em eventos e no boot. Não há game loop/tick. Cada processor consome estado e emite novas actions.
+Skin é `(params) => string` com interpolação direta. Sem parser, sem `eval`, sem condicionais.
 
-**Patterns:** Observer (subscribe a eventos), Strategy (diferentes algoritmos de matching), State Machine (fases de sessão).
+### 4.5 Stateless timer sem punição
 
-**Desafio:** Ordem de processamento. Ciclo de actions (processor A emite action → processor B reage). Prevenir loops infinitos.
+Só timestamps (`startedAt`, `pausedAt`, `totalPaused`). Elapsed derivado no boot e no veredito. Sem `setInterval`, sem timeout de 24h, sem auto-pause punitivo.
 
-### 4.4 Mini-DSL: Template Engine + Expression Evaluator
+### 4.6 Hot mínimo, cold no fog
 
-Skin define templates (`{{resource.primary}}`) e condições (`resource.primary < 20`). Template engine compila strings com placeholders. Expression evaluator parseia e avalia condições seguras (sem `new Function()`).
+Hot é player, session e skinConfig. Lazy loading de cards e histórico espera medição de boot real.
 
-**Patterns:** Interpreter (GoF), Template Method, Strategy.
+### 4.7 Fingerprint Jaccard (fog)
 
-**Desafio:** Parser seguro de expressões. Sem `eval`, sem `new Function`. Implementação manual de tokenizer + AST ou regex limitada.
+Decidido no game design, sem recorte até existir Session com Verdict.
 
-### 4.5 Stateless Timer
+### 4.8 Passivas (fog)
 
-Timer armazena apenas timestamps (`startedAt`, `pausedAt`, `totalPaused`). Elapsed calculado por `Date.now() - startedAt - totalPaused`. Sem `setInterval`. Correto mesmo se processo morreu há dias.
+Técnica nível 10 vira ativação automática. Desenho espera o estilo do core ser exercido.
 
-**Patterns:** Functional State, Derivation.
+### 4.9 Combos (fog)
 
-**Desafio:** Edge cases — sessão >24h perdida = abandon automático. Break em pausa = cálculo de tempo restante. Auto-pause por inatividade.
+Bônus dentro da sessão, nunca malus. Detection temporal espera técnicas reais.
 
-### 4.6 Hot/Cold State Split
+### 4.10 SM-2 puro, sem penalty layer
 
-Dados quentes (player, sessão, quests ativas) carregados no boot. Dados frios (SRS cards, histórico, ghost snapshots) carregados sob demanda via query SQLite.
+Regime sem malus: reviews atrasados viram pilha visível, nunca tocam `easeFactor`. Penalty como camada está vetada pelo ADR.
 
-**Patterns:** Lazy Loading, CQRS, Cache.
+### 4.11 Plugin mínimo (Fase 1)
 
-**Desafio:** Consistência entre hot e cold. Invalidação de cache. Queries SQL performáticas para due cards, matching de ghost runs.
+Core define catálogo fixo de `CoreEvent`, nunca conhece nomes de skin. Loader aceita custom com fallback por evento. Hot-swap e schema evolution são fog.
 
-### 4.7 Fingerprint Matching (Jaccard Similarity)
+### 4.12 Pi Extension API (Fase 1)
 
-Cada sessão gera fingerprint — Set de fraquezas trabalhadas, conceitos da skill tree, técnicas usadas. Comparação entre sessões por similaridade de Jaccard: `|A ∩ B| / |A ∪ B|`.
-
-**Patterns:** Similarity Search, Set Operations.
-
-**Desafio:** Representação eficiente de fingerprints em SQLite. Query de similaridade sem vector DB. Threshold de matching.
-
-### 4.8 Passive System (Observer Pattern)
-
-Técnicas dominadas (nível 10) viram passivas ativáveis. Uma vez ativas, observam estado e disparam ações automaticamente via triggers.
-
-**Patterns:** Observer, Event-Driven Architecture.
-
-**Desafio:** Trigger explosion — muitas passivas ativas verificando estado a cada evento. Otimização: indexação de triggers por tipo.
-
-### 4.9 Combo Detection (Temporal Pattern Matching)
-
-Buffer de técnicas usadas com timestamps. Detecção de padrão em janela de tempo. Progresso parcial, expiração, falha.
-
-**Patterns:** Sliding Window, Pattern Matching, State Machine.
-
-**Desafio:** Janelas de tempo sobrepostas. Múltiplos combos possíveis. Prioridade de combos.
-
-### 4.10 SM-2 + Penalty Layer
-
-Algoritmo SM-2 puro intacto. Penalty de atraso como camada adicional que ajusta `easeFactor` antes do cálculo SM-2.
-
-**Patterns:** Decorator, Strategy, Layered Architecture.
-
-**Desafio:** Penalty não quebrar SM-2. Validação com playtest. Penalidade justa — frustrante o suficiente para motivar, não para abandonar.
-
-### 4.11 Plugin Architecture (Skin System)
-
-Core não conhece skins. Skin carregada de arquivo JSON/TS em runtime. Validação de schema. Fallback para skin default.
-
-**Patterns:** Plugin Architecture, Inversion of Control, Dependency Injection.
-
-**Desafio:** Hot-swap de skin sem perder estado. Schema evolution de skins. Comunidade criando skins sem código.
-
-### 4.12 Pi Extension API Integration
-
-Commands (`/lori-*`), tools (`lori_timer_status`), widgets (`setWidget`), status bar (`setStatus`), systemPrompt injection (`before_agent_start`). Tudo via Pi SDK. Nenhum processo standalone.
-
-**Patterns:** Adapter, Facade, Inversion of Control.
-
-**Desafio:** Pi recria extensão a cada sessão. Estado reconstruído do SQLite no `session_start`. Timer correto mesmo com gaps de tempo.
+Commands `/lori-*`, `setStatus`, `setWidget`, `before_agent_start` para personas futuras. Reconstrói do snapshot em `session_start`. Nada de background na factory, limpeza idempotente em `session_shutdown`.
 
 ---
 
@@ -304,51 +176,26 @@ Commands (`/lori-*`), tools (`lori_timer_status`), widgets (`setWidget`), status
 
 | Trade-off | Escolha | Custo |
 |-----------|---------|-------|
-| **Funcional puro vs OO** | Funcional puro | Curva de aprendizado. Menos intuitivo para game dev tradicional. |
-| **Event sourcing vs Snapshots** | Event sourcing | Mais espaço em disco. Compaction necessária. |
-| **Skin profundo vs Simples** | Profundo | Mais código no template engine/expression evaluator. Edge cases. |
-| **Ghost run híbrido vs Simples** | Híbrido | Fingerprint requer estruturação de dados da sessão. Query Jaccard em SQLite. |
-| **SQLite puro vs JSONL** | SQLite puro | Schema rígido. Migrations implícitas. Build nativo de `better-sqlite3`. |
-| **Processors vs ECS ticks** | Processors | Sem game loop real. Lógica contínua (timer) via timestamps. |
+| **Funcional puro vs OO** | Funcional puro | Menos intuitivo para game dev tradicional; OO entra só com dor real |
+| **Snapshot vs Event sourcing** | Snapshot direto | Sem replay nem audit até o fog virar ticket |
+| **Skin função vs DSL** | Função pura | Sem condicionais até uso real pedir a DSL |
+| **Ghost e SRS agora vs depois** | Depois | Fase 1 sem queries; `bun:sqlite` espera o fog |
+| **`bun:sqlite` vs `better-sqlite3`** | `bun:sqlite` futuro, JSON agora | `node:sqlite` indisponível no Bun; nativo Node é risco à toa |
+| **Processors vs tick contínuo** | Só lifecycle, sem loop | Lógica contínua só via timestamps derivados |
 
 ---
 
-## 7. Roadmap de Implementação
+## 7. Roadmap
 
-### Fase 1 — Fundação
-1. `store/` (Redux-like à mão) + `core/reducers/` (player, session)
-2. `effects/persist.ts` (SQLite, schema versionado, WAL, prepared statements)
-3. `core/reducers/session.ts` (timer stateless) + `effects/timer.ts`
-4. `core/processors/lifecycle-processor.ts` (session resume, abandon guard)
-5. `presentation/views/dashboard.ts` + `effects/pi-extension.ts` (entry point)
-6. Skin `minimal` built-in (`skin/provider.ts`, `skin/loader.ts`, `skin/validator.ts`)
+### Fase 1 — Fundação (travada, executar)
+1. `src/store/` simples + slices `core/player` e `core/session`
+2. `effects/persist.ts` (snapshot JSON atômico + `schemaVersion`)
+3. `core/session` com timer stateless + `processors/lifecycle`
+4. Entry point com rebuild em `session_start` + `/lori-status` + dashboard
+5. Skin Minimal (`provider`, `loader`, `validator` + fallback)
 
-### Fase 2 — Aprendizado Ativo
-7. `core/algorithms/sm2.ts` + `core/reducers/srs.ts` (SM-2 puro)
-8. `core/algorithms/srs-penalty.ts` (penalty layer sobre SM-2)
-9. `core/reducers/weaknesses.ts` + `core/processors/runtime-processor.ts` (debuffs)
-10. Primeiras técnicas: `Pomodoro`, `Feynman`, `Active Recall`
-11. Cards manuais (`/lori-card`) + templates fixos
-
-### Fase 3 — Gamificação Profunda
-12. `core/reducers/techniques.ts` (27 rituais, passivas, combos)
-13. `core/processors/runtime-processor.ts` (passives, modifiers, combo detection)
-14. `core/reducers/inventory.ts` + `core/reducers/achievements.ts` + `core/processors/content-processor.ts`
-15. `core/algorithms/combo.ts` + `core/entities/combo.ts`
-16. `data/story-quests.ts`
-
-### Fase 4 — Personalização
-17. Skins built-in: `rpg`, `horror`, `scifi`, `zen` + template engine + expression evaluator
-18. `persona/loader.ts` + `persona/builder.ts` + `persona/switcher.ts`
-19. `effects/suggestion-engine.ts`
-
-### Fase 5 — Polimento
-20. `core/processors/ghost-processor.ts` (matching simples + fingerprint Jaccard)
-21. `effects/export.ts` + `effects/import.ts` (JSON/Markdown/CSV)
-22. `core/processors/content-processor.ts` (card-generator com LLM/heurística — pós-MVP de verdade, agora com foundation sólido)
-23. Estatísticas avançadas e leaderboard pessoal
-24. Documentação para criação de skins por terceiros
-25. Empacotamento como Pi Package
+### Fases 2 a 5 — Direção validada, não travada
+SM-2 puro sem penalty, cards manuais, técnicas e combos com bônus-ou-nada, skins `rpg`/`horror`/`scifi`/`zen` com DSL, personas com switcher, ghost Jaccard, export e import, Pi package. Cada fase vira mapa próprio antes de codar.
 
 ---
 
@@ -356,29 +203,23 @@ Commands (`/lori-*`), tools (`lori_timer_status`), widgets (`setWidget`), status
 
 | # | Regra | Violação = |
 |---|-------|-----------|
-| 1 | `core/` não importa nada de fora (nem Pi SDK, nem `fs`, nem `skin`) | Refatorar |
+| 1 | `core/` não importa nada de fora (nem Pi SDK, nem `fs`, nem `skin`, nem store) | Refatorar |
 | 2 | `skin/` e `persona/` não modificam estado. Só traduzem. | Bug |
 | 3 | `effects/` não contém regra de negócio. Só orquestra. | Refatorar |
-| 4 | Actions são serializáveis (JSON). Podem ser logadas/replayadas. | Corrigir |
-| 5 | Persistência salva só `core` + `skinConfig`. `persona` e `presentation` são runtime. | Otimizar |
-| 6 | Pi SDK vive só em `effects/pi-extension.ts` e `effects/ui.ts` | Isolar |
-| 7 | `runtime.*` (modifiers, passives, combos) nunca persiste. Sempre recalcula no boot. | Bug |
-| 8 | Modifiers são derivados, não primários. XP base + modifiers = XP final. | Refatorar |
-| 9 | SQLite usa prepared statements. Nunca interpolação de strings SQL. | Segurança |
+| 4 | Actions são serializáveis (JSON). Tipos Action e Event seguem distintos. | Corrigir |
+| 5 | Snapshot guarda `player`, `session` e `skinConfig` com `schemaVersion`, escrita atômica, no projeto de estudo | Corrigir |
+| 6 | Pi SDK vive só no adapter e em `ui.ts`. Nada na factory além de registro. | Isolar |
+| 7 | `runtime.*` nunca persiste quando existir. Sempre recalcula no boot. | Bug |
+| 8 | Modifiers são bônus derivados, nunca abaixo do neutro. | Refatorar |
+| 9 | Quando SQLite pousar: `bun:sqlite` com prepared statements, nunca interpolação. | Segurança |
 | 10 | Dados sensíveis (paths, tokens) são filtrados antes de virar contexto LLM. | Privacidade |
-| 11 | `pi-extension.ts` é o único entry point da extensão Pi. | Manutenção |
-| 12 | `appendEntry()` usado apenas para metadados de sessão Pi, nunca para dados de jogo. | Arquitetura |
+| 11 | `pi-extension.ts` é o único entry point. Estado reconstrói em `session_start`. | Manutenção |
+| 12 | `appendEntry()` só para metadados de agent session, nunca dados de jogo. Validada no doc oficial. | Arquitetura |
 
 ---
 
 ## 9. Conclusão
 
-Arquitetura recomendada é **síntese híbrida** que:
+Fase 1 travada é **store simples mais core puro mais snapshot versionado**: abrir e fechar Lori session com veredito, timer derivado, abandon neutro, Skin Minimal sem DSL. Didático na medida: data flow unidirecional, functional core, derivation, plugin mínimo e Pi Extension API, sem pagar event sourcing ou DSL antes da hora.
 
-1. **Maximiza desafio técnico** — event sourcing, mini-DSL, game processors, stateless timer, fingerprint matching, passive system, combo detection.
-2. **Maximiza aprendizado** — 12 patterns/conceitos não-triviais em único projeto: Event Sourcing, Redux, Processors, Mini-DSL, Stateless Design, Hot/Cold Split, Jaccard Similarity, Observer, Sliding Window, Decorator, Plugin Architecture, Pi Extension API.
-3. **Alinha 100% com proposta** — todas 10 funcionalidades principais cobertas. Skin + Persona = mitologia completa. Técnicas passivas + combos = progression real. Ghost run = feedback comparativo. SRS penalty = retenção rigorosa.
-4. **Respeita restrições** — local, offline, single-player, terminal, <50MB, sem backend.
-5. **Escala incrementalmente** — core puro pode virar Hexagonal/CA no futuro. Skin system pode ganhar mais features sem tocar core.
-
-**Diferencial educacional:** projeto que mistura **arquitetura de software** (event sourcing, functional core, layered architecture) com **game architecture** (processors, passive system, combo detection, progression) e **design patterns** (12 patterns aplicados). Não é CRUD gamificado. É game engine enxuta para aprendizado.
+Fog consciente: SRS, combos, passivas, ghost, DSL, personas, cold split, export e package. Cada um vira mapa próprio. Nada aqui redecide game design; tudo aqui respeita o ADR sem malus.
