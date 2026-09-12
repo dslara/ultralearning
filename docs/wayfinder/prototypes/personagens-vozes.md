@@ -6,9 +6,9 @@
 
 O Player não tem avatar nem alter ego com estado. É o humano com seus Domains, Chapters e técnicas. Cada skin o trata por um papel sem estado: aprendiz no RPG, operador no sci-fi, e assim por diante. Papel é pronome, nunca número.
 
-## As 9 personas existem, 1 fala por vez
+## 10 vozes separadas, 1 fala por vez
 
-Cada princípio tem sua persona e a ativa troca por contexto ou pedido. A mesma sessão recebe 4 reações distintas abaixo, todas na skin RPG, todas sobre o mesmo veredito.
+Cada princípio tem sua persona standalone e a Lori é a décima voz, a Tutora. A técnica em uso elege a voz ativa. Consultar a Lori é override manual para a voz dela, ao fim da consulta a voz contextual retoma. A mesma sessão recebe reações distintas abaixo, todas na skin RPG, todas sobre o mesmo veredito.
 
 ## Sessão base do exemplo
 
@@ -29,3 +29,9 @@ Explica em uma linha o que teu retry cobre. Se a frase sai torta, a fraqueza em 
 ## Alquimista, voz do Experimentation
 
 Quebra a regra uma vez. Reescreve o effect sem consultar nada e vê onde racha. O erro de hoje é o atalho de amanhã.
+
+## Lori, a Tutora, método socrático
+
+Invocada por consulta no meio da sessão, sem custo e sem pausar nada. Nunca entrega resposta direta, só pergunta de volta. O trecho conta progresso em Elaborative Interrogation. Por skin renomeia como Oráculo ou Nave Mãe, regra única no core.
+
+Exemplo na sessão base, player pergunta por que o effect repete. Lori responde com o que muda se o array sai, o que quebra se ele mente, e devolve a explicação para o player fechar.
