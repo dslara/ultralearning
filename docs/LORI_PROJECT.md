@@ -82,7 +82,7 @@ Combos entre técnicas geram bônus multiplicativos de XP.
 
 Sistema de flashcards com intervalos adaptativos. Cards nascem automaticamente de sessões.
 
-Revisões diárias têm penalidade progressiva para atrasos. Streak de reviews gera bônus acumulativo.
+Reviews atrasados viram pilha visível sem tocar no SM-2. Sessão de limpeza rende bônus.
 
 ### 5. Identificação e Forja de Fraquezas
 
@@ -145,7 +145,7 @@ Não há servidor, login ou nuvem. O jogador é dono absoluto dos dados.
 | **Terminal-native** | Não sai do ambiente de trabalho. Zero context switching. |
 | **Base teórica sólida** | Fundamentado em *Ultralearning* (Scott Young). Cada mecânica mapeia para método validado. |
 | **Skin + Persona** | Mitologia completa que muda voz da IA, ASCII art e atmosfera. Rejogabilidade infinita. |
-| **Gamificação com stakes** | Streak quebrada tem consequência. Fraqueza ignorada reduz eficiência. |
+| **Gamificação sem malus** | Streak congela e retoma sem zerar. Fraqueza ignorada só convida drill, nunca reduz. |
 | **Passivas que automatizam** | Técnicas dominadas viram automações que reduzem micro-gerenciamento. |
 | **Extensível pela comunidade** | Skins customizáveis sem código. Personas definidas em arquivos de texto. |
 
